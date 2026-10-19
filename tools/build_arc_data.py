@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Build the game data and item icon sheet for ARC Raiders Utility.
+"""Build the game data, item icon sheet and map tiles for ARC Raiders Utility.
 
 Reads a local clone of the community data repo
 https://github.com/RaidTheory/arcraiders-data (MIT) and writes:
 
   arc-utility/game.json   compact English-only data the app loads
   arc-utility/icons.webp  every item icon in one sprite sheet
+  arc-utility/maps/       map tiles, 1000 px square, three zoom levels
+                          (generated, not committed: rerun this script)
 
 Usage:
   git clone --depth 1 https://github.com/RaidTheory/arcraiders-data /path/to/arcraiders-data
@@ -25,6 +27,22 @@ from PIL import Image
 
 CELL = 64
 COLS = 24
+TILE = 1000          # tile edge in px; the map is 1000 units wide, so zoom z is 1000 * 2^z px wide
+MAX_Z = 2            # zoom 2 = 4000 px wide, the sharpest level we ship
+
+# Map groups shown in the app. Each layer is one floor or view, keyed by the map id quests and ARC use.
+# 'src' is either a single annotated PNG (area names, loot zones, extracts) or a v2 tile pyramid.
+ATLAS = [
+    ('dam_battlegrounds', 'Dam Battlegrounds', [('dam_battlegrounds', '', 'png', 'legacy/dam_battlegrounds.png')]),
+    ('buried_city', 'Buried City', [('buried_city', '', 'png', 'legacy/buried_city.png')]),
+    ('the_spaceport', 'The Spaceport', [('the_spaceport', '', 'png', 'legacy/the_spaceport.png')]),
+    ('the_blue_gate', 'The Blue Gate', [('the_blue_gate', '', 'png', 'legacy/the_blue_gate.png')]),
+    ('stella_montis', 'Stella Montis', [
+        ('stella_montis_upper', 'Upper', 'png', 'stella_montis_upper.png'),
+        ('stella_montis_lower', 'Lower', 'png', 'stella_montis_lower.png'),
+    ]),
+    ('riven_tides', 'Riven Tides', [('riven_tides', '', 'v2', 'riven-tides/v2/high/2')]),
+]
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'arc-utility')
 
 
@@ -140,6 +158,7 @@ def build(src):
                 'n': en(ph.get('name')),
                 'd': en(ph.get('description')),
                 'req': pairs(ph.get('requirementItemIds')),
+                'rew': [rw for r in ph.get('requirementItemIds') or [] for rw in pairs(r.get('rewardItemIds'))],
             } for ph in j.get('phases') or []],
         })
 
@@ -163,6 +182,10 @@ def build(src):
 
     maps = [{'id': m['id'], 'n': en(m.get('name'))} for m in load(os.path.join(src, 'maps.json'))]
 
+    events = load(os.path.join(src, 'map-events', 'map-events.json')).get('eventTypes', {})
+    conditions = [{'id': k, 'n': e.get('displayName') or k, 'cat': e.get('category')}
+                  for k, e in events.items() if k != 'none' and not e.get('disabled')]
+
     # Icon sheet: one 64px cell per item, in item-id order.
     with_icon = [i for i in sorted(items) if os.path.exists(os.path.join(src, 'images', 'items', i + '.png'))]
     rows = math.ceil(len(with_icon) / COLS)
@@ -174,6 +197,8 @@ def build(src):
         y = (idx // COLS) * CELL + (CELL - im.height) // 2
         sheet.paste(im, (x, y), im)
         items[item_id]['i'] = idx
+
+    atlas = build_maps(src)
 
     commit = git(src, 'rev-parse', '--short', 'HEAD')
     commit_date = git(src, 'log', '-1', '--format=%cI')
@@ -195,6 +220,8 @@ def build(src):
         'bots': bots,
         'trades': trades,
         'maps': maps,
+        'atlas': atlas,
+        'conditions': conditions,
     }
 
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -203,6 +230,50 @@ def build(src):
     sheet.save(os.path.join(OUT_DIR, 'icons.webp'), 'WEBP', quality=82, method=6)
     print(f'{len(items)} items ({len(with_icon)} with icons), {len(quests)} quests, '
           f'{len(benches)} benches, {len(projects)} projects, {len(bots)} ARC, {len(trades)} trades')
+
+
+def load_layer(src, kind, path):
+    """Return the layer as one RGB image, MAX_Z level wide (4000 px)."""
+    full = TILE * 2 ** MAX_Z
+    if kind == 'png':
+        im = Image.open(os.path.join(src, 'images', 'maps', path)).convert('RGB')
+        return im.resize((full, round(full * im.height / im.width)), Image.LANCZOS)
+    # v2 pyramid: zoom 2 of the source is 4000 px square in 512 px tiles named {x}/{y}.webp
+    base = os.path.join(src, 'images', 'maps', path)
+    im = Image.new('RGB', (4000, 4000))
+    for x in sorted(os.listdir(base), key=int):
+        for name in os.listdir(os.path.join(base, x)):
+            y = int(name.split('.')[0])
+            im.paste(Image.open(os.path.join(base, x, name)).convert('RGB'), (int(x) * 512, y * 512))
+    return im.resize((full, full), Image.LANCZOS) if full != 4000 else im
+
+
+def build_maps(src):
+    out_root = os.path.join(OUT_DIR, 'maps')
+    atlas = []
+    for group_id, group_name, layers in ATLAS:
+        group = {'id': group_id, 'n': group_name, 'layers': []}
+        for layer_id, layer_name, kind, path in layers:
+            im = load_layer(src, kind, path)
+            levels = []
+            for z in range(MAX_Z + 1):
+                w = TILE * 2 ** z
+                h = round(w * im.height / im.width)
+                level = im if z == MAX_Z else im.resize((w, h), Image.LANCZOS)
+                nx, ny = math.ceil(w / TILE), math.ceil(h / TILE)
+                os.makedirs(os.path.join(out_root, layer_id, str(z)), exist_ok=True)
+                for x in range(nx):
+                    for y in range(ny):
+                        tile = Image.new('RGB', (TILE, TILE), (14, 12, 10))
+                        tile.paste(level.crop((x * TILE, y * TILE, min(w, (x + 1) * TILE), min(h, (y + 1) * TILE))), (0, 0))
+                        tile.save(os.path.join(out_root, layer_id, str(z), f'{x}_{y}.webp'), 'WEBP', quality=74, method=6)
+                levels.append([nx, ny])
+            group['layers'].append({
+                'id': layer_id, 'n': layer_name, 'style': 'labeled' if kind == 'png' else 'satellite',
+                'w': 1000, 'h': round(1000 * im.height / im.width), 'z': levels,
+            })
+        atlas.append(group)
+    return atlas
 
 
 if __name__ == '__main__':

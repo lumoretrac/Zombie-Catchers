@@ -4,6 +4,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Saira+Stencil+One&display=swap">
 <style>
+/* Leaflet 1.9.4 core styles (BSD-2-Clause), image rules removed */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0;}.leaflet-container{overflow:hidden;}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none;}.leaflet-tile::selection{background:transparent;}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast;}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0;}.leaflet-marker-icon,.leaflet-marker-shadow{display:block;}.leaflet-container .leaflet-overlay-pane svg{max-width:none !important;max-height:none !important;}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none !important;max-height:none !important;width:auto;padding:0;}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter;}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y;}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom;}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none;}.leaflet-container{-webkit-tap-highlight-color:transparent;}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,0.4);}.leaflet-tile{filter:inherit;visibility:hidden;}.leaflet-tile-loaded{visibility:inherit;}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800;}.leaflet-overlay-pane svg{-moz-user-select:none;}.leaflet-pane{z-index:400;}.leaflet-tile-pane{z-index:200;}.leaflet-overlay-pane{z-index:400;}.leaflet-shadow-pane{z-index:500;}.leaflet-marker-pane{z-index:600;}.leaflet-tooltip-pane{z-index:650;}.leaflet-popup-pane{z-index:700;}.leaflet-map-pane canvas{z-index:100;}.leaflet-map-pane svg{z-index:200;}.leaflet-vml-shape{width:1px;height:1px;}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto;}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none;}.leaflet-top{top:0;}.leaflet-right{right:0;}.leaflet-bottom{bottom:0;}.leaflet-left{left:0;}.leaflet-control{float:left;clear:both;}.leaflet-right .leaflet-control{float:right;}.leaflet-top .leaflet-control{margin-top:10px;}.leaflet-bottom .leaflet-control{margin-bottom:10px;}.leaflet-left .leaflet-control{margin-left:10px;}.leaflet-right .leaflet-control{margin-right:10px;}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity 0.2s linear;-moz-transition:opacity 0.2s linear;transition:opacity 0.2s linear;}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1;}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0;}svg.leaflet-zoom-animated{will-change:transform;}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform 0.25s cubic-bezier(0,0,0.25,1);-moz-transition:-moz-transform 0.25s cubic-bezier(0,0,0.25,1);transition:transform 0.25s cubic-bezier(0,0,0.25,1);}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none;}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden;}.leaflet-interactive{cursor:pointer;}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab;}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair;}.leaflet-popup-pane,.leaflet-control{cursor:auto;}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing;}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none;}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto;}.leaflet-container{background:#ddd;outline-offset:1px;}.leaflet-container a{color:#0078A8;}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,0.5);}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:0.75rem;line-height:1.5;}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,0.65);border-radius:4px;}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:black;}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block;}.leaflet-bar a:hover,.leaflet-bar a:focus{background-color:#f4f4f4;}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px;}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none;}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb;}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px;}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px;}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px;}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px;}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px;}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,0.4);background:#fff;border-radius:5px;}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px;}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none;}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative;}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff;}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px;}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px;}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em;}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px;}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,0.8);margin:0;}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4;}.leaflet-control-attribution a{text-decoration:none;}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus{text-decoration:underline;}.leaflet-attribution-flag{display:inline !important;vertical-align:baseline !important;width:1em;height:0.6669em;}.leaflet-left .leaflet-control-scale{margin-left:5px;}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px;}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,0.8);text-shadow:1px 1px #fff;}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px;}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777;}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{box-shadow:none;}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{border:2px solid rgba(0,0,0,0.2);background-clip:padding-box;}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px;}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px;}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px;}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0;}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none;}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg);}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:white;color:#333;box-shadow:0 3px 14px rgba(0,0,0,0.4);}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent;}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus{color:#585858;}.leaflet-popup-scrolled{overflow:auto;}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1;}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto;-ms-filter:"progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678,M12=0.70710678,M21=-0.70710678,M22=0.70710678)";filter:progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678,M12=0.70710678,M21=-0.70710678,M22=0.70710678);}.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999;}.leaflet-div-icon{background:#fff;border:1px solid #666;}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,0.4);}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto;}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:"";}.leaflet-tooltip-bottom{margin-top:6px;}.leaflet-tooltip-top{margin-top:-6px;}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px;}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff;}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff;}.leaflet-tooltip-left{margin-left:-6px;}.leaflet-tooltip-right{margin-left:6px;}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px;}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff;}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff;}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 /* Layout: a dark machine-console rail on the left (top bar when narrow) beside a wide cream work surface.
    Each tab is a workspace: Lookup is search + detail side by side; the others are summary strip + list/grid. */
 :root {
@@ -336,6 +338,75 @@ details.more summary { cursor: pointer; font-size: 13px; color: var(--ink-3); fo
 .toast { position: fixed; right: max(20px, env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 60; background: var(--ink); color: var(--panel); padding: 12px 16px; border-radius: 10px; box-shadow: var(--shadow); max-width: min(380px, calc(100vw - 40px)); font-weight: 600; }
 .toast small { display: block; font-weight: 400; opacity: 0.8; margin-top: 2px; }
 
+/* ---------- shared small bits ---------- */
+.nav { overflow-y: auto; min-height: 0; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.small { font-size: 12.5px; }
+.minilink.bare { border: 0; background: none; padding: 0; }
+.btn.danger { color: var(--red); border-color: var(--red); }
+button.linktag { cursor: pointer; background: transparent; }
+button.linktag:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ---------- maps ---------- */
+.maps { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 18px; align-items: start; }
+.map-wrap { position: relative; overflow: hidden; }
+.lmap { height: calc(100vh - 250px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); min-height: 440px; border-radius: var(--radius); background: #0e0c0a; }
+.lmap.adding, .lmap.adding .leaflet-grab, .lmap.adding .leaflet-interactive { cursor: crosshair; }
+.map-side { max-height: calc(100vh - 250px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); min-height: 440px; overflow: auto; }
+.map-hint { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); z-index: 800; background: var(--ink); color: var(--panel); padding: 8px 10px 8px 14px; border-radius: 9px; font-weight: 700; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow); white-space: nowrap; }
+.side-sec { padding: 14px 16px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.side-sec:last-child { border-bottom: 0; }
+.side-sec h3 { font-size: 13px; font-stretch: 112%; letter-spacing: 0.04em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.side-sec p { margin: 0; }
+.side-sec select, .side-sec input[type="text"] { height: 36px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--panel); padding: 0 10px; width: 100%; box-sizing: border-box; }
+.side-sec.editor { background: var(--panel-2); }
+.sline { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 4px 0; font-size: 14px; }
+.sline .dot, .sline .tag { margin-top: 3px; }
+.sline .dot { margin-top: 6px; }
+button.sline { width: 100%; border: 0; background: none; text-align: left; border-radius: 6px; padding: 6px; }
+button.sline:hover { background: var(--panel-2); }
+.pin-wrap { background: none; border: 0; }
+.pin { --pc: #c4501d; display: grid; place-items: center; width: 24px; height: 24px; margin: 1px 0 0 3px; border-radius: 50% 50% 50% 3px; transform: rotate(-45deg); background: var(--pc); border: 2px solid #fff6ec; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55); }
+.pin span { transform: rotate(45deg); font: 800 11px/1 var(--f-display); color: #fff6ec; }
+.pin.sel { box-shadow: 0 0 0 3px #0e0c0a, 0 0 0 6px #fff6ec; }
+.leaflet-container { font: 500 13px/1.3 var(--f-body); }
+.leaflet-bar { border: 1px solid var(--line-2) !important; box-shadow: var(--shadow) !important; }
+.leaflet-bar a { background: var(--panel); color: var(--ink); border-bottom-color: var(--line); }
+.leaflet-bar a:hover, .leaflet-bar a:focus { background: var(--panel-2); color: var(--ink); }
+.leaflet-bar a.leaflet-disabled { background: var(--panel-2); color: var(--ink-3); }
+.leaflet-tooltip { background: var(--ink); color: var(--panel); border: 0; border-radius: 6px; box-shadow: var(--shadow); font-weight: 600; }
+.leaflet-tooltip-top::before { border-top-color: var(--ink); }
+
+/* ---------- plan ---------- */
+.plan { display: grid; grid-template-columns: minmax(300px, 420px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.prow { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.prow:last-child { border-bottom: 0; }
+.prow input, .task input { width: 17px; height: 17px; accent-color: var(--teal); margin: 0; }
+.prow .nm { font-weight: 600; line-height: 1.2; display: block; }
+.prow .sub { font-size: 12.5px; color: var(--ink-3); display: block; }
+.rank { font: 800 30px/1 var(--f-display); font-stretch: 125%; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.mapcard.best { border-color: var(--orange); box-shadow: 0 0 0 1px var(--orange), var(--shadow); }
+.mapcard .panel-body { display: grid; gap: 10px; }
+.task { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.task .lbl { font-weight: 600; }
+.task .sub { display: block; font-size: 12.5px; color: var(--ink-3); }
+.task.done .lbl { text-decoration: line-through; color: var(--ink-3); }
+
+/* ---------- blueprints ---------- */
+.bpgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); }
+.bprow { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.bprow input { width: 18px; height: 18px; accent-color: var(--teal); margin: 0; }
+.bprow .nm { font-weight: 600; display: block; line-height: 1.2; }
+.bprow .sub { display: block; font-size: 12.5px; color: var(--ink-3); }
+.bprow.on { background: color-mix(in oklab, var(--teal) 7%, transparent); }
+
+@media (max-width: 1100px) {
+  .maps { grid-template-columns: minmax(0, 1fr); }
+  .lmap { height: 62vh; min-height: 360px; }
+  .map-side { max-height: none; min-height: 0; }
+}
+@media (max-width: 1000px) { .plan { grid-template-columns: minmax(0, 1fr); } }
+
 /* ---------- narrow ---------- */
 @media (max-width: 960px) {
   .lookup, .stash-top { grid-template-columns: minmax(0, 1fr); }
@@ -377,15 +448,19 @@ details.more summary { cursor: pointer; font-size: 13px; color: var(--ink-3); fo
 <div id="modal" hidden></div>
 <div class="toast" id="toast" hidden></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script>
 'use strict';
 // ---------- constants ----------
 const TABS = [
   { id: 'lookup', label: 'Lookup', icon: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/>' },
   { id: 'needs', label: 'Needs', icon: '<path d="M5 6h14M5 12h14M5 18h9"/><path d="m16 17 2 2 3-4"/>' },
+  { id: 'plan', label: 'Plan', icon: '<circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>' },
+  { id: 'maps', label: 'Maps', icon: '<path d="M3.5 6.5 9 4l6 2.5L20.5 4v13.5L15 20l-6-2.5-5.5 2.5z"/><path d="M9 4v13.5M15 6.5V20"/>' },
   { id: 'stash', label: 'Stash', icon: '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M9.5 4v16M15 4v16"/>' },
   { id: 'quests', label: 'Quests', icon: '<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 15h6"/>' },
   { id: 'workshop', label: 'Workshop', icon: '<path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/>' },
+  { id: 'blueprints', label: 'Blueprints', icon: '<path d="M4 4v16h16z"/><path d="M8 12v4h4z"/>' },
 ];
 const VERDICTS = {
   keep: 'KEEP', stock: 'STOCK', recycle: 'RECYCLE', sell: 'SELL', gear: 'GEAR', learn: 'LEARN',
@@ -393,6 +468,23 @@ const VERDICTS = {
 const SPARE_VERB = { keep: 'keep', stock: 'keep as crafting stock', recycle: 'recycle', sell: 'sell', gear: 'use or sell', learn: 'learn or sell' };
 const GEAR_TYPES = new Set(['Assault Rifle', 'SMG', 'Pistol', 'Shotgun', 'Battle Rifle', 'Sniper Rifle', 'LMG', 'Hand Cannon', 'Special', 'Shield', 'Augment', 'Modification', 'Quick Use', 'Ammunition']);
 const MATERIAL_TYPES = new Set(['Basic Material', 'Topside Material', 'Refined Material']);
+const GUN_TYPES = new Set(['Assault Rifle', 'SMG', 'Pistol', 'Shotgun', 'Battle Rifle', 'Sniper Rifle', 'LMG', 'Hand Cannon', 'Special']);
+const BP_GROUPS = [
+  ['weapons', 'Weapons', t => GUN_TYPES.has(t)],
+  ['mods', 'Weapon mods', t => t === 'Modification'],
+  ['quick', 'Quick use', t => t === 'Quick Use'],
+  ['augments', 'Augments and shields', t => t === 'Augment' || t === 'Shield'],
+  ['other', 'Materials and other', () => true],
+];
+const PIN_TYPES = {
+  extract: { n: 'Extract', c: '#1b706d', g: 'E' },
+  loot: { n: 'Loot spot', c: '#c98a12', g: 'L' },
+  key: { n: 'Locked room', c: '#c4501d', g: 'K' },
+  arc: { n: 'ARC', c: '#b13a2d', g: 'A' },
+  quest: { n: 'Quest', c: '#7b5aa6', g: 'Q' },
+  note: { n: 'Note', c: '#5c5672', g: 'N' },
+};
+const THREAT_ORDER = { Extreme: 0, Critical: 1, High: 2, Moderate: 3, Low: 4 };
 const CURRENCY = { coins: 'Coins', raider_tokens: 'Raider Tokens', creds: 'Creds', cred: 'Creds' };
 const TRADER_COLORS = { Celeste: '#1b706d', Shani: '#c4501d', 'Tian Wen': '#d6981d', Apollo: '#7b5aa6', Lance: '#2e7ec2' };
 const BENCH_ORDER = ['weapon_bench', 'equipment_bench', 'med_station', 'explosives_bench', 'utility_bench', 'refiner', 'scrappy', 'stash'];
@@ -412,21 +504,24 @@ const svg = (paths, size = 20) => `<svg viewBox="0 0 24 24" width="${size}" heig
 
 // ---------- state ----------
 const G = { ready: false, error: null };
-const S = { progress: blankProgress(), stash: blankStash(), booting: true };
+const S = { progress: blankProgress(), stash: blankStash(), pins: blankPins(), booting: true };
 const UI = Object.assign({
   tab: 'lookup', q: '', sel: null, lkFilter: 'all',
   needsScope: 'now', needsSrc: 'all',
   stashFilter: 'all', stashSort: 'slots',
   qTrader: 'all', qStatus: 'open',
+  mapGroup: 'dam_battlegrounds', mapLayer: null, pinFilter: 'all', lastPinType: 'loot',
+  bpFilter: 'all', bpQ: '',
   bannerHidden: false,
 }, loadUI());
 const SCAN = { status: 'idle', files: [], urls: [], rows: [], error: '', ctl: null, mode: 'replace' };
 
-function blankProgress() { return { v: 1, quests: {}, benches: {}, projects: {}, setupDone: false }; }
+function blankProgress() { return { v: 1, quests: {}, benches: {}, projects: {}, blueprints: {}, plan: {}, cond: {}, setupDone: false }; }
 function blankStash() { return { v: 1, items: {}, scannedAt: null }; }
+function blankPins() { return { v: 1, pins: [] }; }
 function loadUI() { try { return JSON.parse(localStorage.getItem(UI_KEY) || '{}') || {}; } catch (e) { return {}; } }
 function saveUI() {
-  const keep = { tab: UI.tab, sel: UI.sel, lkFilter: UI.lkFilter, needsScope: UI.needsScope, needsSrc: UI.needsSrc, stashFilter: UI.stashFilter, stashSort: UI.stashSort, qTrader: UI.qTrader, qStatus: UI.qStatus, bannerHidden: UI.bannerHidden };
+  const keep = { tab: UI.tab, sel: UI.sel, lkFilter: UI.lkFilter, needsScope: UI.needsScope, needsSrc: UI.needsSrc, stashFilter: UI.stashFilter, stashSort: UI.stashSort, qTrader: UI.qTrader, qStatus: UI.qStatus, mapGroup: UI.mapGroup, mapLayer: UI.mapLayer, pinFilter: UI.pinFilter, lastPinType: UI.lastPinType, bpFilter: UI.bpFilter, bannerHidden: UI.bannerHidden };
   try { localStorage.setItem(UI_KEY, JSON.stringify(keep)); } catch (e) { /* storage blocked: fine */ }
 }
 
@@ -469,6 +564,19 @@ async function loadGame() {
   const count = {}; D.quests.forEach(q => { count[q.tr] = (count[q.tr] || 0) + 1; });
   G.traders = Object.keys(count).sort((a, b) => count[b] - count[a]);
   G.search = G.ids.map(id => ({ id, k: norm(D.items[id].n) }));
+  // Blueprints unlock the item of the same name; weapon blueprints unlock tier I.
+  G.bp = G.ids.filter(id => D.items[id].t === 'Blueprint').map(id => {
+    const base = id.replace(/_blueprint$/, '');
+    return { id, target: D.items[base] ? base : D.items[base + '_i'] ? base + '_i' : null };
+  }).sort((a, b) => nm(a.target || a.id).localeCompare(nm(b.target || b.id)));
+  G.bpOf = Object.fromEntries(G.bp.map(b => [b.id, b.target]));
+  G.bpFor = Object.fromEntries(G.bp.filter(b => b.target).map(b => [b.target, b.id]));
+  G.projRewardFrom = {};
+  D.projects.forEach(p => p.ph.forEach((ph, i) => (ph.rew || []).forEach(([id, n]) => push(G.projRewardFrom, id, { p, ph, i, n }))));
+  G.atlas = D.atlas || [];
+  G.layerGroup = {};
+  G.atlas.forEach(g => g.layers.forEach(l => { G.layerGroup[l.id] = g; }));
+  G.conditions = D.conditions || [];
   G.ready = true;
 }
 const item = id => G.items[id];
@@ -540,7 +648,11 @@ function recycleValue(it) { return Object.entries(it.rc || {}).reduce((s, [o, n]
 function baseVerdict(id) {
   const it = item(id);
   if (!it) return { v: 'sell', head: 'Not in the game data', why: '' };
-  if (it.t === 'Blueprint') return { v: 'learn', head: 'Learn it at the Workbench', why: `If you already know it, sell the copy for ${fmt(it.v)} coins.` };
+  if (it.t === 'Blueprint') {
+    const t = G.bpOf[id];
+    if (isLearned(id)) return { v: 'sell', head: 'You know this one: sell the copy', why: `Sells for ${fmt(it.v)} coins.` };
+    return { v: 'learn', head: 'Learn it at the Workbench', why: `${t ? `Unlocks ${nm(t)}${craftNote(t) ? ` (craft at ${craftNote(t)})` : ''}. ` : ''}Tick it on the Blueprints tab once you've learned it.` };
+  }
   if (it.t === 'Key') return { v: 'gear', head: 'Keep it for the locked room it opens', why: `It only sells for ${fmt(it.v)} coins, so it's worth more as a key.` };
   if (GEAR_TYPES.has(it.t) || it.wp) return { v: 'gear', head: 'Equipment: your call', why: 'Keep what you\'ll bring topside. Sell or recycle spare copies.' };
   const recVal = recycleValue(it);
@@ -588,6 +700,8 @@ function whereToFind(id) {
   const vend = (it.vd || []).filter(v => !trades.some(t => t.tr === v.tr));
   if (vend.length) out.push({ k: 'Buy', html: vend.map(v => `${esc(v.tr)}: ${Object.entries(v.c).map(([c, n]) => `${fmt(n)} ${esc(nm(c))}`).join(' + ') || '?'}${v.lim ? ` <span class="muted">(limit ${v.lim})</span>` : ''}`).join('; ') });
   if (it.rp) out.push({ k: 'Craft', html: `${esc(G.bench[it.cb]?.n || nm(it.cb || 'workbench'))}${it.sl ? ' ' + it.sl : ''}: ${Object.entries(it.rp).map(([o, n]) => `${n}× ${esc(nm(o))}`).join(' + ')}${it.cq > 1 ? ` <span class="muted">(makes ${it.cq})</span>` : ''}` });
+  const prw = G.projRewardFrom[id] || [];
+  if (prw.length) out.push({ k: 'Project', html: prw.slice(0, 3).map(r => `${esc(projName(r.p))}: ${esc(r.ph.n)} <span class="muted">(${r.n}×)</span>`).join(', ') });
   const rw = G.rewardFrom[id] || [];
   if (rw.length) out.push({ k: 'Reward', html: rw.slice(0, 4).map(r => `${esc(r.q.n)} <span class="muted">(${esc(r.q.tr)}, ${r.n}×)</span>`).join(', ') });
   return out;
@@ -661,7 +775,7 @@ function render() {
   const main = $('#main');
   if (G.error) { main.innerHTML = `<div class="panel empty"><h2>Game data didn't load</h2><p>${esc(G.error)}. Reload the page to try again.</p></div>`; return; }
   if (!G.ready) { main.innerHTML = `<div class="panel empty"><div class="spinner" style="margin:0 auto 10px"></div>Loading game data…</div>`; return; }
-  const fn = { lookup: renderLookup, needs: renderNeeds, stash: renderStash, quests: renderQuests, workshop: renderWorkshop }[UI.tab] || renderLookup;
+  const fn = { lookup: renderLookup, needs: renderNeeds, plan: renderPlan, maps: renderMaps, stash: renderStash, quests: renderQuests, workshop: renderWorkshop, blueprints: renderBlueprints }[UI.tab] || renderLookup;
   fn(main);
 }
 function renderNav() {
@@ -672,7 +786,8 @@ function renderNav() {
     const avail = G.D.quests.filter(isAvailable).length;
     const ready = G.benches.filter(b => benchReady(b)).length;
     const cap = stashCapacity(), used = stashRows().reduce((s, r) => s + r.slots, 0);
-    badges = { needs: shortNow ? { t: shortNow } : null, quests: avail ? { t: avail } : null, workshop: ready ? { t: ready + ' ready', hot: true } : null, stash: used ? { t: cap ? `${used}/${cap}` : used, hot: cap && used > cap * 0.9 } : null };
+    const learnedN = G.bp.filter(b => isLearned(b.id)).length;
+    badges = { blueprints: { t: `${learnedN}/${G.bp.length}` }, needs: shortNow ? { t: shortNow } : null, quests: avail ? { t: avail } : null, workshop: ready ? { t: ready + ' ready', hot: true } : null, stash: used ? { t: cap ? `${used}/${cap}` : used, hot: cap && used > cap * 0.9 } : null };
   }
   $('#nav').innerHTML = TABS.map(t => `<button type="button" data-tab="${t.id}" ${UI.tab === t.id ? 'aria-current="page"' : ''}>${svg(t.icon)}<span>${t.label}</span>${badges[t.id] ? `<span class="badge ${badges[t.id].hot ? 'hot' : ''}">${esc(badges[t.id].t)}</span>` : '<span></span>'}</button>`).join('');
 }
@@ -756,6 +871,14 @@ function renderDetail(id) {
   const uses = (G.usedIn[id] || []).slice(0, 12);
   const usesHtml = uses.length ? `<div class="mini">${uses.map(u => `<button class="minilink" type="button" data-act="open" data-id="${esc(u.id)}">${icon(u.id, 28)}<span>${esc(nm(u.id))} <span class="muted">×${u.n}</span></span></button>`).join('')}${(G.usedIn[id] || []).length > 12 ? `<span class="muted" style="border:0">+${G.usedIn[id].length - 12} more</span>` : ''}</div>` : '';
   const where = whereToFind(id);
+  let bpHtml = '';
+  if (it.t === 'Blueprint') {
+    const t = G.bpOf[id], src = bpSources(id);
+    bpHtml = `<section class="d-sec"><h3>Blueprint</h3><div style="display:grid;gap:10px">${t ? `<div class="mini"><button class="minilink" type="button" data-act="open" data-id="${esc(t)}">${icon(t, 28)}<span>Unlocks ${esc(nm(t))}${craftNote(t) ? ` <span class="muted">· craft at ${esc(craftNote(t))}</span>` : ''}</span></button></div>` : ''}<label class="check"><input type="checkbox" data-bp="${esc(id)}" ${isLearned(id) ? 'checked' : ''}> I've learned this blueprint</label><div class="muted" style="font-size:13px">${src.length ? src.map(esc).join(' · ') : 'Drops as random loot.'}</div></div></section>`;
+  } else if (G.bpFor[id]) {
+    const b = G.bpFor[id];
+    bpHtml = `<section class="d-sec"><h3>Blueprint</h3><div class="mini"><button class="minilink" type="button" data-act="open" data-id="${esc(b)}">${icon(b, 28)}<span>${esc(nm(b))}</span>${isLearned(b) ? '<span class="tag ok">learned</span>' : '<span class="tag now">not learned</span>'}</button></div></section>`;
+  }
   box.innerHTML = `<article class="panel detail v-${vd.v}">
     <div class="d-hero">${icon(id, 84)}<div><div class="eyebrow">${esc(it.t)} · ${esc(it.r)}</div><h2>${esc(it.n)}</h2><div class="d-meta">${it.q ? '<span class="tag">Quest item</span>' : ''}${n?.now ? '<span class="tag now">Needed next</span>' : ''}</div></div><span class="stamp v-${vd.v}">${VERDICTS[vd.v]}</span></div>
     <div class="d-why"><strong>${esc(vd.head)}</strong>${vd.why ? `<span>${esc(vd.why)}</span>` : ''}${vd.base ? `<span>For the spares: ${esc(vd.base.head.toLowerCase())}. ${esc(vd.base.why)}</span>` : ''}</div>
@@ -770,6 +893,7 @@ function renderDetail(id) {
       <section class="d-sec"><h3>Recycles into</h3>${recHtml}${salHtml}</section>
     </div>
     <section class="d-sec"><h3>Where to find it</h3>${where.length ? `<ul class="find">${where.map(w => `<li><span class="k">${esc(w.k)}</span><span>${w.html}</span></li>`).join('')}</ul>` : '<span class="muted">The community data has no sources listed for this item yet.</span>'}</section>
+    ${bpHtml}
     ${usesHtml ? `<section class="d-sec"><h3>Ingredient in</h3>${usesHtml}</section>` : ''}
     ${it.d ? `<div class="d-desc">${esc(it.d)}</div>` : ''}
   </article>`;
@@ -899,7 +1023,7 @@ function questCard(q) {
     <div class="q-head"><div><div class="q-tr"><i></i>${esc(q.tr)}</div><h3>${esc(q.n)}</h3></div>
       <div>${done ? '<span class="tag ok">Done</span>' : avail ? '<span class="tag now">Available</span>' : '<span class="tag">Locked</span>'}</div></div>
     <div class="q-body">
-      <div class="chips">${mapNames(q.m).map(m => `<span class="tag">${esc(m)}</span>`).join('')}${q.one ? '<span class="tag">In one raid</span>' : ''}${q.or.map(o => `<span class="tag">${esc(o)}</span>`).join('')}</div>
+      <div class="chips">${mapTags(q.m)}${q.one ? '<span class="tag">In one raid</span>' : ''}${q.or.map(o => `<span class="tag">${esc(o)}</span>`).join('')}</div>
       ${!done && !avail && prevOpen.length ? `<div class="muted" style="font-size:13px">Unlocks after ${esc(list(prevOpen.map(p => G.quest[p].n)))}</div>` : ''}
       <ol>${q.o.map(o => `<li>${esc(o)}</li>`).join('')}</ol>
       ${req.length ? `<div><div class="eyebrow" style="margin-bottom:6px">Deliver</div><div class="req">${req.map(([id, n]) => `<span>${icon(id, 26)}${esc(nm(id))} <span class="hn ${have(id) >= n ? 'ok' : 'short'}">${fmt(have(id))}/${n}</span></span>`).join('')}</div></div>` : ''}
@@ -948,6 +1072,293 @@ function renderWorkshop(main) {
     <header class="page-head" style="margin-top:8px"><div><h1 style="font-size:24px">Projects</h1><p>Expeditions and event projects. Track one to count its items, and log what you've already delivered.</p></div></header>
     <div class="bgrid">${active.map(projCard).join('') || '<div class="panel empty">No projects are running right now according to the community data.</div>'}</div>
     ${ended.length ? `<details class="more"><summary>Ended projects (${ended.length})</summary><div class="bgrid" style="margin-top:12px">${ended.map(projCard).join('')}</div></details>` : ''}`;
+}
+
+// ----- shared map helpers -----
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const groupLayerIds = g => g.layers.map(l => l.id);
+function mapTags(ids) {
+  return [...new Set(ids || [])].map(m => {
+    const g = G.layerGroup[m];
+    if (!g) return `<span class="tag">${esc(G.mapName[m] || nm(m))}</span>`;
+    const floor = g.layers.length > 1 ? ' · ' + (g.layers.find(l => l.id === m)?.n || '') : '';
+    return `<button type="button" class="tag linktag" data-act="open-map" data-layer="${esc(m)}" title="Open the map">${esc(g.n + floor)}</button>`;
+  }).join('');
+}
+function questsOn(g) { const L = groupLayerIds(g); return G.questOrder.filter(q => !isDone(q.id) && q.m.some(m => L.includes(m))); }
+function botsOn(g) { const L = groupLayerIds(g); return G.D.bots.filter(b => b.maps.some(m => L.includes(m))).sort((a, b) => (THREAT_ORDER[a.threat] ?? 5) - (THREAT_ORDER[b.threat] ?? 5)); }
+const clock = d => new Date(d).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+function condNow(gid) {
+  const c = S.progress.cond?.[gid]; if (!c || !c.c) return null;
+  const end = new Date(c.at); end.setMinutes(60, 0, 0); // conditions change on the hour
+  return Date.now() < end.getTime() ? { c: c.c, at: c.at, end, cond: G.conditions.find(x => x.id === c.c) } : null;
+}
+
+// ----- Blueprints -----
+const isLearned = id => !!S.progress.blueprints[id];
+function craftNote(target) {
+  const t = item(target); if (!t?.cb) return '';
+  return `${G.bench[t.cb]?.n || nm(t.cb)} ${t.sl || 1}`;
+}
+function canCraft(target) { const t = item(target); return !t?.cb || !G.bench[t.cb] || benchLevel(t.cb) >= (t.sl || 1); }
+function bpSources(id) {
+  const out = [];
+  (G.rewardFrom[id] || []).forEach(r => out.push(`Quest reward: ${r.q.n} (${r.q.tr})`));
+  (G.projRewardFrom[id] || []).forEach(r => out.push(`Project reward: ${projName(r.p)}, ${r.ph.n}`));
+  (G.tradeFor[id] || []).forEach(t => out.push(`Trade: ${t.tr}`));
+  return out;
+}
+function renderBlueprints(main) {
+  if (!$('#bp-q')) {
+    main.innerHTML = `<div id="banner-slot"></div>
+      <header class="page-head"><div><div class="eyebrow">Workbench</div><h1>Blueprints</h1><p>Tick the blueprints you've learned. Spare copies of learned ones become SELL everywhere in the app; the rest stay LEARN.</p></div></header>
+      <div class="strip" id="bp-strip"></div>
+      <div class="toolbar"><div class="addbox" style="width:min(280px,100%)"><input id="bp-q" type="search" autocomplete="off" placeholder="Filter blueprints…" aria-label="Filter blueprints" value="${esc(UI.bpQ)}"></div><div class="seg" role="group" aria-label="Show" id="bp-filter"></div></div>
+      <div id="bp-list" style="display:grid;gap:18px"></div>`;
+  }
+  $('#banner-slot').innerHTML = setupBanner();
+  const all = G.bp, learned = all.filter(b => isLearned(b.id));
+  const spare = all.filter(b => isLearned(b.id) && have(b.id) > 0);
+  const craftable = learned.filter(b => b.target && canCraft(b.target)).length;
+  $('#bp-strip').innerHTML = `
+    <div class="panel stat space"><span class="eyebrow">Learned</span><b>${learned.length}<span class="muted" style="font-size:16px"> / ${all.length}</span></b><div class="bar"><i style="width:${all.length ? (learned.length / all.length) * 100 : 0}%"></i></div></div>
+    <div class="panel stat"><span class="eyebrow">Craftable now</span><b>${craftable}</b><span>learned, and your bench is high enough</span></div>
+    <div class="panel stat"><span class="eyebrow">Still to find</span><b>${all.length - learned.length}</b><span>most drop as random loot</span></div>
+    <div class="panel stat"><span class="eyebrow">Spare copies</span><b>${spare.length}</b><span>${spare.length ? 'learned blueprints in your stash: sell them' : 'none in your stash'}</span></div>`;
+  $('#bp-filter').innerHTML = [['all', 'All'], ['missing', 'Not learned'], ['learned', 'Learned']].map(([k, l]) => `<button type="button" data-bpf="${k}" aria-pressed="${UI.bpFilter === k}">${l}</button>`).join('');
+  renderBpList();
+}
+function renderBpList() {
+  const q = norm(UI.bpQ);
+  const groups = BP_GROUPS.map(([k, label]) => ({ k, label, all: [], shown: [] }));
+  for (const b of G.bp) {
+    const g = groups[BP_GROUPS.findIndex(([, , test]) => test(item(b.target)?.t || ''))];
+    g.all.push(b);
+    const okF = UI.bpFilter === 'all' || (UI.bpFilter === 'missing' ? !isLearned(b.id) : isLearned(b.id));
+    if (okF && (!q || norm(nm(b.target || b.id)).includes(q))) g.shown.push(b);
+  }
+  $('#bp-list').innerHTML = groups.filter(g => g.shown.length).map(g => `<section class="panel"><div class="panel-head"><h2>${esc(g.label)}</h2><span class="hn">${g.all.filter(b => isLearned(b.id)).length}/${g.all.length}</span></div><div class="bpgrid">${g.shown.map(bpRow).join('')}</div></section>`).join('')
+    || `<div class="panel empty">No blueprints match.</div>`;
+}
+function bpRow(b) {
+  const t = b.target, on = isLearned(b.id), src = bpSources(b.id), cn = t ? craftNote(t) : '';
+  const status = on && t ? (canCraft(t) ? '<span class="tag ok">Can craft</span>' : `<span class="tag">Needs ${esc(cn)}</span>`) : '';
+  const sub = [cn ? 'Craft at ' + cn : (item(t)?.t || ''), have(b.id) ? `${fmt(have(b.id))} in stash` : ''].filter(Boolean).join(' · ');
+  return `<div class="bprow ${on ? 'on' : ''}">
+    <input type="checkbox" id="bp-${esc(b.id)}" data-bp="${esc(b.id)}" ${on ? 'checked' : ''}>
+    <button type="button" class="minilink bare" data-act="open-lookup" data-id="${esc(b.id)}" aria-label="Look up ${esc(nm(b.id))}">${icon(t || b.id, 38)}</button>
+    <label for="bp-${esc(b.id)}" style="min-width:0;cursor:pointer"><span class="nm">${esc(nm(t || b.id))}</span><span class="sub">${esc(sub)}</span>${src.length ? `<span class="sub">${esc(src[0])}${src.length > 1 ? ` +${src.length - 1} more` : ''}</span>` : ''}</label>
+    <span>${status}</span>
+  </div>`;
+}
+
+// ----- Maps -----
+const MAPV = { map: null, tiles: null, markers: null, layerId: null, adding: false, edit: null };
+function mapGroup() { return G.atlas.find(g => g.id === UI.mapGroup) || G.atlas[0]; }
+function mapLayer(g = mapGroup()) { return g.layers.find(l => l.id === UI.mapLayer) || g.layers[0]; }
+function renderMaps(main) {
+  if (!G.atlas.length) { main.innerHTML = '<div class="panel empty">This build has no maps.</div>'; return; }
+  const g = mapGroup(), layer = mapLayer(g);
+  UI.mapGroup = g.id; UI.mapLayer = layer.id;
+  if (!$('#lmap')) {
+    main.innerHTML = `<div id="banner-slot"></div>
+      <header class="page-head"><div><div class="eyebrow">Topside</div><h1>Maps</h1><p>The labeled maps show area names, loot types, extraction points and high-value zones. Add your own pins for loot spots, locked rooms and anything worth remembering.</p></div></header>
+      <div class="toolbar" id="map-bar"></div>
+      <div class="maps"><div class="panel map-wrap"><div id="lmap" class="lmap" aria-label="Map of ${esc(g.n)}"></div><div class="map-hint" id="map-hint" hidden><span>Click the map where the pin goes</span><button type="button" class="btn small" data-act="pin-add-cancel" style="border-color:currentColor;color:inherit">Cancel</button></div></div><aside class="panel map-side" id="map-side" aria-label="About this map"></aside></div>`;
+    initLeaflet();
+  }
+  $('#banner-slot').innerHTML = setupBanner();
+  renderMapBar();
+  showLayer(layer);
+  renderPins();
+  renderMapSide();
+}
+function renderMapBar() {
+  const g = mapGroup(), layer = mapLayer(g);
+  $('#map-bar').innerHTML = `
+    <div class="chips" role="group" aria-label="Map">${G.atlas.map(x => { const n = questsOn(x).filter(isAvailable).length; return `<button type="button" class="chip" data-act="map-group" data-group="${esc(x.id)}" aria-pressed="${x.id === g.id}" ${n ? `title="${plural(n, 'available quest')}"` : ''}>${esc(x.n)}${n ? ` <span class="num">${n}</span>` : ''}</button>`; }).join('')}</div>
+    ${g.layers.length > 1 ? `<div class="seg" role="group" aria-label="Floor">${g.layers.map(l => `<button type="button" data-act="map-layer" data-layer="${esc(l.id)}" aria-pressed="${l.id === layer.id}">${esc(l.n)}</button>`).join('')}</div>` : ''}
+    <div class="chips" role="group" aria-label="Show pins" style="margin-left:auto">${[['all', 'All pins'], ...Object.entries(PIN_TYPES).map(([k, t]) => [k, t.n])].map(([k, l]) => `<button type="button" class="chip" data-act="pin-filter" data-pf="${k}" aria-pressed="${UI.pinFilter === k}">${k !== 'all' ? `<i class="dot" style="background:${PIN_TYPES[k].c}"></i>` : ''}${esc(l)}</button>`).join('')}</div>
+    <button type="button" class="btn primary small" data-act="pin-add" aria-pressed="${MAPV.adding}">+ Add pin</button>`;
+}
+function initLeaflet() {
+  const el = $('#lmap');
+  if (!window.L) { el.innerHTML = '<div class="empty" style="color:#d9cfba">The map viewer didn\'t load. Check your connection, then reload the page.</div>'; return; }
+  // y grows downward, so map units match image pixels: (x, y) with (0, 0) top left.
+  const crs = L.extend({}, L.CRS.Simple, { transformation: new L.Transformation(1, 0, 1, 0) });
+  const map = L.map(el, { crs, minZoom: -1, maxZoom: 4, zoomSnap: 0.25, zoomDelta: 0.5, wheelPxPerZoomLevel: 100, attributionControl: false });
+  map.on('click', onMapClick);
+  MAPV.map = map; MAPV.layerId = null; MAPV.tiles = null;
+  MAPV.markers = L.layerGroup().addTo(map);
+}
+function showLayer(layer) {
+  const map = MAPV.map; if (!map || MAPV.layerId === layer.id) return;
+  if (MAPV.tiles) map.removeLayer(MAPV.tiles);
+  const b = [[0, 0], [layer.h, layer.w]];
+  MAPV.tiles = L.tileLayer(`data/maps/${layer.id}/{z}/{x}_{y}.webp`, { tileSize: 1000, minNativeZoom: 0, maxNativeZoom: layer.z.length - 1, minZoom: -1, maxZoom: 4, bounds: b, noWrap: true, keepBuffer: 1 }).addTo(map);
+  map.setMaxBounds([[-layer.h * 0.3, -layer.w * 0.3], [layer.h * 1.3, layer.w * 1.3]]);
+  map.invalidateSize();
+  map.fitBounds(b, { animate: false });
+  MAPV.layerId = layer.id;
+  $('#lmap').setAttribute('aria-label', `Map of ${mapGroup().n}${layer.n ? ', ' + layer.n + ' floor' : ''}`);
+}
+function pinIcon(p, sel) {
+  const t = PIN_TYPES[p.t] || PIN_TYPES.note;
+  return L.divIcon({ className: 'pin-wrap', html: `<span class="pin ${sel ? 'sel' : ''}" style="--pc:${t.c}"><span>${t.g}</span></span>`, iconSize: [30, 32], iconAnchor: [6, 30], tooltipAnchor: [9, -28] });
+}
+function renderPins() {
+  if (!MAPV.map) return;
+  MAPV.markers.clearLayers();
+  const E = MAPV.edit;
+  const pins = S.pins.pins.filter(p => p.l === MAPV.layerId && (UI.pinFilter === 'all' || p.t === UI.pinFilter) && (!E || p.id !== E.id));
+  if (E && E.l === MAPV.layerId) pins.push(E);
+  for (const p of pins) {
+    const isEdit = p === E;
+    const mk = L.marker([p.y, p.x], { icon: pinIcon(p, isEdit), draggable: true, title: p.label || PIN_TYPES[p.t]?.n || 'Pin', riseOnHover: true, zIndexOffset: isEdit ? 1000 : 0 });
+    const tip = [p.label, p.item ? nm(p.item) : ''].filter(Boolean).join(' · ');
+    if (tip && !isEdit) mk.bindTooltip(esc(tip), { direction: 'top' });
+    mk.on('click', () => { setAddMode(false); MAPV.edit = isEdit ? E : clone(p); renderPins(); renderMapSide(); });
+    mk.on('dragend', ev => {
+      const ll = ev.target.getLatLng(), layer = mapLayer();
+      const x = Math.round(clamp(ll.lng, 0, layer.w) * 10) / 10, y = Math.round(clamp(ll.lat, 0, layer.h) * 10) / 10;
+      if (isEdit) { E.x = x; E.y = y; return; }
+      const real = S.pins.pins.find(q => q.id === p.id);
+      if (real) { real.x = x; real.y = y; markDirty('pins'); toast('Pin moved'); }
+    });
+    MAPV.markers.addLayer(mk);
+  }
+}
+function setAddMode(on) {
+  MAPV.adding = on;
+  $('#lmap')?.classList.toggle('adding', on);
+  const hint = $('#map-hint'); if (hint) hint.hidden = !on;
+  const btn = $('[data-act="pin-add"]'); if (btn) btn.setAttribute('aria-pressed', String(on));
+}
+function onMapClick(e) {
+  if (!MAPV.adding) return;
+  const layer = mapLayer();
+  MAPV.edit = { id: null, l: layer.id, x: Math.round(clamp(e.latlng.lng, 0, layer.w) * 10) / 10, y: Math.round(clamp(e.latlng.lat, 0, layer.h) * 10) / 10, t: PIN_TYPES[UI.lastPinType] ? UI.lastPinType : 'loot', label: '', item: null };
+  setAddMode(false);
+  renderPins(); renderMapSide();
+  setTimeout(() => $('#pin-label')?.focus(), 0);
+}
+function pinEditor(E) {
+  return `<section class="side-sec editor"><h3>${E.id ? 'Edit pin' : 'New pin'}</h3>
+    <div class="chips" role="group" aria-label="Pin type">${Object.entries(PIN_TYPES).map(([k, t]) => `<button type="button" class="chip" data-act="pin-type" data-type="${k}" aria-pressed="${E.t === k}"><i class="dot" style="background:${t.c}"></i>${esc(t.n)}</button>`).join('')}</div>
+    <input id="pin-label" type="text" maxlength="80" placeholder="Label, like “Gear crate behind the shed”" value="${esc(E.label)}" aria-label="Pin label">
+    <div class="toolbar">${E.item ? `<span class="mini"><span>${icon(E.item, 26)}${esc(nm(E.item))}</span></span><button type="button" class="btn small ghost" data-act="pin-item-clear">Unlink</button>` : '<button type="button" class="btn small ghost" data-act="pin-item">Link an item</button>'}</div>
+    <p class="muted small">Drag the pin to move it. ${E.item ? 'The session planner sends you here for this item.' : 'Link an item and the session planner will send you here for it.'}</p>
+    <div class="toolbar" style="justify-content:space-between">${E.id ? '<button type="button" class="btn small ghost danger" data-act="pin-del">Delete</button>' : '<span></span>'}<span class="toolbar"><button type="button" class="btn small ghost" data-act="pin-cancel">Cancel</button><button type="button" class="btn small primary" data-act="pin-save">Save pin</button></span></div>
+  </section>`;
+}
+function renderMapSide() {
+  const side = $('#map-side'); if (!side) return;
+  const g = mapGroup();
+  const qs = questsOn(g), avail = qs.filter(isAvailable), locked = qs.filter(q => !isAvailable(q));
+  const bots = botsOn(g), withNeeds = bots.filter(b => b.drops.some(d => shortOf(d) > 0)), others = bots.filter(b => !withNeeds.includes(b));
+  const pins = S.pins.pins.filter(p => groupLayerIds(g).includes(p.l));
+  const cn = condNow(g.id);
+  const qLine = q => `<div class="sline"><span class="dot" style="background:${TRADER_COLORS[q.tr] || 'var(--ink-3)'}"></span><span><strong>${esc(q.n)}</strong><span class="muted small" style="display:block">${esc(q.tr)}${q.req.length ? ' · deliver ' + esc(q.req.map(([id, n]) => `${n}× ${nm(id)}`).join(', ')) : ''}</span></span></div>`;
+  const bLine = b => { const need = b.drops.filter(d => shortOf(d) > 0); return `<div class="sline"><span class="tag ${THREAT_ORDER[b.threat] <= 1 ? 'now' : ''}">${esc(b.threat || '?')}</span><span><strong>${esc(titleCase(b.n))}</strong>${need.length ? `<span class="small" style="display:block">You need: ${need.map(d => `<button type="button" class="linkish" data-act="open-lookup" data-id="${esc(d)}">${esc(nm(d))}</button> <span class="muted">(${fmt(shortOf(d))})</span>`).join(', ')}</span>` : ''}</span></div>`; };
+  const pLine = p => { const t = PIN_TYPES[p.t] || PIN_TYPES.note, lyr = g.layers.length > 1 ? g.layers.find(l => l.id === p.l)?.n : ''; return `<button type="button" class="sline" data-act="pin-go" data-id="${esc(p.id)}"><span class="dot" style="background:${t.c}"></span><span><strong>${esc(p.label || t.n)}</strong><span class="muted small" style="display:block">${esc([t.n, p.item ? nm(p.item) : '', lyr ? lyr + ' floor' : ''].filter(Boolean).join(' · '))}</span></span></button>`; };
+  side.innerHTML = `${MAPV.edit ? pinEditor(MAPV.edit) : ''}
+    <section class="side-sec"><h3>Condition now</h3>
+      <select id="cond-sel" aria-label="Current condition on ${esc(g.n)}"><option value="">Not set</option>${['major', 'minor'].map(cat => `<optgroup label="${cat === 'major' ? 'Major' : 'Minor'}">${G.conditions.filter(c => c.cat === cat).map(c => `<option value="${esc(c.id)}" ${cn?.c === c.id ? 'selected' : ''}>${esc(c.n)}</option>`).join('')}</optgroup>`).join('')}</select>
+      <p class="muted small">${cn ? `Set at ${clock(cn.at)}; clears at ${clock(cn.end)}, when conditions change.` : 'Set it from the in-game map screen, or check a live tracker:'} <a href="https://arcstatus.com/map-conditions" target="_blank" rel="noopener">arcstatus.com</a> · <a href="https://arcraidershub.com/events" target="_blank" rel="noopener">arcraidershub.com</a></p>
+    </section>
+    <section class="side-sec"><h3>Quests here <span class="hn">${avail.length}</span></h3>${avail.length ? avail.map(qLine).join('') : '<p class="muted small">No available quests on this map.</p>'}${locked.length ? `<details class="more"><summary>${plural(locked.length, 'locked quest')}</summary>${locked.map(qLine).join('')}</details>` : ''}</section>
+    <section class="side-sec"><h3>ARC here</h3>${bots.length ? withNeeds.map(bLine).join('') + (others.length ? `<details class="more"><summary>${plural(others.length, 'other ARC type')}</summary>${others.map(bLine).join('')}</details>` : '') : '<p class="muted small">The community data doesn\'t list ARC for this map yet.</p>'}</section>
+    <section class="side-sec"><h3>Your pins <span class="hn">${pins.length}</span></h3>${pins.length ? pins.map(pLine).join('') : '<p class="muted small">None yet. Press “+ Add pin”, then click the map.</p>'}</section>`;
+}
+function openMapAt(layerId) {
+  const g = G.layerGroup[layerId]; if (!g) return;
+  UI.mapGroup = g.id; UI.mapLayer = layerId; MAPV.edit = null; saveUI();
+  if (UI.tab === 'maps') render(); else switchTab('maps');
+}
+function destroyMap() {
+  if (MAPV.map) MAPV.map.remove();
+  Object.assign(MAPV, { map: null, tiles: null, markers: null, layerId: null, adding: false, edit: null });
+}
+
+// ----- Plan -----
+function planState() {
+  const P = S.progress.plan && typeof S.progress.plan === 'object' ? S.progress.plan : (S.progress.plan = {});
+  for (const k of ['skipQ', 'skipI', 'extra', 'done']) if (!P[k] || typeof P[k] !== 'object') P[k] = {};
+  return P;
+}
+function planTargets() {
+  const P = planState(), needs = derived().needs;
+  const quests = G.questOrder.filter(isAvailable);
+  const items = Object.keys(needs).filter(id => needs[id].now > have(id)).sort((a, b) => shortOf(b) - shortOf(a) || nm(a).localeCompare(nm(b)));
+  const extra = Object.keys(P.extra).filter(id => item(id));
+  const selQ = quests.filter(q => !P.skipQ[q.id]);
+  const selI = [...new Set(items.filter(id => !P.skipI[id]).concat(extra))];
+  return { quests, items, extra, selQ, selI };
+}
+const wantQty = id => shortOf(id) || planState().extra[id] || 1;
+function rankMaps(T) {
+  return G.atlas.map(g => {
+    const L = groupLayerIds(g);
+    const qs = T.selQ.filter(q => q.m.some(m => L.includes(m)));
+    const covered = new Set();
+    qs.forEach(q => q.req.forEach(([id]) => { if (T.selI.includes(id)) covered.add(id); }));
+    const farm = [];
+    // Credit each item to the easiest ARC on the map that drops it.
+    for (const b of botsOn(g).reverse()) {
+      const its = T.selI.filter(id => b.drops.includes(id) && !farm.some(f => f.its.includes(id)));
+      if (its.length) { farm.push({ b, its }); its.forEach(i => covered.add(i)); }
+    }
+    const pins = S.pins.pins.filter(p => L.includes(p.l) && p.item && T.selI.includes(p.item));
+    pins.forEach(p => covered.add(p.item));
+    farm.reverse();
+    return { g, qs, farm, pins, covered, score: qs.length * 3 + covered.size + pins.length };
+  }).sort((a, b) => b.score - a.score);
+}
+function renderPlan(main) {
+  const P = planState(), T = planTargets(), ranked = rankMaps(T);
+  const coveredAll = new Set(); ranked.forEach(r => r.covered.forEach(i => coveredAll.add(i)));
+  const zones = {};
+  T.selI.filter(id => !coveredAll.has(id)).forEach(id => { const z = (item(id)?.f || []).filter(x => x !== 'ARC'); (z.length ? z : ['Elsewhere']).forEach(zz => push(zones, zz, id)); });
+  const useful = ranked.filter(r => r.score > 0), idle = ranked.filter(r => !r.score);
+  const chosen = P.map ? ranked.find(r => r.g.id === P.map) : null;
+  const qRow = q => `<label class="prow"><input type="checkbox" data-plan-q="${esc(q.id)}" ${P.skipQ[q.id] ? '' : 'checked'}><span class="dot" style="background:${TRADER_COLORS[q.tr] || 'var(--ink-3)'}"></span><span><span class="nm">${esc(q.n)}</span><span class="sub">${esc(q.tr)} · ${esc(list(mapNames(q.m)) || 'any map')}</span></span><span></span></label>`;
+  const iRow = id => `<label class="prow"><input type="checkbox" data-plan-i="${esc(id)}" ${P.skipI[id] ? '' : 'checked'}>${icon(id, 32)}<span><span class="nm">${esc(nm(id))}</span><span class="sub">${esc(bestWhere(id))}</span></span><span class="hn short">${fmt(shortOf(id))}</span></label>`;
+  const xRow = id => `<div class="prow" style="cursor:default"><span></span>${icon(id, 32)}<span><span class="nm">${esc(nm(id))}</span><span class="sub">${esc(bestWhere(id) || item(id).t)}</span></span><button type="button" class="btn small ghost" data-act="plan-extra-del" data-id="${esc(id)}" aria-label="Remove ${esc(nm(id))}">✕</button></div>`;
+  const farmLine = f => `<div class="sline"><span class="tag ${THREAT_ORDER[f.b.threat] <= 1 ? 'now' : ''}">${esc(f.b.threat || '?')}</span><span><strong>${esc(titleCase(f.b.n))}</strong> <span class="muted">for</span> ${f.its.map(id => `${esc(nm(id))} <span class="muted">(${fmt(wantQty(id))})</span>`).join(', ')}</span></div>`;
+  const card = (r, i) => { const cn = condNow(r.g.id); return `<article class="panel mapcard ${i === 0 ? 'best' : ''}">
+      <div class="panel-head"><div style="display:flex;gap:14px;align-items:center"><span class="rank">${i + 1}</span><div><h2>${esc(r.g.n)}</h2><div class="muted small">${plural(r.qs.length, 'quest')} · ${plural(r.covered.size, 'item')}${cn ? ` · ${esc(cn.cond?.n || cn.c)} now` : ''}</div></div></div>
+        <div class="toolbar"><button type="button" class="btn small ghost" data-act="open-map" data-layer="${esc(r.g.layers[0].id)}">Map</button><button type="button" class="btn small ${P.map === r.g.id ? '' : 'primary'}" data-act="plan-pick" data-group="${esc(r.g.id)}">${P.map === r.g.id ? 'Planned' : 'Plan this raid'}</button></div></div>
+      <div class="panel-body">
+        ${r.qs.length ? `<div><div class="eyebrow" style="margin-bottom:4px">Quests</div>${r.qs.map(q => `<div class="sline"><span class="dot" style="background:${TRADER_COLORS[q.tr] || 'var(--ink-3)'}"></span><span>${esc(q.n)}</span></div>`).join('')}</div>` : ''}
+        ${r.farm.length ? `<div><div class="eyebrow" style="margin-bottom:4px">Hunt ARC</div>${r.farm.map(farmLine).join('')}</div>` : ''}
+        ${r.pins.length ? `<div><div class="eyebrow" style="margin-bottom:4px">Your spots</div>${r.pins.map(p => `<div class="sline"><span class="dot" style="background:${(PIN_TYPES[p.t] || PIN_TYPES.note).c}"></span><span>${esc(p.label || PIN_TYPES[p.t]?.n)} <span class="muted">(${esc(nm(p.item))})</span></span></div>`).join('')}</div>` : ''}
+      </div></article>`; };
+  let raid = '';
+  if (chosen) {
+    const tasks = [];
+    chosen.qs.forEach(q => tasks.push({ k: 'q:' + q.id, lbl: q.n, sub: q.o.join(' · ') }));
+    chosen.farm.forEach(f => f.its.forEach(id => tasks.push({ k: 'i:' + id, lbl: `Get ${fmt(wantQty(id))}× ${nm(id)}`, sub: `drops from ${titleCase(f.b.n)}` })));
+    chosen.pins.forEach(p => tasks.push({ k: 'p:' + p.id, lbl: `Check your spot: ${p.label || nm(p.item)}`, sub: nm(p.item) }));
+    const doneN = tasks.filter(t => P.done[t.k]).length;
+    raid = `<section class="panel"><div class="panel-head"><div><div class="eyebrow">This raid</div><h2 style="font-size:20px">${esc(chosen.g.n)}</h2></div><div class="toolbar"><span class="hn">${doneN}/${tasks.length}</span><button type="button" class="btn small ghost" data-act="open-map" data-layer="${esc(chosen.g.layers[0].id)}">Open map</button><button type="button" class="btn small" data-act="plan-clear">Finish raid</button></div></div>
+      <div class="panel-body" style="padding-top:4px">${tasks.length ? tasks.map(t => `<label class="task ${P.done[t.k] ? 'done' : ''}"><input type="checkbox" data-plan-done="${esc(t.k)}" ${P.done[t.k] ? 'checked' : ''}><span><span class="lbl">${esc(t.lbl)}</span><span class="sub">${esc(t.sub)}</span></span></label>`).join('') : '<p class="muted">None of your targets are on this map any more.</p>'}</div></section>`;
+  }
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Tonight</div><h1>Session plan</h1><p>Pick what you're going for. Maps are ranked by how much of it you can do there: quests on the map, ARC that drop what you need, and your own pinned spots.</p></div></header>
+    <div class="plan">
+      <section class="panel"><div class="panel-head"><h2>Targets</h2><span class="hn">${T.selQ.length + T.selI.length} picked</span></div>
+        <div class="panel-body" style="display:grid;gap:14px">
+          <div><div class="eyebrow">Quests you can do (${T.quests.length})</div>${T.quests.map(qRow).join('') || '<p class="muted small">No quests available. Check your progress on the Quests tab.</p>'}</div>
+          <div><div class="eyebrow">Items for your next steps (${T.items.length})</div>${T.items.map(iRow).join('') || '<p class="muted small">You have everything your next steps need.</p>'}</div>
+          <div><div class="eyebrow">Extra targets</div>${T.extra.map(xRow).join('')}<button type="button" class="btn small ghost" data-act="plan-add" style="margin-top:8px">+ Add an item to hunt</button></div>
+        </div></section>
+      <div style="display:grid;gap:14px;min-width:0">
+        ${raid}
+        ${useful.map(card).join('') || '<div class="panel empty">None of your targets point to a specific map. Use the loot areas below, or pin spots on the Maps tab and link items to them.</div>'}
+        ${Object.keys(zones).length ? `<section class="panel"><div class="panel-head"><h2>Loot anywhere</h2><span class="muted small">look for these loot areas on the labeled maps</span></div><div class="panel-body" style="display:grid;gap:6px">${Object.entries(zones).sort((a, b) => b[1].length - a[1].length).map(([z, ids]) => `<div class="sline"><span class="tag">${esc(z)}</span><span>${ids.map(id => `<button type="button" class="linkish" data-act="open-lookup" data-id="${esc(id)}">${esc(nm(id))}</button>`).join(', ')}</span></div>`).join('')}</div></section>` : ''}
+        ${idle.length ? `<p class="muted small" style="margin:0">Nothing on your list points to ${esc(list(idle.map(r => r.g.n)))}.</p>` : ''}
+      </div>
+    </div>`;
 }
 
 // ---------- modals ----------
@@ -1125,7 +1536,7 @@ function applyScan() {
 document.addEventListener('click', e => {
   const tabBtn = e.target.closest('[data-tab]');
   if (tabBtn) { switchTab(tabBtn.dataset.tab); return; }
-  const t = e.target.closest('[data-act], [data-lkf], [data-needs-scope], [data-needs-src], [data-stash-filter], [data-qtr], [data-qst], [data-scan-mode]');
+  const t = e.target.closest('[data-act], [data-lkf], [data-needs-scope], [data-needs-src], [data-stash-filter], [data-qtr], [data-qst], [data-scan-mode], [data-bpf]');
   if (!t) { if (e.target.id === 'modal') closeModal(); if (!e.target.closest('.addbox')) hideAddPop(); return; }
   const d = t.dataset, id = d.id;
   if (d.lkf) { UI.lkFilter = d.lkf; saveUI(); renderLookup($('#main')); return; }
@@ -1135,6 +1546,7 @@ document.addEventListener('click', e => {
   if (d.qtr) { UI.qTrader = d.qtr; saveUI(); render(); return; }
   if (d.qst) { UI.qStatus = d.qst; saveUI(); render(); return; }
   if (d.scanMode) { SCAN.mode = d.scanMode; rerenderScan(); return; }
+  if (d.bpf) { UI.bpFilter = d.bpf; saveUI(); render(); return; }
   switch (d.act) {
     case 'open':
       if (UI.tab !== 'lookup') { openLookup(id); return; }
@@ -1190,6 +1602,40 @@ document.addEventListener('click', e => {
       pickItem('Which item is it?', pid => { const r = SCAN.rows[i]; if (!r) return; const dup = SCAN.rows.findIndex((x, j) => j !== i && x.id === pid); if (dup >= 0) { SCAN.rows[dup].count += r.count; SCAN.rows.splice(i, 1); } else { r.id = pid; r.sure = true; } rerenderScan(); });
       return;
     }
+    case 'open-map': openMapAt(d.layer); return;
+    case 'map-group': UI.mapGroup = d.group; UI.mapLayer = null; MAPV.edit = null; setAddMode(false); saveUI(); render(); return;
+    case 'map-layer': UI.mapLayer = d.layer; MAPV.edit = null; saveUI(); render(); return;
+    case 'pin-filter': UI.pinFilter = d.pf; saveUI(); renderMapBar(); renderPins(); return;
+    case 'pin-add': MAPV.edit = null; setAddMode(!MAPV.adding); renderPins(); renderMapSide(); return;
+    case 'pin-add-cancel': setAddMode(false); return;
+    case 'pin-type': if (MAPV.edit) { MAPV.edit.t = d.type; renderPins(); renderMapSide(); } return;
+    case 'pin-item': pickItem('Link an item to this pin', iid => { if (MAPV.edit) { MAPV.edit.item = iid; renderMapSide(); } }); return;
+    case 'pin-item-clear': if (MAPV.edit) { MAPV.edit.item = null; renderMapSide(); } return;
+    case 'pin-cancel': MAPV.edit = null; renderPins(); renderMapSide(); return;
+    case 'pin-save': {
+      const E = MAPV.edit; if (!E) return;
+      const pin = { id: E.id || 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), l: E.l, x: E.x, y: E.y, t: E.t, label: String($('#pin-label')?.value ?? E.label).trim().slice(0, 80), item: E.item || null };
+      const i = S.pins.pins.findIndex(x => x.id === pin.id);
+      if (i >= 0) S.pins.pins[i] = pin; else S.pins.pins.push(pin);
+      UI.lastPinType = pin.t; saveUI();
+      MAPV.edit = null; markDirty('pins'); render(); toast('Pin saved');
+      return;
+    }
+    case 'pin-del':
+      if (t.dataset.armed) { const E = MAPV.edit; S.pins.pins = S.pins.pins.filter(x => x.id !== E?.id); MAPV.edit = null; markDirty('pins'); render(); toast('Pin deleted'); }
+      else { t.dataset.armed = '1'; t.textContent = 'Click again to delete'; setTimeout(() => { if (t.isConnected) { delete t.dataset.armed; t.textContent = 'Delete'; } }, 3000); }
+      return;
+    case 'pin-go': {
+      const pin = S.pins.pins.find(x => x.id === id); if (!pin) return;
+      UI.mapGroup = G.layerGroup[pin.l]?.id || UI.mapGroup; UI.mapLayer = pin.l; saveUI();
+      MAPV.edit = clone(pin); setAddMode(false); render();
+      MAPV.map?.setView([pin.y, pin.x], Math.max(1.5, MAPV.map.getZoom()));
+      return;
+    }
+    case 'plan-add': pickItem('Add an item to hunt', iid => { planState().extra[iid] = 1; markDirty('progress'); render(); }); return;
+    case 'plan-extra-del': delete planState().extra[id]; markDirty('progress'); render(); return;
+    case 'plan-pick': { const P = planState(); P.map = d.group; P.done = {}; markDirty('progress'); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    case 'plan-clear': { const P = planState(); P.map = null; P.done = {}; markDirty('progress'); render(); toast('Raid finished', 'Pick the next map when you\'re ready.'); return; }
     case 'add-pick': setStash(id, have(id) + 1); hideAddPop(); $('#add-q').value = ''; render(); setTimeout(() => { const inp = document.getElementById('cnt-stash-' + id); if (inp) { inp.focus(); inp.select(); } }, 0); return;
   }
 });
@@ -1210,6 +1656,11 @@ document.addEventListener('change', e => {
     return;
   }
   if (t.dataset.quest) { const id = t.dataset.quest; if (t.checked) S.progress.quests[id] = 1; else delete S.progress.quests[id]; markDirty('progress'); render(); return; }
+  if (t.dataset.bp) { const id = t.dataset.bp; if (t.checked) S.progress.blueprints[id] = 1; else delete S.progress.blueprints[id]; markDirty('progress'); render(); return; }
+  if (t.dataset.planQ) { const P = planState(); if (t.checked) delete P.skipQ[t.dataset.planQ]; else P.skipQ[t.dataset.planQ] = 1; markDirty('progress'); render(); return; }
+  if (t.dataset.planI) { const P = planState(); if (t.checked) delete P.skipI[t.dataset.planI]; else P.skipI[t.dataset.planI] = 1; markDirty('progress'); render(); return; }
+  if (t.dataset.planDone) { const P = planState(); if (t.checked) P.done[t.dataset.planDone] = 1; else delete P.done[t.dataset.planDone]; markDirty('progress'); render(); return; }
+  if (t.id === 'cond-sel') { const g = mapGroup(); S.progress.cond = S.progress.cond || {}; if (t.value) S.progress.cond[g.id] = { c: t.value, at: Date.now() }; else delete S.progress.cond[g.id]; markDirty('progress'); render(); return; }
   if (t.dataset.track) { const st = ensureProj(t.dataset.track); st.track = t.checked; markDirty('progress'); render(); return; }
   if (t.dataset.setupTr) { UI.setup.traders[t.dataset.setupTr] = t.value; return; }
   if (t.id === 'stash-sort') { UI.stashSort = t.value; saveUI(); render(); return; }
@@ -1220,6 +1671,8 @@ document.addEventListener('input', e => {
   if (t.id === 'lk-q') { UI.q = t.value; renderLookupList(); return; }
   if (t.id === 'pick-q') { renderPickList(t.value); return; }
   if (t.id === 'add-q') { showAddPop(t.value); return; }
+  if (t.id === 'bp-q') { UI.bpQ = t.value; renderBpList(); return; }
+  if (t.id === 'pin-label') { if (MAPV.edit) MAPV.edit.label = t.value; return; }
 });
 function showAddPop(q) {
   const pop = $('#add-pop'); if (!pop) return;
@@ -1233,6 +1686,8 @@ document.addEventListener('keydown', e => {
   const tag = (e.target.tagName || '').toLowerCase();
   const typing = tag === 'input' || tag === 'select' || tag === 'textarea';
   if (e.key === 'Escape' && !$('#modal').hidden) { closeModal(); return; }
+  if (e.key === 'Escape' && UI.tab === 'maps' && (MAPV.adding || MAPV.edit)) { setAddMode(false); MAPV.edit = null; renderPins(); renderMapSide(); return; }
+  if (e.target.id === 'pin-label' && e.key === 'Enter') { e.preventDefault(); $('[data-act="pin-save"]')?.click(); return; }
   if (e.key === '/' && !typing && $('#modal').hidden) { e.preventDefault(); if (UI.tab !== 'lookup') switchTab('lookup'); const q = $('#lk-q'); if (q) { q.focus(); q.select(); } return; }
   if (e.target.id === 'lk-q' && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter')) {
     const opts = [...document.querySelectorAll('#lk-list [data-act="open"]')]; if (!opts.length) return;
@@ -1261,6 +1716,7 @@ document.addEventListener('paste', e => {
 });
 function switchTab(tab) {
   if (!TABS.some(t => t.id === tab)) return;
+  destroyMap();
   UI.tab = tab; saveUI();
   $('#main').innerHTML = '';
   render();
@@ -1273,9 +1729,9 @@ function openLookup(id) {
 
 // ---------- persistence (owner-only db with an on-device fallback) ----------
 const Sync = { mode: 'boot', db: null, dirty: new Set(), inflight: new Set(), timer: 0, last: {}, quiet: {}, error: false, bootCache: null, migrated: {} };
-const DOCS = { progress: 'app/progress', stash: 'app/stash' };
+const DOCS = { progress: 'app/progress', stash: 'app/stash', pins: 'app/pins' };
 function cacheSave() {
-  try { localStorage.setItem(LS_KEY, JSON.stringify({ source: Sync.mode === 'cloud' ? 'cloud' : 'local', progress: S.progress, stash: S.stash })); } catch (e) { /* storage blocked: fine */ }
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ source: Sync.mode === 'cloud' ? 'cloud' : 'local', progress: S.progress, stash: S.stash, pins: S.pins })); } catch (e) { /* storage blocked: fine */ }
 }
 function cacheLoad() { try { const c = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); return c && typeof c === 'object' ? c : null; } catch (e) { return null; } }
 function busy(key) { return Sync.dirty.has(key) || Sync.inflight.has(key); }
@@ -1327,9 +1783,10 @@ async function refetch(key) {
   try { const snap = await Sync.db.doc(DOCS[key]).get(); if (busy(key)) return; if (snap.exists) apply(key, snap.data()); } catch (e) { /* the live subscription catches up */ }
 }
 function normalize(key, data) {
-  const base = key === 'progress' ? blankProgress() : blankStash();
+  const base = key === 'progress' ? blankProgress() : key === 'pins' ? blankPins() : blankStash();
   const out = Object.assign(base, data && typeof data === 'object' ? data : {});
-  if (key === 'progress') { for (const k of ['quests', 'benches', 'projects']) if (!out[k] || typeof out[k] !== 'object') out[k] = {}; }
+  if (key === 'progress') { for (const k of ['quests', 'benches', 'projects', 'blueprints', 'plan', 'cond']) if (!out[k] || typeof out[k] !== 'object') out[k] = {}; }
+  else if (key === 'pins') out.pins = Array.isArray(out.pins) ? out.pins.filter(p => p && p.id && p.l && Number.isFinite(p.x) && Number.isFinite(p.y)) : [];
   else if (!out.items || typeof out.items !== 'object') out.items = {};
   return out;
 }
@@ -1377,7 +1834,7 @@ function renderDataInfo() {
 async function boot() {
   const cache = cacheLoad();
   Sync.bootCache = cache;
-  if (cache) { if (cache.progress) S.progress = normalize('progress', cache.progress); if (cache.stash) S.stash = normalize('stash', cache.stash); }
+  if (cache) { for (const key of Object.keys(DOCS)) if (cache[key]) S[key] = normalize(key, cache[key]); }
   renderSync();
   render();
   try { await loadGame(); } catch (e) { G.error = 'Couldn\'t load the item database (' + (e.message || 'network error') + ')'; }
@@ -1387,7 +1844,7 @@ async function boot() {
   try { db = window.claude && typeof window.claude.use === 'function' ? await window.claude.use('db') : null; } catch (e) { db = null; }
   if (!db) { Sync.mode = 'local'; Sync.dirty.clear(); cacheSave(); renderSync(); return; }
   Sync.mode = 'cloud'; Sync.db = db;
-  subscribe('progress'); subscribe('stash');
+  Object.keys(DOCS).forEach(subscribe);
   if (Sync.dirty.size) flush();
   renderSync();
 }
