@@ -1,0 +1,1395 @@
+<title>ARC Raiders Utility</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Saira+Stencil+One&display=swap">
+<style>
+/* Layout: a dark machine-console rail on the left (top bar when narrow) beside a wide cream work surface.
+   Each tab is a workspace: Lookup is search + detail side by side; the others are summary strip + list/grid. */
+:root {
+  --paper: #ece3d0;
+  --paper-2: #e2d7c0;
+  --panel: #f7f1e4;
+  --panel-2: #efe6d3;
+  --tile: #d9cfba;
+  --ink: #201b15;
+  --ink-2: #554b3f;
+  --ink-3: #82776a;
+  --line: rgba(32, 27, 21, 0.13);
+  --line-2: rgba(32, 27, 21, 0.3);
+  --rail: #26211c;
+  --rail-2: #332c25;
+  --rail-ink: #f1e7d3;
+  --rail-ink-2: #b4a790;
+  --orange: #c4501d;
+  --on-orange: #fff6ec;
+  --teal: #1b706d;
+  --mustard: #d6981d;
+  --red: #b13a2d;
+  --keep: #1b706d;
+  --stock: #5f6f2f;
+  --recycle: #a36d07;
+  --sell: #c4501d;
+  --gear: #5c5672;
+  --learn: #33639f;
+  --r-common: #8d8a80;
+  --r-uncommon: #3f9b4f;
+  --r-rare: #2e7ec2;
+  --r-epic: #9550c4;
+  --r-legendary: #d5a021;
+  --ok: #2f7d3d;
+  --shadow: 0 1px 0 rgba(32, 27, 21, 0.06), 0 10px 24px -16px rgba(32, 27, 21, 0.45);
+  --f-display: "Archivo", "Arial Black", system-ui, sans-serif;
+  --f-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-stencil: "Saira Stencil One", "Archivo", Impact, sans-serif;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #161310; --paper-2: #1d1915; --panel: #221d18; --panel-2: #2a241e; --tile: #332c25;
+    --ink: #efe5d2; --ink-2: #bcb09b; --ink-3: #8c8172; --line: rgba(239, 229, 210, 0.11); --line-2: rgba(239, 229, 210, 0.26);
+    --rail: #0e0c0a; --rail-2: #1c1814; --rail-ink: #f1e7d3; --rail-ink-2: #a39781;
+    --orange: #e2693a; --on-orange: #1a0d05; --teal: #3ba39e; --mustard: #e8b13c; --red: #e0614f;
+    --keep: #46b0aa; --stock: #a9b964; --recycle: #e3a935; --sell: #ea7444; --gear: #a7a2c2; --learn: #7aa5e6;
+    --ok: #6cc47c; --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 26px -16px rgba(0, 0, 0, 0.8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #161310; --paper-2: #1d1915; --panel: #221d18; --panel-2: #2a241e; --tile: #332c25;
+  --ink: #efe5d2; --ink-2: #bcb09b; --ink-3: #8c8172; --line: rgba(239, 229, 210, 0.11); --line-2: rgba(239, 229, 210, 0.26);
+  --rail: #0e0c0a; --rail-2: #1c1814; --rail-ink: #f1e7d3; --rail-ink-2: #a39781;
+  --orange: #e2693a; --on-orange: #1a0d05; --teal: #3ba39e; --mustard: #e8b13c; --red: #e0614f;
+  --keep: #46b0aa; --stock: #a9b964; --recycle: #e3a935; --sell: #ea7444; --gear: #a7a2c2; --learn: #7aa5e6;
+  --ok: #6cc47c; --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 26px -16px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+
+html, body { height: 100%; }
+body {
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.38 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: var(--ink);
+  font: 400 15px/1.45 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 125%; font-weight: 800; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.num, .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-3); }
+.eyebrow { font: 600 11px/1.2 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+a { color: inherit; text-decoration-color: var(--line-2); text-underline-offset: 2px; }
+
+/* ---------- shell ---------- */
+.app {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  gap: 22px;
+  min-height: 100%;
+  padding-block: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+}
+.rail {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  align-self: start;
+  height: calc(100vh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  min-height: 520px;
+  background: var(--rail);
+  color: var(--rail-ink);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.brand { padding: 20px 18px 16px; display: grid; gap: 4px; }
+.brand .eyebrow { color: var(--rail-ink-2); }
+.brand-name { font: 900 30px/0.9 var(--f-display); font-stretch: 125%; letter-spacing: -0.02em; }
+.stripes { display: grid; grid-template-columns: repeat(4, 1fr); height: 8px; }
+.stripes i:nth-child(1) { background: #c4501d; }
+.stripes i:nth-child(2) { background: #d6981d; }
+.stripes i:nth-child(3) { background: #1b706d; }
+.stripes i:nth-child(4) { background: #7b8f9b; }
+.nav { display: grid; gap: 4px; padding: 16px 10px; }
+.nav button {
+  display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 12px;
+  padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; text-align: left;
+  color: var(--rail-ink-2); font: 700 15px/1 var(--f-display); font-stretch: 112%; letter-spacing: 0.01em;
+}
+.nav button svg { width: 20px; height: 20px; }
+.nav button:hover { background: var(--rail-2); color: var(--rail-ink); }
+.nav button[aria-current="page"] { background: var(--rail-ink); color: var(--rail); }
+.nav .badge { font: 600 11px/1 var(--f-mono); padding: 4px 6px; border-radius: 5px; background: var(--rail-2); color: var(--rail-ink); }
+.nav button[aria-current="page"] .badge { background: var(--rail); color: var(--rail-ink); }
+.nav .badge.hot { background: #c4501d; color: #fff6ec; }
+.rail-foot { margin-top: auto; padding: 14px 16px 18px; display: grid; gap: 10px; border-top: 1px solid rgba(241, 231, 211, 0.1); font-size: 12.5px; color: var(--rail-ink-2); }
+.rail-foot a { color: var(--rail-ink-2); }
+.rail-btn { border: 1px solid rgba(241, 231, 211, 0.22); background: transparent; color: var(--rail-ink); border-radius: 7px; padding: 8px 10px; font: 600 13px/1 var(--f-body); text-align: left; }
+.rail-btn:hover { background: var(--rail-2); }
+.sync { display: flex; align-items: center; gap: 8px; }
+.sync i { width: 8px; height: 8px; border-radius: 50%; background: var(--rail-ink-2); flex: none; }
+.sync.cloud i { background: #4fbf8a; }
+.sync.err i { background: #e0614f; }
+
+main { min-width: 0; display: grid; gap: 18px; align-content: start; padding-bottom: 40px; }
+.page-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 20px; padding-top: 6px; }
+.page-head h1 { font-size: clamp(26px, 3vw, 38px); line-height: 1; }
+.page-head p { margin: 6px 0 0; color: var(--ink-2); max-width: 70ch; }
+
+/* ---------- panels and bits ---------- */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); min-width: 0; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.panel-head h2 { font-size: 15px; font-stretch: 112%; letter-spacing: 0.01em; }
+.panel-body { padding: 14px 16px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px;
+  border: 1.5px solid var(--ink); background: transparent; padding: 8px 14px; font: 700 13.5px/1 var(--f-body); letter-spacing: 0.01em; white-space: nowrap;
+}
+.btn:hover { background: var(--panel-2); }
+.btn.primary { background: var(--orange); border-color: var(--orange); color: var(--on-orange); }
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.small { padding: 6px 10px; font-size: 12.5px; border-width: 1px; }
+.btn.ghost { border-color: var(--line-2); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.seg button { border: 0; background: transparent; padding: 7px 12px; font: 600 13px/1 var(--f-body); color: var(--ink-2); }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--panel); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line-2); background: var(--panel); border-radius: 999px; padding: 5px 11px; font: 600 12.5px/1 var(--f-body); color: var(--ink-2); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.chip .num { font-size: 11px; opacity: 0.75; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font: 600 10.5px/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 6px; border-radius: 4px; border: 1px solid var(--line-2); color: var(--ink-2); white-space: nowrap; }
+.tag.now { border-color: var(--orange); color: var(--orange); }
+.tag.ok { border-color: var(--ok); color: var(--ok); }
+.tag.solid { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.empty { padding: 26px 18px; text-align: center; color: var(--ink-3); }
+.coin { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.coin::after { content: ""; display: inline-block; width: 0.62em; height: 0.62em; margin-left: 4px; border-radius: 50%; border: 2px solid var(--mustard); vertical-align: 0.02em; box-sizing: border-box; }
+
+/* verdict stamp + verdict chip */
+.v-keep { --vc: var(--keep); } .v-stock { --vc: var(--stock); } .v-recycle { --vc: var(--recycle); }
+.v-sell { --vc: var(--sell); } .v-gear { --vc: var(--gear); } .v-learn { --vc: var(--learn); }
+.vchip { display: inline-flex; align-items: center; font: 400 13px/1 var(--f-stencil); letter-spacing: 0.08em; color: var(--vc); border: 1.5px solid var(--vc); border-radius: 4px; padding: 4px 6px 3px; white-space: nowrap; }
+.stamp { display: inline-block; font: 400 clamp(30px, 3.4vw, 44px)/1 var(--f-stencil); letter-spacing: 0.06em; color: var(--vc); border: 3px solid var(--vc); border-radius: 6px; padding: 6px 12px 4px; transform: rotate(-4deg); }
+@media (prefers-reduced-motion: no-preference) { .stamp { animation: stamp 0.28s cubic-bezier(.2, 1.4, .4, 1); } }
+@keyframes stamp { from { transform: rotate(-9deg) scale(1.35); opacity: 0; } to { transform: rotate(-4deg) scale(1); opacity: 1; } }
+
+/* item tiles (sprite sheet icons on a rarity-tinted plate) */
+.tile { --s: 40px; --rc: var(--r-common); position: relative; flex: none; width: var(--s); height: var(--s); border-radius: 6px; overflow: hidden;
+  background: linear-gradient(170deg, color-mix(in oklab, var(--rc) 16%, var(--tile)), color-mix(in oklab, var(--rc) 46%, var(--tile)));
+  box-shadow: inset 0 -3px 0 var(--rc); display: grid; place-items: center; }
+.tile .spr { width: calc(var(--s) * 0.86); height: calc(var(--s) * 0.86); background-repeat: no-repeat; }
+.tile .ph { font: 700 calc(var(--s) * 0.32)/1 var(--f-display); color: var(--ink-2); }
+.r-uncommon { --rc: var(--r-uncommon); } .r-rare { --rc: var(--r-rare); } .r-epic { --rc: var(--r-epic); } .r-legendary { --rc: var(--r-legendary); }
+.tile .qty { position: absolute; right: 3px; bottom: 4px; font: 600 10px/1 var(--f-mono); color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+
+/* item row (used in lists everywhere) */
+.irow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 8px; }
+.irow .nm { font-weight: 600; line-height: 1.2; }
+.irow .sub { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+button.irow { width: 100%; border: 0; background: transparent; text-align: left; }
+button.irow:hover { background: var(--panel-2); }
+button.irow[aria-selected="true"] { background: var(--ink); color: var(--panel); }
+button.irow[aria-selected="true"] .sub { color: color-mix(in oklab, var(--panel) 70%, var(--ink)); }
+button.irow[aria-selected="true"] .vchip { color: var(--panel); border-color: var(--panel); }
+
+.bar { position: relative; height: 6px; border-radius: 3px; background: var(--paper-2); overflow: hidden; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--teal); border-radius: 3px; }
+.bar.full i { background: var(--ok); }
+.hn { font: 600 13px/1 var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hn.short { color: var(--orange); }
+.hn.ok { color: var(--ok); }
+
+/* counter */
+.counter { display: inline-flex; align-items: center; border: 1px solid var(--line-2); border-radius: 7px; overflow: hidden; background: var(--panel); }
+.counter button { width: 28px; height: 30px; border: 0; background: transparent; font: 700 16px/1 var(--f-body); color: var(--ink-2); }
+.counter button:hover { background: var(--panel-2); color: var(--ink); }
+.counter input { width: 52px; height: 30px; border: 0; border-inline: 1px solid var(--line); text-align: center; background: transparent; font: 600 13px/1 var(--f-mono); padding: 0; -moz-appearance: textfield; }
+.counter input::-webkit-outer-spin-button, .counter input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* search */
+.search { position: relative; }
+.search svg { position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--ink-3); pointer-events: none; }
+.search input { width: 100%; box-sizing: border-box; height: 48px; border-radius: 10px; border: 1.5px solid var(--line-2); background: var(--panel); padding: 0 46px 0 42px; font: 600 17px/1 var(--f-body); }
+.search input:focus { border-color: var(--ink); outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, var(--orange) 28%, transparent); }
+.search input:not(:placeholder-shown) + kbd { display: none; }
+.search kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font: 600 11px/1 var(--f-mono); border: 1px solid var(--line-2); border-radius: 4px; padding: 4px 6px; color: var(--ink-3); }
+
+/* ---------- lookup ---------- */
+.lookup { display: grid; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.lk-side { display: grid; gap: 10px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+.lk-list { overflow: auto; padding: 6px; max-height: calc(100vh - 150px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); min-height: 240px; }
+.linkish { border: 0; background: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 2px; cursor: pointer; }
+.linkish:hover { text-decoration-color: currentColor; }
+.lk-group { padding: 10px 12px 4px; }
+.detail { overflow: hidden; }
+.d-hero { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 20px 22px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, var(--panel-2), var(--panel)); }
+.d-hero h2 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.05; }
+.d-meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.d-why { padding: 14px 22px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; background: color-mix(in oklab, var(--vc) 8%, var(--panel)); }
+.d-why strong { font: 700 16px/1.3 var(--f-body); }
+.d-why span { color: var(--ink-2); }
+.d-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+.d-stat { padding: 12px 22px; display: grid; gap: 4px; border-right: 1px solid var(--line); }
+.d-stat:last-child { border-right: 0; }
+.d-stat b { font: 600 18px/1.1 var(--f-mono); font-variant-numeric: tabular-nums; }
+.d-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.d-sec { padding: 16px 22px; border-bottom: 1px solid var(--line); min-width: 0; }
+.d-sec h3 { font-size: 13px; font-stretch: 112%; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+.d-sec ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.src { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: baseline; }
+.src .k { font-size: 12.5px; color: var(--ink-3); }
+.mini { display: flex; flex-wrap: wrap; gap: 8px; }
+.mini > * { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px 4px 4px; background: var(--panel); font-size: 13.5px; }
+button.minilink { border: 1px solid var(--line); background: var(--panel); cursor: pointer; text-align: left; }
+button.minilink:hover { border-color: var(--line-2); background: var(--panel-2); }
+.find li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; }
+.find .k { font: 600 11px/1.7 var(--f-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); }
+.d-desc { padding: 14px 22px 18px; color: var(--ink-2); font-size: 14px; }
+
+/* ---------- needs ---------- */
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.stat { padding: 14px 16px; display: grid; gap: 6px; }
+.stat b { font: 800 28px/1 var(--f-display); font-stretch: 112%; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--ink-2); font-size: 13.5px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.table { width: 100%; border-collapse: collapse; }
+.table th { text-align: left; font: 600 11px/1.2 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.table td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.table tr:last-child td { border-bottom: 0; }
+.table tr.click { cursor: pointer; }
+.table tr.click:hover td { background: var(--panel-2); }
+.tscroll { overflow-x: auto; }
+.cell-item { display: flex; align-items: center; gap: 12px; min-width: 200px; }
+.cell-item .nm { font-weight: 600; line-height: 1.2; }
+.cell-item .sub { font-size: 12.5px; color: var(--ink-3); }
+.hv { display: grid; gap: 5px; min-width: 110px; }
+.for { display: flex; flex-wrap: wrap; gap: 4px; max-width: 360px; }
+.where { font-size: 13px; color: var(--ink-2); max-width: 260px; }
+
+/* ---------- stash ---------- */
+.stash-top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.drop { border: 2px dashed var(--line-2); border-radius: 10px; padding: 20px; display: grid; gap: 10px; justify-items: center; text-align: center; background: var(--panel-2); }
+.drop.over { border-color: var(--orange); background: color-mix(in oklab, var(--orange) 10%, var(--panel)); }
+.drop p { margin: 0; color: var(--ink-2); max-width: 46ch; }
+.thumbs { display: flex; flex-wrap: wrap; gap: 8px; }
+.thumbs img { height: 64px; border-radius: 6px; border: 1px solid var(--line-2); }
+.scan-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--line); }
+.scan-row.check { background: color-mix(in oklab, var(--mustard) 12%, transparent); }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--line-2); border-top-color: var(--orange); animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.space { display: grid; gap: 8px; }
+.space .bar { height: 10px; border-radius: 5px; }
+.space .bar i { background: var(--ink); }
+.space .bar.warn i { background: var(--orange); }
+.addbox { position: relative; }
+.addbox input { width: 100%; box-sizing: border-box; height: 40px; border-radius: 8px; border: 1.5px solid var(--line-2); background: var(--panel); padding: 0 12px; font-weight: 600; }
+.pop { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 20; background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; box-shadow: var(--shadow); max-height: 320px; overflow: auto; padding: 4px; }
+
+/* ---------- quests ---------- */
+.qgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 14px; align-items: start; }
+.quest { display: grid; }
+.quest.done { opacity: 0.62; }
+.q-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; padding: 14px 16px 10px; }
+.q-head h3 { font-size: 17px; font-stretch: 112%; line-height: 1.15; }
+.q-tr { font: 600 11px/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 6px; color: var(--ink-2); }
+.q-tr i { width: 10px; height: 10px; border-radius: 2px; background: var(--trc, var(--ink-3)); }
+.q-body { padding: 0 16px 12px; display: grid; gap: 10px; }
+.q-body ol { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 14px; display: grid; gap: 3px; }
+.q-foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px solid var(--line); }
+.check { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--teal); }
+.req { display: flex; flex-wrap: wrap; gap: 6px; }
+.req > span { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 3px; border-radius: 7px; border: 1px solid var(--line); font-size: 13px; }
+details.more summary { cursor: pointer; font-size: 13px; color: var(--ink-3); font-weight: 600; }
+
+/* ---------- workshop ---------- */
+.bgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 14px; align-items: start; }
+.bench-lvl { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.bgrid .panel-head { flex-wrap: wrap; }
+.pips { display: flex; gap: 4px; }
+.pips i { width: 16px; height: 8px; border-radius: 2px; background: var(--paper-2); border: 1px solid var(--line-2); }
+.pips i.on { background: var(--teal); border-color: var(--teal); }
+.reqlist { display: grid; gap: 6px; }
+.reqline { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.ready { color: var(--ok); font-weight: 700; }
+
+/* ---------- setup banner + modal ---------- */
+.setup-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px; padding: 14px 18px; border-radius: var(--radius); background: var(--ink); color: var(--panel); }
+.setup-banner p { margin: 2px 0 0; color: color-mix(in oklab, var(--panel) 72%, var(--ink)); max-width: 72ch; }
+.setup-banner .btn { border-color: var(--panel); color: var(--panel); }
+.setup-banner .btn.primary { color: var(--on-orange); border-color: var(--orange); }
+#modal { position: fixed; inset: 0; z-index: 50; background: rgba(14, 12, 10, 0.55); display: grid; place-items: center; padding: 20px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px)); overflow: auto; }
+.modal-card { width: min(560px, 100%); max-height: calc(100vh - 40px); overflow: auto; background: var(--panel); border-radius: 14px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6); }
+.modal-card.wide { width: min(880px, 100%); }
+.modal-card .panel-head { position: sticky; top: 0; background: var(--panel); z-index: 1; }
+.setup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 18px; }
+.setup-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.setup-row select { max-width: 220px; height: 34px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--panel); padding: 0 8px; }
+.toast { position: fixed; right: max(20px, env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 60; background: var(--ink); color: var(--panel); padding: 12px 16px; border-radius: 10px; box-shadow: var(--shadow); max-width: min(380px, calc(100vw - 40px)); font-weight: 600; }
+.toast small { display: block; font-weight: 400; opacity: 0.8; margin-top: 2px; }
+
+/* ---------- narrow ---------- */
+@media (max-width: 960px) {
+  .lookup, .stash-top { grid-template-columns: minmax(0, 1fr); }
+  .lk-side { position: static; }
+  .lk-list { max-height: 50vh; min-height: 0; }
+}
+@media (max-width: 860px) {
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--rail); }
+  .app { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-top: 0; }
+  .rail { position: sticky; top: env(safe-area-inset-top, 0px); height: auto; min-height: 0; z-index: 5; border-radius: 0 0 12px 12px; flex-direction: row; align-items: stretch; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px))); }
+  .brand { padding: 10px 12px 10px max(16px, env(safe-area-inset-left, 0px)); align-content: center; }
+  .brand .eyebrow { display: none; }
+  .brand-name { font-size: 18px; }
+  .stripes, .rail-foot { display: none; }
+  .nav { display: flex; overflow-x: auto; padding: 8px max(10px, env(safe-area-inset-right, 0px)) 8px 4px; gap: 2px; scrollbar-width: none; }
+  .nav button { grid-template-columns: auto auto; gap: 6px; padding: 9px 10px; font-size: 13px; white-space: nowrap; }
+  .nav button svg { display: none; }
+  .d-hero { grid-template-columns: auto minmax(0, 1fr); }
+  .d-hero .stamp { grid-column: 1 / -1; justify-self: start; }
+}
+</style>
+
+<div class="app">
+  <aside class="rail" aria-label="Sections">
+    <div class="brand">
+      <span class="eyebrow">ARC Raiders</span>
+      <span class="brand-name">UTILITY</span>
+    </div>
+    <div class="stripes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="rail-foot">
+      <button class="rail-btn" type="button" data-act="setup">Set up my progress</button>
+      <div class="sync" id="sync"><i></i><span>Connecting…</span></div>
+      <div id="datainfo">Loading game data…</div>
+    </div>
+  </aside>
+  <main id="main" aria-live="polite"></main>
+</div>
+<div id="modal" hidden></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+'use strict';
+// ---------- constants ----------
+const TABS = [
+  { id: 'lookup', label: 'Lookup', icon: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/>' },
+  { id: 'needs', label: 'Needs', icon: '<path d="M5 6h14M5 12h14M5 18h9"/><path d="m16 17 2 2 3-4"/>' },
+  { id: 'stash', label: 'Stash', icon: '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M9.5 4v16M15 4v16"/>' },
+  { id: 'quests', label: 'Quests', icon: '<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 15h6"/>' },
+  { id: 'workshop', label: 'Workshop', icon: '<path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/>' },
+];
+const VERDICTS = {
+  keep: 'KEEP', stock: 'STOCK', recycle: 'RECYCLE', sell: 'SELL', gear: 'GEAR', learn: 'LEARN',
+};
+const SPARE_VERB = { keep: 'keep', stock: 'keep as crafting stock', recycle: 'recycle', sell: 'sell', gear: 'use or sell', learn: 'learn or sell' };
+const GEAR_TYPES = new Set(['Assault Rifle', 'SMG', 'Pistol', 'Shotgun', 'Battle Rifle', 'Sniper Rifle', 'LMG', 'Hand Cannon', 'Special', 'Shield', 'Augment', 'Modification', 'Quick Use', 'Ammunition']);
+const MATERIAL_TYPES = new Set(['Basic Material', 'Topside Material', 'Refined Material']);
+const CURRENCY = { coins: 'Coins', raider_tokens: 'Raider Tokens', creds: 'Creds', cred: 'Creds' };
+const TRADER_COLORS = { Celeste: '#1b706d', Shani: '#c4501d', 'Tian Wen': '#d6981d', Apollo: '#7b5aa6', Lance: '#2e7ec2' };
+const BENCH_ORDER = ['weapon_bench', 'equipment_bench', 'med_station', 'explosives_bench', 'utility_bench', 'refiner', 'scrappy', 'stash'];
+const LS_KEY = 'arcutil.v1';
+const UI_KEY = 'arcutil.ui';
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = n => Math.round(n || 0).toLocaleString('en-US');
+const clone = o => JSON.parse(JSON.stringify(o));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const push = (map, k, v) => { (map[k] || (map[k] = [])).push(v); };
+const norm = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, ' ').trim();
+const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : (many || one + 's')}`;
+const list = arr => arr.length <= 1 ? (arr[0] || '') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+const svg = (paths, size = 20) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+
+// ---------- state ----------
+const G = { ready: false, error: null };
+const S = { progress: blankProgress(), stash: blankStash(), booting: true };
+const UI = Object.assign({
+  tab: 'lookup', q: '', sel: null, lkFilter: 'all',
+  needsScope: 'now', needsSrc: 'all',
+  stashFilter: 'all', stashSort: 'slots',
+  qTrader: 'all', qStatus: 'open',
+  bannerHidden: false,
+}, loadUI());
+const SCAN = { status: 'idle', files: [], urls: [], rows: [], error: '', ctl: null, mode: 'replace' };
+
+function blankProgress() { return { v: 1, quests: {}, benches: {}, projects: {}, setupDone: false }; }
+function blankStash() { return { v: 1, items: {}, scannedAt: null }; }
+function loadUI() { try { return JSON.parse(localStorage.getItem(UI_KEY) || '{}') || {}; } catch (e) { return {}; } }
+function saveUI() {
+  const keep = { tab: UI.tab, sel: UI.sel, lkFilter: UI.lkFilter, needsScope: UI.needsScope, needsSrc: UI.needsSrc, stashFilter: UI.stashFilter, stashSort: UI.stashSort, qTrader: UI.qTrader, qStatus: UI.qStatus, bannerHidden: UI.bannerHidden };
+  try { localStorage.setItem(UI_KEY, JSON.stringify(keep)); } catch (e) { /* storage blocked: fine */ }
+}
+
+// ---------- game data ----------
+async function loadGame() {
+  const res = await fetch('data/game.json');
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const D = await res.json();
+  G.D = D;
+  G.items = D.items;
+  G.ids = Object.keys(D.items);
+  G.quest = {}; D.quests.forEach(q => { G.quest[q.id] = q; });
+  G.bench = {}; D.benches.forEach(b => { G.bench[b.id] = b; });
+  G.benches = BENCH_ORDER.map(id => G.bench[id]).filter(Boolean).concat(D.benches.filter(b => !BENCH_ORDER.includes(b.id)));
+  G.mapName = Object.fromEntries(D.maps.map(m => [m.id, m.n]));
+  G.recycleFrom = {}; G.salvageFrom = {}; G.usedIn = {}; G.dropsFrom = {}; G.tradeFor = {}; G.rewardFrom = {};
+  for (const [id, it] of Object.entries(D.items)) {
+    for (const [o, n] of Object.entries(it.rc || {})) push(G.recycleFrom, o, { id, n });
+    for (const [o, n] of Object.entries(it.sv || {})) push(G.salvageFrom, o, { id, n });
+    for (const [o, n] of Object.entries(it.rp || {})) push(G.usedIn, o, { id, n });
+  }
+  D.bots.forEach(b => b.drops.forEach(d => push(G.dropsFrom, d, b)));
+  D.trades.forEach(t => push(G.tradeFor, t.id, t));
+  G.tradeCost = {};
+  D.trades.forEach(t => { if (t.cost) push(G.tradeCost, t.cost[0], t); });
+  D.quests.forEach(q => q.rew.forEach(([id, n]) => push(G.rewardFrom, id, { q, n })));
+  // Quest order: depth in the unlock chain, then name.
+  const depth = {};
+  const visit = (id, trail) => {
+    if (depth[id] != null) return depth[id];
+    if (trail.has(id)) return 0;
+    trail.add(id);
+    const ps = (G.quest[id]?.p || []).filter(p => G.quest[p]);
+    depth[id] = ps.length ? 1 + Math.max(...ps.map(p => visit(p, trail))) : 0;
+    return depth[id];
+  };
+  D.quests.forEach(q => visit(q.id, new Set()));
+  G.depth = depth;
+  G.questOrder = D.quests.slice().sort((a, b) => depth[a.id] - depth[b.id] || a.n.localeCompare(b.n));
+  const count = {}; D.quests.forEach(q => { count[q.tr] = (count[q.tr] || 0) + 1; });
+  G.traders = Object.keys(count).sort((a, b) => count[b] - count[a]);
+  G.search = G.ids.map(id => ({ id, k: norm(D.items[id].n) }));
+  G.ready = true;
+}
+const item = id => G.items[id];
+const nm = id => item(id)?.n || CURRENCY[id] || String(id).replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+const mapNames = ids => [...new Set((ids || []).map(m => G.mapName[m] || nm(m)))];
+
+// ---------- progress helpers ----------
+const isDone = id => !!S.progress.quests[id];
+const isAvailable = q => !isDone(q.id) && q.p.every(p => !G.quest[p] || isDone(p));
+function benchDefault(b) { return b.lv[0] && !b.lv[0].req.length && !b.lv[0].or.length ? 1 : 0; }
+function benchLevel(id) {
+  const b = G.bench[id]; if (!b) return 0;
+  const v = S.progress.benches[id];
+  return Number.isFinite(v) ? Math.max(0, Math.min(b.max, v)) : benchDefault(b);
+}
+function ancestors(id) {
+  const out = new Set(), stack = [...(G.quest[id]?.p || [])];
+  while (stack.length) { const x = stack.pop(); if (out.has(x) || !G.quest[x]) continue; out.add(x); stack.push(...G.quest[x].p); }
+  return out;
+}
+const have = id => Math.max(0, S.stash.items[id] || 0);
+const projState = id => S.progress.projects[id] || { track: false, phase: 0, given: {} };
+const now = () => Date.now() / 1000;
+const projActive = p => (!p.start || p.start <= now()) && (!p.end || p.end >= now());
+const projName = p => p.n.replace(/\s*\(.*\)$/, '') + (/\((.*)\)/.test(p.n) ? ` · ${p.n.match(/\((.*)\)/)[1]}` : '');
+
+// ---------- derived: needs, verdicts, where to find ----------
+let D_CACHE = null;
+function derived() {
+  if (D_CACHE) return D_CACHE;
+  const needs = {};
+  const add = (id, qty, src) => {
+    if (!(qty > 0)) return;
+    const n = needs[id] || (needs[id] = { total: 0, now: 0, src: [] });
+    n.total += qty; if (src.now) n.now += qty;
+    n.src.push(Object.assign({ qty }, src));
+  };
+  for (const q of G.D.quests) {
+    if (isDone(q.id)) continue;
+    const granted = Object.fromEntries(q.g);
+    const nowQ = isAvailable(q);
+    for (const [id, n] of q.req) add(id, n - (granted[id] || 0), { kind: 'quest', ref: q.id, label: q.n, sub: q.tr, now: nowQ });
+  }
+  for (const b of G.benches) {
+    const L = benchLevel(b.id);
+    for (const lv of b.lv) {
+      if (lv.l <= L) continue;
+      for (const [id, n] of lv.req) add(id, n, { kind: 'bench', ref: b.id, label: `${b.n} ${lv.l}`, sub: 'Workshop', now: lv.l === L + 1 });
+    }
+  }
+  for (const p of G.D.projects) {
+    const st = projState(p.id); if (!st.track) continue;
+    p.ph.forEach((ph, i) => {
+      if (i < st.phase) return;
+      for (const [id, n] of ph.req) {
+        const given = i === st.phase ? (st.given?.[id] || 0) : 0;
+        add(id, n - given, { kind: 'project', ref: p.id, label: `${projName(p)}: ${ph.n}`, sub: 'Project', now: i === st.phase });
+      }
+    });
+  }
+  D_CACHE = { needs };
+  return D_CACHE;
+}
+function invalidate() { D_CACHE = null; }
+const needOf = id => derived().needs[id] || null;
+const shortOf = id => { const n = needOf(id); return n ? Math.max(0, n.total - have(id)) : 0; };
+function recycleValue(it) { return Object.entries(it.rc || {}).reduce((s, [o, n]) => s + (item(o)?.v || 0) * n, 0); }
+
+function baseVerdict(id) {
+  const it = item(id);
+  if (!it) return { v: 'sell', head: 'Not in the game data', why: '' };
+  if (it.t === 'Blueprint') return { v: 'learn', head: 'Learn it at the Workbench', why: `If you already know it, sell the copy for ${fmt(it.v)} coins.` };
+  if (it.t === 'Key') return { v: 'gear', head: 'Keep it for the locked room it opens', why: `It only sells for ${fmt(it.v)} coins, so it's worth more as a key.` };
+  if (GEAR_TYPES.has(it.t) || it.wp) return { v: 'gear', head: 'Equipment: your call', why: 'Keep what you\'ll bring topside. Sell or recycle spare copies.' };
+  const recVal = recycleValue(it);
+  const parts = Object.keys(it.rc || {}).filter(o => shortOf(o) > 0);
+  if (parts.length) return { v: 'recycle', head: `Recycle it: you need its ${list(parts.map(nm))}`, why: `Recycling gives ${Object.entries(it.rc).map(([o, n]) => `${n}× ${nm(o)}`).join(', ')}.` };
+  const pays = G.tradeCost[id];
+  if (pays?.length) {
+    const trs = [...new Set(pays.map(t => t.tr))];
+    return { v: 'stock', head: `Trade currency: keep it for ${list(trs)}`, why: `${list(trs)} take${trs.length === 1 ? 's' : ''} it as payment for ${plural(pays.length, 'trade')}, like ${list(pays.slice(0, 3).map(t => nm(t.id)))}.` };
+  }
+  const uses = G.usedIn[id]?.length || 0;
+  if (MATERIAL_TYPES.has(it.t) && uses) return { v: 'stock', head: 'Crafting material: keep a stack', why: `Used in ${plural(uses, 'recipe')}. Sell extras when your stash is tight (${fmt(it.v)} coins each).` };
+  if (recVal > it.v * 1.15 && recVal - it.v >= 40) return { v: 'recycle', head: 'Recycle it: the parts are worth more', why: `Parts are worth ${fmt(recVal)} coins; it sells for ${fmt(it.v)}.` };
+  if (recVal) return { v: 'sell', head: 'Sell it', why: `Sells for ${fmt(it.v)} coins. Recycled, its parts are only worth ${fmt(recVal)}.` };
+  return { v: 'sell', head: 'Sell it', why: `Nothing you're working on needs it. Sells for ${fmt(it.v)} coins.` };
+}
+function verdict(id) {
+  const n = needOf(id);
+  if (n && n.total > 0) {
+    const h = have(id), short = Math.max(0, n.total - h);
+    const forWhat = list([...new Set(n.src.map(s => s.label))].slice(0, 3)) + (n.src.length > 3 ? ` and ${n.src.length - 3} more` : '');
+    if (h > n.total) {
+      const spare = h - n.total, base = baseVerdict(id);
+      return { v: 'keep', head: `Keep ${fmt(n.total)}; ${SPARE_VERB[base.v]} the other ${fmt(spare)}`, why: `Needed for ${forWhat}.`, spare, base, short: 0 };
+    }
+    return { v: 'keep', head: short ? `Keep it: you need ${fmt(n.total)} (${fmt(short)} more to find)` : `Keep it: you have exactly the ${fmt(n.total)} you need`, why: `Needed for ${forWhat}.`, spare: 0, short };
+  }
+  return Object.assign({ spare: 0, short: 0 }, baseVerdict(id));
+}
+function whereToFind(id) {
+  const it = item(id); const out = [];
+  if (!it) return out;
+  const questsNeeding = (needOf(id)?.src || []).filter(s => s.kind === 'quest').map(s => G.quest[s.ref]).filter(q => q && q.m.length);
+  for (const q of questsNeeding.slice(0, 2)) out.push({ k: 'Quest', html: `${esc(q.n)} on ${esc(list(mapNames(q.m)))}${q.o.length ? `: <span class="muted">${esc(q.o.find(o => /find|locate|search|grab|collect/i.test(o)) || q.o[0])}</span>` : ''}` });
+  const drops = G.dropsFrom[id] || [];
+  if (drops.length) out.push({ k: 'ARC', html: drops.map(b => `${esc(titleCase(b.n))} <span class="muted">(${esc(b.threat || '')})</span>`).join(', ') });
+  const zones = (it.f || []).filter(z => !(z === 'ARC' && drops.length));
+  if (zones.length) out.push({ k: 'Found in', html: esc(zones.join(', ')) + ' <span class="muted">loot</span>' });
+  const rec = (G.recycleFrom[id] || []).map(r => ({ ...r, score: r.n / Math.max(1, item(r.id)?.s || 1) })).sort((a, b) => b.n - a.n || (item(a.id)?.v || 0) - (item(b.id)?.v || 0));
+  if (rec.length) out.push({ k: 'Recycle', html: rec.slice(0, 6).map(r => `<button class="linkish" type="button" data-act="open" data-id="${esc(r.id)}">${esc(nm(r.id))}</button> <span class="muted">→ ${r.n}</span>`).join(', ') + (rec.length > 6 ? ` <span class="muted">+${rec.length - 6} more</span>` : '') });
+  const sal = (G.salvageFrom[id] || []).filter(s => !(G.recycleFrom[id] || []).some(r => r.id === s.id));
+  if (sal.length) out.push({ k: 'Salvage', html: sal.slice(0, 5).map(r => `${esc(nm(r.id))} <span class="muted">→ ${r.n}</span>`).join(', ') + ' <span class="muted">(topside)</span>' });
+  const trades = G.tradeFor[id] || [];
+  if (trades.length) out.push({ k: 'Trade', html: trades.map(t => `${esc(t.tr)}: ${t.q}× for ${t.cost ? `${t.cost[1]}× ${esc(nm(t.cost[0]))}` : '?'}${t.lim ? ` <span class="muted">(${t.lim}/day)</span>` : ''}`).join('; ') });
+  const vend = (it.vd || []).filter(v => !trades.some(t => t.tr === v.tr));
+  if (vend.length) out.push({ k: 'Buy', html: vend.map(v => `${esc(v.tr)}: ${Object.entries(v.c).map(([c, n]) => `${fmt(n)} ${esc(nm(c))}`).join(' + ') || '?'}${v.lim ? ` <span class="muted">(limit ${v.lim})</span>` : ''}`).join('; ') });
+  if (it.rp) out.push({ k: 'Craft', html: `${esc(G.bench[it.cb]?.n || nm(it.cb || 'workbench'))}${it.sl ? ' ' + it.sl : ''}: ${Object.entries(it.rp).map(([o, n]) => `${n}× ${esc(nm(o))}`).join(' + ')}${it.cq > 1 ? ` <span class="muted">(makes ${it.cq})</span>` : ''}` });
+  const rw = G.rewardFrom[id] || [];
+  if (rw.length) out.push({ k: 'Reward', html: rw.slice(0, 4).map(r => `${esc(r.q.n)} <span class="muted">(${esc(r.q.tr)}, ${r.n}×)</span>`).join(', ') });
+  return out;
+}
+function bestWhere(id) {
+  const it = item(id); if (!it) return '';
+  const q = (needOf(id)?.src || []).map(s => s.kind === 'quest' && G.quest[s.ref]).find(q => q && q.m.length);
+  if (it.q && q) return `Quest: ${list(mapNames(q.m))}`;
+  const drops = G.dropsFrom[id];
+  if (drops?.length) return 'ARC: ' + drops.slice(0, 3).map(b => titleCase(b.n)).join(', ');
+  if (it.f?.length) return 'Loot: ' + it.f.slice(0, 3).join(', ');
+  const rec = (G.recycleFrom[id] || []).slice().sort((a, b) => b.n - a.n);
+  if (rec.length) return 'Recycle: ' + rec.slice(0, 2).map(r => nm(r.id)).join(', ');
+  if (G.tradeFor[id]?.length) return 'Trade: ' + [...new Set(G.tradeFor[id].map(t => t.tr))].join(', ');
+  if (it.vd?.length) return 'Buy: ' + [...new Set(it.vd.map(v => v.tr))].join(', ');
+  if (it.rp) return `Craft: ${G.bench[it.cb]?.n || 'Workbench'}`;
+  if (q) return `Quest: ${list(mapNames(q.m))}`;
+  return '';
+}
+function titleCase(s) { return /^[A-Z0-9\s-]+$/.test(s) ? s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()) : s; }
+
+// stash space
+function stashCapacity() {
+  const b = G.bench.stash; if (!b) return null;
+  const L = Math.max(1, benchLevel('stash'));
+  const lv = b.lv.find(x => x.l === L); const d = lv?.d || '';
+  const m = d.match(/(\d+)\s*total/) || d.match(/^(\d+)\s*slots/);
+  return m ? Number(m[1]) : null;
+}
+const slotsFor = (id, count) => count > 0 ? Math.ceil(count / Math.max(1, item(id)?.s || 1)) : 0;
+function stashRows() {
+  return Object.entries(S.stash.items).filter(([id, c]) => c > 0).map(([id, c]) => {
+    const vd = verdict(id), it = item(id);
+    const spareCount = vd.v === 'keep' ? vd.spare : (['sell', 'recycle'].includes(vd.v) ? c : 0);
+    const spareV = vd.v === 'keep' ? (vd.base?.v || 'keep') : vd.v;
+    const freed = ['sell', 'recycle'].includes(spareV) ? slotsFor(id, c) - slotsFor(id, c - spareCount) : 0;
+    return { id, c, it, vd, slots: slotsFor(id, c), value: (it?.v || 0) * c, spareCount, spareV, freed };
+  });
+}
+
+// ---------- rendering helpers ----------
+function icon(id, size = 40, qty) {
+  const it = item(id);
+  const r = (it?.r || 'Common').toLowerCase();
+  const q = qty != null ? `<span class="qty">${esc(qty)}</span>` : '';
+  if (!it && CURRENCY[id]) return `<span class="tile r-legendary" style="--s:${size}px" aria-hidden="true"><span class="ph">${id === 'coins' ? '◎' : '⬢'}</span>${q}</span>`;
+  if (!it || it.i == null) {
+    const ini = nm(id).split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    return `<span class="tile r-${r}" style="--s:${size}px" aria-hidden="true"><span class="ph">${esc(ini)}</span>${q}</span>`;
+  }
+  const m = G.D.meta, inner = Math.round(size * 0.86);
+  const col = it.i % m.iconCols, row = Math.floor(it.i / m.iconCols);
+  return `<span class="tile r-${r}" style="--s:${size}px" aria-hidden="true"><span class="spr" style="background-image:url(data/icons.webp);background-size:${m.iconCols * inner}px ${m.iconRows * inner}px;background-position:${-col * inner}px ${-row * inner}px"></span>${q}</span>`;
+}
+const vchip = v => `<span class="vchip v-${v}">${VERDICTS[v]}</span>`;
+function hvCell(id, need) {
+  const h = have(id), pct = need ? Math.min(100, (h / need) * 100) : 0;
+  return `<div class="hv"><span class="hn ${h >= need ? 'ok' : 'short'}">${fmt(Math.min(h, 99999))} / ${fmt(need)}</span><div class="bar ${h >= need ? 'full' : ''}"><i style="width:${pct}%"></i></div></div>`;
+}
+function counter(id, val, act = 'stash') {
+  return `<span class="counter"><button type="button" data-act="${act}-dec" data-id="${esc(id)}" aria-label="One less ${esc(nm(id))}">−</button><input type="number" min="0" inputmode="numeric" value="${val}" data-input="${act}" data-id="${esc(id)}" aria-label="How many ${esc(nm(id))}" id="cnt-${act}-${esc(id)}"><button type="button" data-act="${act}-inc" data-id="${esc(id)}" aria-label="One more ${esc(nm(id))}">+</button></span>`;
+}
+function srcTag(s) {
+  return `<span class="tag ${s.now ? 'now' : ''}" title="${esc(s.label)}">${esc(s.kind === 'bench' ? s.label : s.kind === 'quest' ? s.label : s.label)}${s.qty ? ` ×${s.qty}` : ''}</span>`;
+}
+
+// ---------- render ----------
+function render() {
+  invalidate();
+  renderNav();
+  const main = $('#main');
+  if (G.error) { main.innerHTML = `<div class="panel empty"><h2>Game data didn't load</h2><p>${esc(G.error)}. Reload the page to try again.</p></div>`; return; }
+  if (!G.ready) { main.innerHTML = `<div class="panel empty"><div class="spinner" style="margin:0 auto 10px"></div>Loading game data…</div>`; return; }
+  const fn = { lookup: renderLookup, needs: renderNeeds, stash: renderStash, quests: renderQuests, workshop: renderWorkshop }[UI.tab] || renderLookup;
+  fn(main);
+}
+function renderNav() {
+  let badges = {};
+  if (G.ready) {
+    const needs = derived().needs;
+    const shortNow = Object.entries(needs).filter(([id, n]) => n.now > 0 && have(id) < n.now).length;
+    const avail = G.D.quests.filter(isAvailable).length;
+    const ready = G.benches.filter(b => benchReady(b)).length;
+    const cap = stashCapacity(), used = stashRows().reduce((s, r) => s + r.slots, 0);
+    badges = { needs: shortNow ? { t: shortNow } : null, quests: avail ? { t: avail } : null, workshop: ready ? { t: ready + ' ready', hot: true } : null, stash: used ? { t: cap ? `${used}/${cap}` : used, hot: cap && used > cap * 0.9 } : null };
+  }
+  $('#nav').innerHTML = TABS.map(t => `<button type="button" data-tab="${t.id}" ${UI.tab === t.id ? 'aria-current="page"' : ''}>${svg(t.icon)}<span>${t.label}</span>${badges[t.id] ? `<span class="badge ${badges[t.id].hot ? 'hot' : ''}">${esc(badges[t.id].t)}</span>` : '<span></span>'}</button>`).join('');
+}
+function needsSetup() {
+  return G.ready && !S.progress.setupDone && !Object.keys(S.progress.quests).length && !Object.keys(S.progress.benches).length;
+}
+function setupBanner() {
+  if (!needsSetup() || UI.bannerHidden) return '';
+  return `<div class="setup-banner"><div><strong>Set your progress first</strong><p>Until you tell the app which quests you've finished and how far your benches are upgraded, it counts every quest and upgrade as still to do, so it will say "keep" too often.</p></div><div class="toolbar"><button class="btn primary" type="button" data-act="setup">Set up (2 minutes)</button><button class="btn small" type="button" data-act="hide-banner">Later</button></div></div>`;
+}
+
+// ----- Lookup -----
+function searchItems(q) {
+  const toks = norm(q).split(' ').filter(Boolean);
+  if (!toks.length) return [];
+  const out = [];
+  for (const e of G.search) {
+    if (!toks.every(t => e.k.includes(t))) continue;
+    const k = e.k, t0 = toks[0];
+    const score = (k === norm(q) ? 0 : k.startsWith(t0) ? 1 : (' ' + k).includes(' ' + t0) ? 2 : 3);
+    out.push({ id: e.id, score });
+  }
+  return out.sort((a, b) => a.score - b.score || nm(a.id).localeCompare(nm(b.id))).map(x => x.id);
+}
+function lookupList() {
+  const needs = derived().needs;
+  let ids, groups;
+  if (UI.q.trim()) {
+    ids = searchItems(UI.q);
+    if (UI.lkFilter === 'needed') ids = ids.filter(id => needs[id]);
+    if (UI.lkFilter === 'stash') ids = ids.filter(id => have(id) > 0);
+    groups = [{ title: `${plural(ids.length, 'match', 'matches')}`, ids: ids.slice(0, 80) }];
+  } else if (UI.lkFilter === 'stash') {
+    ids = Object.keys(S.stash.items).filter(id => have(id) > 0).sort((a, b) => nm(a).localeCompare(nm(b)));
+    groups = [{ title: 'In your stash', ids }];
+  } else {
+    const all = Object.keys(needs).filter(id => needs[id].total > have(id));
+    const nowIds = all.filter(id => needs[id].now > have(id)).sort((a, b) => shortOf(b) - shortOf(a));
+    const later = all.filter(id => !nowIds.includes(id)).sort((a, b) => nm(a).localeCompare(nm(b)));
+    groups = [{ title: 'Needed for your next steps', ids: nowIds }, { title: 'Needed later', ids: later }];
+  }
+  return groups;
+}
+function renderLookup(main) {
+  const sel = UI.sel && item(UI.sel) ? UI.sel : null;
+  if (!$('#lk-q')) {
+    main.innerHTML = `<div id="banner-slot"></div><div class="lookup">
+      <div class="lk-side">
+        <label class="search">${svg('<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/>')}<input id="lk-q" type="search" autocomplete="off" spellcheck="false" placeholder="Search any item…" aria-label="Search items" value="${esc(UI.q)}"><kbd>/</kbd></label>
+        <div class="seg" role="group" aria-label="Show" id="lk-filter"></div>
+        <div class="panel lk-list" id="lk-list" role="listbox" aria-label="Items"></div>
+      </div>
+      <div id="lk-detail"></div>
+    </div>`;
+  }
+  $('#banner-slot').innerHTML = setupBanner();
+  $('#lk-filter').innerHTML = [['all', 'All items'], ['needed', 'Needed'], ['stash', 'In stash']].map(([k, l]) => `<button type="button" data-lkf="${k}" aria-pressed="${UI.lkFilter === k}">${l}</button>`).join('');
+  renderLookupList();
+  renderDetail(sel);
+}
+function renderLookupList() {
+  const groups = lookupList();
+  const html = groups.filter(g => g.ids.length).map(g => `<div class="lk-group eyebrow">${esc(g.title)}</div>` + g.ids.map(id => {
+    const vd = verdict(id), n = needOf(id);
+    const sub = n ? `${fmt(have(id))} / ${fmt(n.total)} · ${esc(bestWhere(id) || item(id).t)}` : `${esc(item(id).t)}${have(id) ? ` · ${fmt(have(id))} in stash` : ''}`;
+    return `<button type="button" class="irow" role="option" data-act="open" data-id="${esc(id)}" aria-selected="${UI.sel === id}">${icon(id, 40)}<span><span class="nm">${esc(nm(id))}</span><span class="sub" style="display:block">${sub}</span></span>${vchip(vd.v)}</button>`;
+  }).join('')).join('');
+  $('#lk-list').innerHTML = html || `<div class="empty">${UI.q.trim() ? `No item matches “${esc(UI.q)}”.` : UI.lkFilter === 'stash' ? 'Your stash is empty. Add items on the Stash tab or scan a screenshot.' : 'Nothing left to find. Search for any item to see what to do with it.'}</div>`;
+}
+function renderDetail(id) {
+  const box = $('#lk-detail');
+  if (!id) {
+    box.innerHTML = `<div class="panel empty" style="padding:48px 24px"><div class="eyebrow" style="margin-bottom:10px">Item lookup</div><h2 style="font-size:24px;margin-bottom:8px">Pick an item to see whether to keep, recycle or sell it</h2><p style="max-width:52ch;margin:0 auto">Press <span class="tag">/</span> and type a name. The answer uses your quests, bench upgrades and stash.</p></div>`;
+    return;
+  }
+  const it = item(id), vd = verdict(id), n = needOf(id);
+  const recVal = recycleValue(it);
+  const recHtml = it.rc ? `<div class="mini">${Object.entries(it.rc).map(([o, q]) => `<button class="minilink" type="button" data-act="open" data-id="${esc(o)}">${icon(o, 28)}<span>${q}× ${esc(nm(o))}</span>${shortOf(o) ? '<span class="tag now">needed</span>' : ''}</button>`).join('')}</div>` : '<span class="muted">Doesn\'t recycle.</span>';
+  const salHtml = it.sv && JSON.stringify(it.sv) !== JSON.stringify(it.rc) ? `<p class="muted" style="margin:10px 0 0;font-size:13px">Salvaging it topside gives ${Object.entries(it.sv).map(([o, q]) => `${q}× ${esc(nm(o))}`).join(', ')}.</p>` : '';
+  const needHtml = n ? `<ul>${n.src.map(s => `<li class="src"><span>${esc(s.label)} <span class="k">· ${esc(s.kind === 'quest' ? s.sub : s.kind === 'bench' ? 'Workshop upgrade' : 'Project')}</span></span><span>${s.now ? '<span class="tag now">next</span> ' : ''}<span class="hn">×${s.qty}</span></span></li>`).join('')}</ul>` : '<span class="muted">None of your open quests, bench upgrades or tracked projects need it.</span>';
+  const uses = (G.usedIn[id] || []).slice(0, 12);
+  const usesHtml = uses.length ? `<div class="mini">${uses.map(u => `<button class="minilink" type="button" data-act="open" data-id="${esc(u.id)}">${icon(u.id, 28)}<span>${esc(nm(u.id))} <span class="muted">×${u.n}</span></span></button>`).join('')}${(G.usedIn[id] || []).length > 12 ? `<span class="muted" style="border:0">+${G.usedIn[id].length - 12} more</span>` : ''}</div>` : '';
+  const where = whereToFind(id);
+  box.innerHTML = `<article class="panel detail v-${vd.v}">
+    <div class="d-hero">${icon(id, 84)}<div><div class="eyebrow">${esc(it.t)} · ${esc(it.r)}</div><h2>${esc(it.n)}</h2><div class="d-meta">${it.q ? '<span class="tag">Quest item</span>' : ''}${n?.now ? '<span class="tag now">Needed next</span>' : ''}</div></div><span class="stamp v-${vd.v}">${VERDICTS[vd.v]}</span></div>
+    <div class="d-why"><strong>${esc(vd.head)}</strong>${vd.why ? `<span>${esc(vd.why)}</span>` : ''}${vd.base ? `<span>For the spares: ${esc(vd.base.head.toLowerCase())}. ${esc(vd.base.why)}</span>` : ''}</div>
+    <div class="d-stats">
+      <div class="d-stat"><span class="eyebrow">Sells for</span><b class="coin">${fmt(it.v)}</b></div>
+      <div class="d-stat"><span class="eyebrow">Parts worth</span><b class="${recVal ? 'coin' : ''}">${recVal ? fmt(recVal) : '—'}</b></div>
+      <div class="d-stat"><span class="eyebrow">Stack</span><b>${fmt(it.s)}</b></div>
+      <div class="d-stat"><span class="eyebrow">In stash</span>${counter(id, have(id), 'stash')}</div>
+    </div>
+    <div class="d-cols">
+      <section class="d-sec"><h3>Needed for</h3>${needHtml}</section>
+      <section class="d-sec"><h3>Recycles into</h3>${recHtml}${salHtml}</section>
+    </div>
+    <section class="d-sec"><h3>Where to find it</h3>${where.length ? `<ul class="find">${where.map(w => `<li><span class="k">${esc(w.k)}</span><span>${w.html}</span></li>`).join('')}</ul>` : '<span class="muted">The community data has no sources listed for this item yet.</span>'}</section>
+    ${usesHtml ? `<section class="d-sec"><h3>Ingredient in</h3>${usesHtml}</section>` : ''}
+    ${it.d ? `<div class="d-desc">${esc(it.d)}</div>` : ''}
+  </article>`;
+}
+
+// ----- Needs -----
+function renderNeeds(main) {
+  const needs = derived().needs;
+  let rows = Object.entries(needs).map(([id, n]) => ({ id, n, h: have(id) }));
+  const srcFilter = s => UI.needsSrc === 'all' || s.kind === UI.needsSrc;
+  rows = rows.map(r => {
+    const src = r.n.src.filter(s => srcFilter(s) && (UI.needsScope === 'all' || s.now));
+    const need = src.reduce((a, s) => a + s.qty, 0);
+    return Object.assign(r, { src, need });
+  }).filter(r => r.need > 0);
+  const open = rows.filter(r => r.h < r.need).sort((a, b) => (b.need - b.h) - (a.need - a.h) || nm(a.id).localeCompare(nm(b.id)));
+  const covered = rows.filter(r => r.h >= r.need).sort((a, b) => nm(a.id).localeCompare(nm(b.id)));
+  const availQ = G.D.quests.filter(isAvailable).length;
+  const benchesReady = G.benches.filter(benchReady);
+  const totalShort = open.reduce((a, r) => a + (r.need - r.h), 0);
+  const row = r => `<tr class="click" data-act="open-lookup" data-id="${esc(r.id)}">
+      <td><div class="cell-item">${icon(r.id, 40)}<div><div class="nm">${esc(nm(r.id))}</div><div class="sub">${esc(item(r.id)?.t || '')}</div></div></div></td>
+      <td>${hvCell(r.id, r.need)}</td>
+      <td class="num">${r.h >= r.need ? '<span class="tag ok">Got it</span>' : `<span class="hn short">${fmt(r.need - r.h)}</span>`}</td>
+      <td><div class="for">${r.src.slice(0, 4).map(srcTag).join('')}${r.src.length > 4 ? `<span class="tag">+${r.src.length - 4}</span>` : ''}</div></td>
+      <td class="where">${esc(bestWhere(r.id))}</td></tr>`;
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Shopping list</div><h1>What to grab topside</h1><p>Everything your open quests, bench upgrades and tracked projects still need, minus what's already in your stash.</p></div></header>
+    <div class="strip">
+      <div class="panel stat"><span class="eyebrow">Still to find</span><b>${fmt(totalShort)}</b><span>${plural(open.length, 'different item')}</span></div>
+      <div class="panel stat"><span class="eyebrow">Already covered</span><b>${fmt(covered.length)}</b><span>items you hold enough of</span></div>
+      <div class="panel stat"><span class="eyebrow">Quests ready</span><b>${fmt(availQ)}</b><span>unlocked and not done</span></div>
+      <div class="panel stat"><span class="eyebrow">Upgrades ready</span><b>${fmt(benchesReady.length)}</b><span>${benchesReady.length ? esc(list(benchesReady.map(b => b.n))) : 'none yet'}</span></div>
+    </div>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Scope">${[['now', 'Next steps'], ['all', 'Everything left']].map(([k, l]) => `<button type="button" data-needs-scope="${k}" aria-pressed="${UI.needsScope === k}">${l}</button>`).join('')}</div>
+      <div class="chips" role="group" aria-label="Needed for">${[['all', 'All'], ['quest', 'Quests'], ['bench', 'Workshop'], ['project', 'Projects']].map(([k, l]) => `<button type="button" class="chip" data-needs-src="${k}" aria-pressed="${UI.needsSrc === k}">${l}</button>`).join('')}</div>
+    </div>
+    <div class="panel"><div class="tscroll"><table class="table">
+      <thead><tr><th>Item</th><th>Have / need</th><th>To find</th><th>Needed for</th><th>Where to look</th></tr></thead>
+      <tbody>${open.map(row).join('') || `<tr><td colspan="5"><div class="empty">${UI.needsScope === 'now' ? 'You have everything your next steps need. Switch to “Everything left” to plan further ahead.' : 'Nothing left to collect for these.'}</div></td></tr>`}</tbody>
+    </table></div></div>
+    ${covered.length ? `<details class="panel more"><summary class="panel-head" style="border:0"><h2>Covered (${covered.length})</h2></summary><div class="tscroll"><table class="table"><tbody>${covered.map(row).join('')}</tbody></table></div></details>` : ''}`;
+}
+
+// ----- Stash -----
+function renderStash(main) {
+  const rows = stashRows();
+  const cap = stashCapacity();
+  const used = rows.reduce((s, r) => s + r.slots, 0);
+  const value = rows.reduce((s, r) => s + r.value, 0);
+  const spare = rows.filter(r => r.spareCount > 0 && ['sell', 'recycle'].includes(r.spareV));
+  const freeSlots = spare.reduce((s, r) => s + r.freed, 0);
+  const sellValue = rows.filter(r => r.spareV === 'sell').reduce((s, r) => s + (r.it?.v || 0) * r.spareCount, 0);
+  const keepCount = rows.filter(r => r.vd.v === 'keep').length;
+  const pct = cap ? Math.min(100, (used / cap) * 100) : 0;
+  const filterFn = { all: () => true, keep: r => r.vd.v === 'keep', spare: r => r.spareCount > 0 && ['sell', 'recycle'].includes(r.spareV), gear: r => ['gear', 'learn'].includes(r.vd.v), stock: r => r.vd.v === 'stock' }[UI.stashFilter] || (() => true);
+  const sortFn = { slots: (a, b) => b.slots - a.slots || nm(a.id).localeCompare(nm(b.id)), value: (a, b) => b.value - a.value, name: (a, b) => nm(a.id).localeCompare(nm(b.id)), verdict: (a, b) => Object.keys(VERDICTS).indexOf(a.vd.v) - Object.keys(VERDICTS).indexOf(b.vd.v) || nm(a.id).localeCompare(nm(b.id)) }[UI.stashSort];
+  const shown = rows.filter(filterFn).sort(sortFn);
+  const clear = spare.slice().sort((a, b) => b.freed - a.freed || (a.it?.v || 0) - (b.it?.v || 0)).slice(0, 8);
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Your stash</div><h1>Stash</h1><p>Scan screenshots or add items by hand. Every item gets a verdict based on what you still need.</p></div>
+      <div class="toolbar">${S.stash.scannedAt ? `<span class="muted" style="font-size:13px">Last scan ${esc(new Date(S.stash.scannedAt).toLocaleString())}</span>` : ''}<button class="btn small ghost" type="button" data-act="clear-stash" ${rows.length ? '' : 'disabled'}>Empty the list</button></div></header>
+    <div class="strip">
+      <div class="panel stat space"><span class="eyebrow">Space used</span><b>${fmt(used)}${cap ? `<span class="muted" style="font-size:16px"> / ${fmt(cap)}</span>` : ''}</b><div class="bar ${cap && used > cap * 0.9 ? 'warn' : ''}"><i style="width:${pct}%"></i></div><span>${cap ? `Stash level ${Math.max(1, benchLevel('stash'))}. Change it on Workshop.` : 'slots'}</span></div>
+      <div class="panel stat"><span class="eyebrow">Stash value</span><b class="coin">${fmt(value)}</b><span>${plural(rows.length, 'item type')}</span></div>
+      <div class="panel stat"><span class="eyebrow">Safe to clear</span><b>${fmt(freeSlots)} <span class="muted" style="font-size:16px">slots</span></b><span>selling the sell pile pays <span class="coin">${fmt(sellValue)}</span></span></div>
+      <div class="panel stat"><span class="eyebrow">Kept for goals</span><b>${fmt(keepCount)}</b><span>item types your quests and upgrades need</span></div>
+    </div>
+    <div class="stash-top">
+      <section class="panel"><div class="panel-head"><h2>Scan screenshots</h2><span class="tag">Claude reads them</span></div><div class="panel-body" id="scan">${scanPanel()}</div></section>
+      <section class="panel"><div class="panel-head"><h2>Clear space</h2><span class="muted" style="font-size:13px">biggest wins first</span></div>
+        <div class="panel-body" style="padding:6px 8px">${clear.length ? clear.map(r => `<button type="button" class="irow" data-act="open-lookup" data-id="${esc(r.id)}">${icon(r.id, 36, r.c)}<span><span class="nm">${r.spareV === 'sell' ? 'Sell' : 'Recycle'} ${fmt(r.spareCount)}× ${esc(nm(r.id))}</span><span class="sub" style="display:block">frees ${plural(r.freed, 'slot')}${r.spareV === 'sell' ? ` · +${fmt((r.it?.v || 0) * r.spareCount)} coins` : ''}</span></span>${vchip(r.spareV)}</button>`).join('') : `<div class="empty">${rows.length ? 'Nothing in your stash is safe to clear right now.' : 'Add your stash to see what to sell or recycle.'}</div>`}</div>
+      </section>
+    </div>
+    <section class="panel">
+      <div class="panel-head" style="flex-wrap:wrap">
+        <div class="chips" role="group" aria-label="Filter">${[['all', 'All'], ['keep', 'Keep'], ['spare', 'Sell or recycle'], ['stock', 'Stock'], ['gear', 'Gear and blueprints']].map(([k, l]) => `<button type="button" class="chip" data-stash-filter="${k}" aria-pressed="${UI.stashFilter === k}">${l}</button>`).join('')}</div>
+        <div class="toolbar"><div class="addbox" style="width:260px"><input id="add-q" type="search" autocomplete="off" placeholder="Add an item…" aria-label="Add an item to your stash"><div class="pop" id="add-pop" hidden></div></div>
+        <label class="muted" style="font-size:13px">Sort <select id="stash-sort" style="height:32px;border-radius:7px;border:1px solid var(--line-2);background:var(--panel)">${[['slots', 'Slots'], ['value', 'Value'], ['verdict', 'Verdict'], ['name', 'Name']].map(([k, l]) => `<option value="${k}" ${UI.stashSort === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div>
+      </div>
+      <div class="tscroll"><table class="table"><thead><tr><th>Item</th><th>Verdict</th><th>Count</th><th>Slots</th><th>Value</th></tr></thead>
+      <tbody>${shown.map(r => `<tr><td><button type="button" class="cell-item minilink" style="border:0;background:none;padding:0" data-act="open-lookup" data-id="${esc(r.id)}">${icon(r.id, 40)}<div><div class="nm">${esc(nm(r.id))}</div><div class="sub">${esc(r.vd.head)}</div></div></button></td><td>${vchip(r.vd.v)}</td><td>${counter(r.id, r.c, 'stash')}</td><td class="num">${fmt(r.slots)}</td><td class="coin">${fmt(r.value)}</td></tr>`).join('') || `<tr><td colspan="5"><div class="empty">${rows.length ? 'No items in this filter.' : 'No items yet. Scan a screenshot above or add items by name.'}</div></td></tr>`}</tbody></table></div>
+    </section>`;
+}
+function scanPanel() {
+  if (SCAN.status === 'working') {
+    return `<div style="display:flex;gap:12px;align-items:center"><div class="spinner"></div><div><strong>Reading ${plural(SCAN.files.length, 'screenshot')}…</strong><div class="muted" style="font-size:13px">This usually takes 20–60 seconds.</div></div></div><div class="thumbs" style="margin-top:12px">${SCAN.urls.map(u => `<img src="${u}" alt="">`).join('')}</div><div style="margin-top:12px"><button class="btn small ghost" type="button" data-act="scan-stop">Stop</button></div>`;
+  }
+  if (SCAN.status === 'review') {
+    const unsure = SCAN.rows.filter(r => !r.id || !r.sure).length;
+    return `<div class="thumbs" style="margin-bottom:10px">${SCAN.urls.map(u => `<img src="${u}" alt="">`).join('')}</div>
+      <p style="margin:0 0 8px"><strong>Found ${plural(SCAN.rows.filter(r => r.id).length, 'item')}.</strong> ${unsure ? `${plural(unsure, 'row')} marked “Check” may be wrong; compare them with your screenshot.` : 'Check the counts, then save.'}</p>
+      <div style="max-height:360px;overflow:auto;border-top:1px solid var(--line)">${SCAN.rows.map((r, i) => `<div class="scan-row ${!r.id || !r.sure ? 'check' : ''}">${r.id ? icon(r.id, 36) : '<span class="tile" style="--s:36px"><span class="ph">?</span></span>'}<div><div style="font-weight:600">${r.id ? esc(nm(r.id)) : `Unknown: ${esc(r.seen || 'item')}`}</div><div style="display:flex;gap:8px;align-items:center;margin-top:3px">${!r.id || !r.sure ? '<span class="tag now">Check</span>' : ''}<button type="button" class="btn small ghost" data-act="scan-pick" data-i="${i}">${r.id ? 'Change item' : 'Pick item'}</button></div></div>${counter(String(i), r.count, 'scan')}<button type="button" class="btn small ghost" data-act="scan-del" data-i="${i}" aria-label="Remove row">✕</button></div>`).join('')}</div>
+      <div class="toolbar" style="margin-top:12px;justify-content:space-between">
+        <div class="seg" role="group" aria-label="Save mode">${[['replace', 'Replace my stash'], ['add', 'Add to my stash']].map(([k, l]) => `<button type="button" data-scan-mode="${k}" aria-pressed="${SCAN.mode === k}">${l}</button>`).join('')}</div>
+        <div class="toolbar"><button class="btn small ghost" type="button" data-act="scan-cancel">Discard</button><button class="btn primary" type="button" data-act="scan-apply">Save ${plural(SCAN.rows.filter(r => r.id).length, 'item')}</button></div>
+      </div>`;
+  }
+  return `<label class="drop" id="drop"><strong style="font-family:var(--f-display);font-stretch:112%">Drop stash screenshots here</strong><p>Take a screenshot of each stash page and drop them all in at once, or <u>choose files</u>. Claude identifies each item from its icon and reads the counts, then you check the list before anything is saved.</p><input type="file" id="scan-files" accept="image/png,image/jpeg,image/webp" multiple hidden></label>
+    ${SCAN.error ? `<p style="color:var(--red);margin:10px 0 0;font-weight:600">${esc(SCAN.error)}</p>` : ''}
+    <p class="muted" style="font-size:12.5px;margin:10px 0 0">Tip: full-resolution screenshots of just the stash grid work best. Icons that look alike can get mixed up, so check rows marked “Check”.</p>`;
+}
+
+// ----- Quests -----
+function renderQuests(main) {
+  const qs = G.questOrder;
+  const stat = tr => { const all = qs.filter(q => tr === 'all' || q.tr === tr); return `${all.filter(q => isDone(q.id)).length}/${all.length}`; };
+  let shown = qs.filter(q => UI.qTrader === 'all' || q.tr === UI.qTrader);
+  shown = shown.filter(q => ({ open: isAvailable(q), locked: !isDone(q.id) && !isAvailable(q), done: isDone(q.id), all: true }[UI.qStatus]));
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Trader quests</div><h1>Quests</h1><p>Tick quests off as you finish them. Items they ask you to deliver go straight onto your Needs list.</p></div>
+      <div class="toolbar"><span class="hn">${stat('all')} done</span></div></header>
+    <div class="toolbar">
+      <div class="chips" role="group" aria-label="Trader">${['all', ...G.traders].map(tr => `<button type="button" class="chip" data-qtr="${esc(tr)}" aria-pressed="${UI.qTrader === tr}">${tr === 'all' ? 'All traders' : `<i style="width:8px;height:8px;border-radius:2px;background:${TRADER_COLORS[tr] || 'var(--ink-3)'}"></i>${esc(tr)}`} <span class="num">${stat(tr)}</span></button>`).join('')}</div>
+      <div class="seg" role="group" aria-label="Status">${[['open', 'Available'], ['locked', 'Locked'], ['done', 'Done'], ['all', 'All']].map(([k, l]) => `<button type="button" data-qst="${k}" aria-pressed="${UI.qStatus === k}">${l}</button>`).join('')}</div>
+    </div>
+    <div class="qgrid">${shown.map(questCard).join('') || `<div class="panel empty">${UI.qStatus === 'open' ? 'No quests available here. Finish earlier quests to unlock more, or check the Locked list.' : 'No quests in this list.'}</div>`}</div>`;
+}
+function questCard(q) {
+  const done = isDone(q.id), avail = isAvailable(q);
+  const prevOpen = q.p.filter(p => G.quest[p] && !isDone(p));
+  const anc = done ? 0 : [...ancestors(q.id)].filter(a => !isDone(a)).length;
+  const granted = Object.fromEntries(q.g);
+  const req = q.req.map(([id, n]) => [id, n - (granted[id] || 0)]).filter(([, n]) => n > 0);
+  return `<article class="panel quest ${done ? 'done' : ''}" style="--trc:${TRADER_COLORS[q.tr] || 'var(--ink-3)'}">
+    <div class="q-head"><div><div class="q-tr"><i></i>${esc(q.tr)}</div><h3>${esc(q.n)}</h3></div>
+      <div>${done ? '<span class="tag ok">Done</span>' : avail ? '<span class="tag now">Available</span>' : '<span class="tag">Locked</span>'}</div></div>
+    <div class="q-body">
+      <div class="chips">${mapNames(q.m).map(m => `<span class="tag">${esc(m)}</span>`).join('')}${q.one ? '<span class="tag">In one raid</span>' : ''}${q.or.map(o => `<span class="tag">${esc(o)}</span>`).join('')}</div>
+      ${!done && !avail && prevOpen.length ? `<div class="muted" style="font-size:13px">Unlocks after ${esc(list(prevOpen.map(p => G.quest[p].n)))}</div>` : ''}
+      <ol>${q.o.map(o => `<li>${esc(o)}</li>`).join('')}</ol>
+      ${req.length ? `<div><div class="eyebrow" style="margin-bottom:6px">Deliver</div><div class="req">${req.map(([id, n]) => `<span>${icon(id, 26)}${esc(nm(id))} <span class="hn ${have(id) >= n ? 'ok' : 'short'}">${fmt(have(id))}/${n}</span></span>`).join('')}</div></div>` : ''}
+      ${q.rew.length ? `<div><div class="eyebrow" style="margin-bottom:6px">Reward</div><div class="req">${q.rew.map(([id, n]) => `<span>${icon(id, 26)}${n}× ${esc(nm(id))}</span>`).join('')}</div></div>` : ''}
+    </div>
+    <div class="q-foot"><label class="check"><input type="checkbox" data-quest="${esc(q.id)}" ${done ? 'checked' : ''}> Done</label>
+      ${anc ? `<button type="button" class="btn small ghost" data-act="quest-chain" data-id="${esc(q.id)}">Also mark the ${plural(anc, 'earlier quest')} done</button>` : ''}</div>
+  </article>`;
+}
+
+// ----- Workshop -----
+function benchReady(b) {
+  const L = benchLevel(b.id); const next = b.lv.find(l => l.l === L + 1);
+  return !!next && next.req.length > 0 && next.req.every(([id, n]) => have(id) >= n);
+}
+function reqLines(req, givenMap, pid) {
+  return `<div class="reqlist">${req.map(([id, n]) => {
+    const given = givenMap ? (givenMap[id] || 0) : 0, left = Math.max(0, n - given);
+    return `<div class="reqline">${icon(id, 30)}<span><span style="font-weight:600">${esc(nm(id))}</span>${givenMap ? `<span class="muted" style="font-size:12.5px;display:block">${fmt(given)} of ${fmt(n)} delivered</span>` : ''}</span>${givenMap ? `<span style="display:flex;gap:8px;align-items:center"><span class="hn ${have(id) >= left ? 'ok' : 'short'}" title="In stash / still to deliver">${fmt(have(id))}/${fmt(left)}</span>${counter(pid + '|' + id, given, 'given')}</span>` : `<span class="hn ${have(id) >= n ? 'ok' : 'short'}">${fmt(have(id))}/${fmt(n)}</span>`}</div>`;
+  }).join('')}</div>`;
+}
+function renderWorkshop(main) {
+  const benchCard = b => {
+    const L = benchLevel(b.id), next = b.lv.find(l => l.l === L + 1), later = b.lv.filter(l => l.l > L + 1);
+    const ready = benchReady(b);
+    return `<article class="panel"><div class="panel-head"><div><h2>${esc(b.n)}</h2></div><div class="bench-lvl">${b.max <= 5 ? `<div class="pips" aria-hidden="true">${Array.from({ length: b.max }, (_, i) => `<i class="${i < L ? 'on' : ''}"></i>`).join('')}</div>` : `<span class="muted mono" style="font-size:12px">of ${b.max}</span>`}${counter(b.id, L, 'bench')}</div></div>
+      <div class="panel-body" style="display:grid;gap:10px">
+        ${next ? `<div class="eyebrow">${ready ? '<span class="ready">Ready:</span> ' : ''}Level ${next.l} needs</div>${next.req.length ? reqLines(next.req) : ''}${next.or.length ? `<div class="chips">${next.or.map(o => `<span class="tag">${esc(o)}</span>`).join('')}</div>` : ''}${next.d ? `<div class="muted" style="font-size:13px">${esc(next.d)}</div>` : ''}${ready ? `<button class="btn small primary" type="button" data-act="bench-up" data-id="${esc(b.id)}" style="justify-self:start">I upgraded it: use the materials</button>` : ''}`
+          : '<div class="ready">Fully upgraded</div>'}
+        ${later.length ? `<details class="more"><summary>Later levels (${later.map(l => l.l).join(', ')})</summary><div style="display:grid;gap:10px;margin-top:10px">${later.map(l => `<div class="eyebrow">Level ${l.l}</div>${l.req.length ? reqLines(l.req) : ''}${l.or.length ? `<div class="chips">${l.or.map(o => `<span class="tag">${esc(o)}</span>`).join('')}</div>` : ''}`).join('')}</div></details>` : ''}
+      </div></article>`;
+  };
+  const projs = G.D.projects.slice().sort((a, b) => (b.start || 0) - (a.start || 0));
+  const active = projs.filter(projActive), ended = projs.filter(p => !projActive(p));
+  const projCard = p => {
+    const st = projState(p.id), ph = p.ph[st.phase];
+    const fmtD = t => t ? new Date(t * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    return `<article class="panel"><div class="panel-head"><div><h2>${esc(projName(p))}</h2><div class="muted" style="font-size:12.5px">${p.end && p.end < 2e9 ? `${projActive(p) ? 'Ends' : 'Ended'} ${fmtD(p.end)}` : 'Permanent'}</div></div><label class="check"><input type="checkbox" data-track="${esc(p.id)}" ${st.track ? 'checked' : ''}> Track</label></div>
+      <div class="panel-body" style="display:grid;gap:10px">
+        ${st.track ? (ph ? `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><div class="eyebrow">Phase ${st.phase + 1} of ${p.ph.length}</div><strong>${esc(ph.n)}</strong></div><div class="toolbar"><button class="btn small ghost" type="button" data-act="phase-prev" data-id="${esc(p.id)}" ${st.phase ? '' : 'disabled'}>Back</button><button class="btn small" type="button" data-act="phase-next" data-id="${esc(p.id)}">Phase done</button></div></div>${ph.req.length ? reqLines(ph.req, st.given || {}, p.id) : `<div class="muted" style="font-size:13.5px">${esc(ph.d)}</div>`}` : '<div class="ready">All phases done</div>') : `<div class="muted" style="font-size:13.5px">${esc(p.d)}</div><div class="muted" style="font-size:13px">Track it to add its items to your Needs list.</div>`}
+      </div></article>`;
+  };
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Speranza</div><h1>Workshop</h1><p>Set each bench to its current level. The next level's materials go onto your Needs list, and a bench shows <span class="ready">Ready</span> when your stash covers it.</p></div></header>
+    <div class="bgrid">${G.benches.map(benchCard).join('')}</div>
+    <header class="page-head" style="margin-top:8px"><div><h1 style="font-size:24px">Projects</h1><p>Expeditions and event projects. Track one to count its items, and log what you've already delivered.</p></div></header>
+    <div class="bgrid">${active.map(projCard).join('') || '<div class="panel empty">No projects are running right now according to the community data.</div>'}</div>
+    ${ended.length ? `<details class="more"><summary>Ended projects (${ended.length})</summary><div class="bgrid" style="margin-top:12px">${ended.map(projCard).join('')}</div></details>` : ''}`;
+}
+
+// ---------- modals ----------
+function openModal(html, wide) {
+  const m = $('#modal');
+  m.innerHTML = `<div class="modal-card ${wide ? 'wide' : ''}" role="dialog" aria-modal="true">${html}</div>`;
+  m.hidden = false;
+  const f = m.querySelector('[autofocus]') || m.querySelector('input, select, button');
+  if (f) f.focus();
+}
+function closeModal() { const m = $('#modal'); m.hidden = true; m.innerHTML = ''; UI.pickCb = null; UI.setup = null; }
+
+function openSetup() {
+  const firstOpen = tr => {
+    const qs = G.questOrder.filter(q => q.tr === tr);
+    if (qs.length && qs.every(q => isDone(q.id))) return '__all';
+    const cur = qs.find(isAvailable);
+    return cur ? cur.id : (qs.some(q => isDone(q.id)) ? '' : '__none');
+  };
+  UI.setup = { benches: Object.fromEntries(G.benches.map(b => [b.id, benchLevel(b.id)])), traders: Object.fromEntries(G.traders.map(tr => [tr, firstOpen(tr)])) };
+  renderSetup();
+}
+function renderSetup() {
+  const st = UI.setup;
+  openModal(`<div class="panel-head"><h2>Set up your progress</h2><button class="btn small ghost" type="button" data-act="modal-close">Close</button></div>
+    <div class="panel-body" style="display:grid;gap:18px">
+      <section><div class="eyebrow" style="margin-bottom:6px">1 · Bench levels</div><p class="muted" style="margin:0 0 8px;font-size:13.5px">Use the levels shown in your Workshop in Speranza. 0 means not built yet.</p>
+        <div class="setup-grid">${G.benches.map(b => `<div class="setup-row"><span>${esc(b.n)} <span class="muted">(max ${b.max})</span></span>${counter(b.id, st.benches[b.id], 'setupbench')}</div>`).join('')}</div></section>
+      <section><div class="eyebrow" style="margin-bottom:6px">2 · The quest you're on</div><p class="muted" style="margin:0 0 8px;font-size:13.5px">Pick the quest each trader is giving you now. Everything that unlocks it gets marked done. You can fine-tune single quests on the Quests tab.</p>
+        <div class="setup-grid">${G.traders.map(tr => `<div class="setup-row"><span><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${TRADER_COLORS[tr] || 'var(--ink-3)'};margin-right:6px"></i>${esc(tr)}</span><select data-setup-tr="${esc(tr)}" id="setup-${esc(tr.replace(/\s/g, '-'))}">
+          <option value="__none" ${st.traders[tr] === '__none' ? 'selected' : ''}>Haven't started</option>
+          ${G.questOrder.filter(q => q.tr === tr).map(q => `<option value="${esc(q.id)}" ${st.traders[tr] === q.id ? 'selected' : ''}>${esc(q.n)}</option>`).join('')}
+          <option value="__all" ${st.traders[tr] === '__all' ? 'selected' : ''}>Finished all</option>
+          ${st.traders[tr] === '' ? '<option value="" selected>Keep my current checkmarks</option>' : ''}
+        </select></div>`).join('')}</div></section>
+      <div class="toolbar" style="justify-content:flex-end"><button class="btn ghost" type="button" data-act="modal-close">Cancel</button><button class="btn primary" type="button" data-act="setup-save">Save progress</button></div>
+    </div>`, true);
+}
+function saveSetup() {
+  const st = UI.setup; if (!st) return;
+  for (const [id, lvl] of Object.entries(st.benches)) S.progress.benches[id] = lvl;
+  const anyChoice = Object.values(st.traders).some(v => v !== '');
+  if (anyChoice) {
+    const doneSet = {};
+    // Keep checkmarks for traders left on "keep my current checkmarks".
+    for (const [tr, choice] of Object.entries(st.traders)) {
+      if (choice === '') G.D.quests.filter(q => q.tr === tr && isDone(q.id)).forEach(q => { doneSet[q.id] = 1; });
+    }
+    for (const [tr, choice] of Object.entries(st.traders)) {
+      if (choice === '__all') G.D.quests.filter(q => q.tr === tr).forEach(q => { doneSet[q.id] = 1; ancestors(q.id).forEach(a => { doneSet[a] = 1; }); });
+      else if (choice && choice !== '__none') ancestors(choice).forEach(a => { doneSet[a] = 1; });
+    }
+    S.progress.quests = doneSet;
+  }
+  S.progress.setupDone = true;
+  closeModal();
+  markDirty('progress');
+  render();
+  toast('Progress saved', 'Your Needs list and verdicts now follow it.');
+}
+
+function pickItem(title, cb) {
+  UI.pickCb = cb;
+  openModal(`<div class="panel-head"><h2>${esc(title)}</h2><button class="btn small ghost" type="button" data-act="modal-close">Cancel</button></div>
+    <div class="panel-body" style="display:grid;gap:10px"><input id="pick-q" type="search" autocomplete="off" placeholder="Type an item name…" autofocus style="height:42px;border-radius:8px;border:1.5px solid var(--line-2);background:var(--panel);padding:0 12px;font-weight:600"><div id="pick-list" style="max-height:50vh;overflow:auto"></div></div>`);
+  renderPickList('');
+}
+function renderPickList(q) {
+  const ids = searchItems(q).slice(0, 40);
+  $('#pick-list').innerHTML = ids.map(id => `<button type="button" class="irow" data-act="pick" data-id="${esc(id)}">${icon(id, 34)}<span><span class="nm">${esc(nm(id))}</span><span class="sub" style="display:block">${esc(item(id).t)} · ${esc(item(id).r)}</span></span><span></span></button>`).join('') || `<div class="empty">${q ? 'No matches.' : 'Start typing to search.'}</div>`;
+}
+
+let toastTimer = 0;
+function toast(msg, sub) {
+  const t = $('#toast');
+  t.innerHTML = `${esc(msg)}${sub ? `<small>${esc(sub)}</small>` : ''}`;
+  t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, 3800);
+}
+
+// ---------- stash edits ----------
+function setStash(id, n) {
+  n = Math.max(0, Math.min(99999, Math.floor(Number(n) || 0)));
+  if (n) S.stash.items[id] = n; else delete S.stash.items[id];
+  markDirty('stash');
+}
+
+// ---------- screenshot scan ----------
+let SAMPLE = undefined;
+async function getSample() {
+  if (SAMPLE !== undefined) return SAMPLE;
+  try { SAMPLE = window.claude && typeof window.claude.use === 'function' ? await window.claude.use('sample') : null; } catch (e) { SAMPLE = null; }
+  return SAMPLE;
+}
+function scanPrompt() {
+  const catalog = G.ids.map(id => `${id}|${G.items[id].n}|${G.items[id].t}|${G.items[id].r}`).join('\n');
+  return `These images are screenshots of a player's stash (the inventory grid) in the video game ARC Raiders.
+
+For every item tile you can see, identify the item and read its stack count: the number printed on the tile. If a tile shows no number, its count is 1.
+Match each tile to exactly one id from the catalog below, using the icon, the tile's rarity color (grey Common, green Uncommon, blue Rare, purple Epic, gold Legendary) and any text you can read. Only use ids from the catalog.
+Set "sure" to false when you are not confident about the item or the count.
+If you can see a tile but can't tell which item it is, put it in "unknown" with a short description of what it looks like.
+The screenshots show different parts of the stash, so list every tile in every image; the page adds them up.
+
+Reply with only JSON in this shape:
+{"tiles":[{"id":"metal_parts","count":12,"sure":true}],"unknown":[{"seen":"blue canister with yellow stripe","count":1}]}
+
+Catalog (id|name|type|rarity):
+${catalog}`;
+}
+async function startScan(files) {
+  const imgs = [...files].filter(f => /^image\/(png|jpeg|webp|gif)$/.test(f.type));
+  if (!imgs.length) { SCAN.error = 'Those files aren\'t screenshots. Use PNG, JPEG or WebP images.'; rerenderScan(); return; }
+  SCAN.error = '';
+  const sample = await getSample();
+  if (!sample) { SCAN.error = 'Screenshot reading only works when this page is opened from its claude.ai link while you\'re signed in. You can still add items by name below.'; rerenderScan(); return; }
+  const lim = await sample.limits().catch(() => null);
+  if (!lim || !lim.images) { SCAN.error = 'This view can\'t send images to Claude. Open the page from its claude.ai link, or add items by name below.'; rerenderScan(); return; }
+  const use = imgs.slice(0, lim.images.maxCount || 1);
+  const tooBig = use.find(f => f.size > (lim.images.maxInputBytes || Infinity));
+  if (tooBig) { SCAN.error = `${tooBig.name} is too large. Save it as a JPEG or crop it to the stash grid.`; rerenderScan(); return; }
+  SCAN.urls.forEach(u => URL.revokeObjectURL(u));
+  SCAN.files = use; SCAN.urls = use.map(f => URL.createObjectURL(f));
+  SCAN.status = 'working'; SCAN.ctl = new AbortController();
+  rerenderScan();
+  if (imgs.length > use.length) toast(`Reading the first ${use.length} screenshots`, `Claude can read ${use.length} at a time. Scan the rest after saving these.`);
+  try {
+    const res = await sample.json(scanPrompt(), { images: use, signal: SCAN.ctl.signal, cache: false });
+    const agg = new Map();
+    for (const t of Array.isArray(res?.tiles) ? res.tiles : []) {
+      const id = String(t?.id || ''); const c = Math.max(1, Math.min(99999, Math.floor(Number(t?.count) || 1)));
+      if (!G.items[id]) { agg.set('?' + agg.size, { id: null, seen: id, count: c, sure: false }); continue; }
+      const prev = agg.get(id);
+      if (prev) { prev.count += c; prev.sure = prev.sure && t.sure !== false; } else agg.set(id, { id, count: c, sure: t.sure !== false });
+    }
+    for (const u of Array.isArray(res?.unknown) ? res.unknown : []) {
+      agg.set('?' + agg.size, { id: null, seen: String(u?.seen || 'unknown item').slice(0, 80), count: Math.max(1, Math.floor(Number(u?.count) || 1)), sure: false });
+    }
+    SCAN.rows = [...agg.values()].sort((a, b) => (a.id ? 1 : 0) - (b.id ? 1 : 0) || (a.sure ? 1 : 0) - (b.sure ? 1 : 0) || nm(a.id || '').localeCompare(nm(b.id || '')));
+    SCAN.mode = Object.keys(S.stash.items).length ? SCAN.mode : 'replace';
+    SCAN.status = SCAN.rows.length ? 'review' : 'idle';
+    if (!SCAN.rows.length) SCAN.error = 'Claude didn\'t find any items in those screenshots. Try a clearer screenshot of the stash grid.';
+  } catch (e) {
+    SCAN.status = 'idle';
+    const code = e && e.code;
+    SCAN.error = {
+      cancelled: '',
+      not_granted: 'You didn\'t allow this page to use Claude, so it can\'t read screenshots. Add items by name below instead.',
+      sampling_disabled: 'Claude isn\'t available for your account here. Add items by name below instead.',
+      rate_limited: 'You\'ve hit a Claude usage limit. Try again later, or add items by name.',
+      image_rejected: 'Claude couldn\'t open one of those images. Try a PNG or JPEG screenshot.',
+      invalid_json: 'Claude\'s answer came back garbled. Try again, ideally with fewer screenshots at once.',
+      refused: 'Claude declined to read those images. Try a different screenshot.',
+      session_expired: 'Your claude.ai session expired. Sign in again and retry.',
+    }[code] ?? 'Reading the screenshots failed. Try again in a moment.';
+  }
+  SCAN.ctl = null;
+  rerenderScan();
+}
+function rerenderScan() { if (UI.tab === 'stash' && $('#scan')) $('#scan').innerHTML = scanPanel(); }
+function applyScan() {
+  const rows = SCAN.rows.filter(r => r.id && r.count > 0);
+  if (SCAN.mode === 'replace') S.stash.items = {};
+  for (const r of rows) S.stash.items[r.id] = Math.min(99999, (S.stash.items[r.id] || 0) + r.count);
+  S.stash.scannedAt = new Date().toISOString();
+  markDirty('stash');
+  SCAN.urls.forEach(u => URL.revokeObjectURL(u));
+  Object.assign(SCAN, { status: 'idle', files: [], urls: [], rows: [], error: '' });
+  render();
+  toast(`Saved ${plural(rows.length, 'item')} to your stash`);
+}
+
+// ---------- events ----------
+document.addEventListener('click', e => {
+  const tabBtn = e.target.closest('[data-tab]');
+  if (tabBtn) { switchTab(tabBtn.dataset.tab); return; }
+  const t = e.target.closest('[data-act], [data-lkf], [data-needs-scope], [data-needs-src], [data-stash-filter], [data-qtr], [data-qst], [data-scan-mode]');
+  if (!t) { if (e.target.id === 'modal') closeModal(); if (!e.target.closest('.addbox')) hideAddPop(); return; }
+  const d = t.dataset, id = d.id;
+  if (d.lkf) { UI.lkFilter = d.lkf; saveUI(); renderLookup($('#main')); return; }
+  if (d.needsScope) { UI.needsScope = d.needsScope; saveUI(); render(); return; }
+  if (d.needsSrc) { UI.needsSrc = d.needsSrc; saveUI(); render(); return; }
+  if (d.stashFilter) { UI.stashFilter = d.stashFilter; saveUI(); render(); return; }
+  if (d.qtr) { UI.qTrader = d.qtr; saveUI(); render(); return; }
+  if (d.qst) { UI.qStatus = d.qst; saveUI(); render(); return; }
+  if (d.scanMode) { SCAN.mode = d.scanMode; rerenderScan(); return; }
+  switch (d.act) {
+    case 'open':
+      if (UI.tab !== 'lookup') { openLookup(id); return; }
+      UI.sel = id; saveUI(); renderLookupList(); renderDetail(id);
+      if (window.matchMedia('(max-width: 960px)').matches) $('#lk-detail').scrollIntoView({ block: 'start', behavior: 'smooth' });
+      return;
+    case 'open-lookup': openLookup(id); return;
+    case 'stash-inc': setStash(id, have(id) + 1); render(); return;
+    case 'stash-dec': setStash(id, have(id) - 1); render(); return;
+    case 'bench-inc': case 'bench-dec': {
+      const b = G.bench[id]; S.progress.benches[id] = Math.max(0, Math.min(b.max, benchLevel(id) + (d.act === 'bench-inc' ? 1 : -1)));
+      markDirty('progress'); render(); return;
+    }
+    case 'bench-up': {
+      const b = G.bench[id], next = b.lv.find(l => l.l === benchLevel(id) + 1);
+      if (next) for (const [iid, n] of next.req) setStash(iid, have(iid) - n);
+      S.progress.benches[id] = Math.min(b.max, benchLevel(id) + 1); markDirty('progress'); render();
+      toast(`${b.n} is now level ${benchLevel(id)}`, next?.req.length ? 'The materials it used are off your stash list.' : '');
+      return;
+    }
+    case 'setupbench-inc': case 'setupbench-dec': {
+      const b = G.bench[id]; UI.setup.benches[id] = Math.max(0, Math.min(b.max, UI.setup.benches[id] + (d.act === 'setupbench-inc' ? 1 : -1)));
+      const inp = document.getElementById('cnt-setupbench-' + id); if (inp) inp.value = UI.setup.benches[id];
+      return;
+    }
+    case 'given-inc': case 'given-dec': {
+      const [pid, iid] = id.split('|'); const st = ensureProj(pid);
+      st.given = st.given || {}; st.given[iid] = Math.max(0, (st.given[iid] || 0) + (d.act === 'given-inc' ? 1 : -1));
+      markDirty('progress'); render(); return;
+    }
+    case 'phase-next': case 'phase-prev': {
+      const p = G.D.projects.find(x => x.id === id); const st = ensureProj(id);
+      st.phase = Math.max(0, Math.min(p.ph.length, st.phase + (d.act === 'phase-next' ? 1 : -1))); st.given = {};
+      markDirty('progress'); render(); return;
+    }
+    case 'quest-chain': ancestors(id).forEach(a => { S.progress.quests[a] = 1; }); markDirty('progress'); render(); toast('Earlier quests marked done'); return;
+    case 'setup': openSetup(); return;
+    case 'setup-save': saveSetup(); return;
+    case 'hide-banner': UI.bannerHidden = true; saveUI(); render(); return;
+    case 'modal-close': closeModal(); return;
+    case 'pick': { const cb = UI.pickCb; closeModal(); if (cb) cb(id); return; }
+    case 'clear-stash':
+      if (t.dataset.armed) { S.stash.items = {}; S.stash.scannedAt = null; markDirty('stash'); render(); toast('Stash list emptied'); }
+      else { t.dataset.armed = '1'; t.textContent = 'Click again to empty'; setTimeout(() => { if (t.isConnected) { delete t.dataset.armed; t.textContent = 'Empty the list'; } }, 3000); }
+      return;
+    case 'scan-stop': SCAN.ctl?.abort(); return;
+    case 'scan-cancel': SCAN.urls.forEach(u => URL.revokeObjectURL(u)); Object.assign(SCAN, { status: 'idle', files: [], urls: [], rows: [], error: '' }); rerenderScan(); return;
+    case 'scan-apply': applyScan(); return;
+    case 'scan-del': SCAN.rows.splice(Number(d.i), 1); rerenderScan(); return;
+    case 'scan-inc': case 'scan-dec': { const r = SCAN.rows[Number(id)]; if (r) r.count = Math.max(0, r.count + (d.act === 'scan-inc' ? 1 : -1)); rerenderScan(); return; }
+    case 'scan-pick': {
+      const i = Number(d.i);
+      pickItem('Which item is it?', pid => { const r = SCAN.rows[i]; if (!r) return; const dup = SCAN.rows.findIndex((x, j) => j !== i && x.id === pid); if (dup >= 0) { SCAN.rows[dup].count += r.count; SCAN.rows.splice(i, 1); } else { r.id = pid; r.sure = true; } rerenderScan(); });
+      return;
+    }
+    case 'add-pick': setStash(id, have(id) + 1); hideAddPop(); $('#add-q').value = ''; render(); setTimeout(() => { const inp = document.getElementById('cnt-stash-' + id); if (inp) { inp.focus(); inp.select(); } }, 0); return;
+  }
+});
+function ensureProj(pid) {
+  const st = S.progress.projects[pid] || (S.progress.projects[pid] = { track: false, phase: 0, given: {} });
+  if (!Number.isFinite(st.phase)) st.phase = 0;
+  return st;
+}
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.input) {
+    const id = t.dataset.id, v = Math.max(0, Math.floor(Number(t.value) || 0));
+    if (t.dataset.input === 'stash') { setStash(id, v); render(); }
+    else if (t.dataset.input === 'bench') { S.progress.benches[id] = Math.min(G.bench[id].max, v); markDirty('progress'); render(); }
+    else if (t.dataset.input === 'setupbench') { UI.setup.benches[id] = Math.min(G.bench[id].max, v); t.value = UI.setup.benches[id]; }
+    else if (t.dataset.input === 'given') { const [pid, iid] = id.split('|'); const st = ensureProj(pid); st.given = st.given || {}; st.given[iid] = v; markDirty('progress'); render(); }
+    else if (t.dataset.input === 'scan') { const r = SCAN.rows[Number(id)]; if (r) r.count = v; }
+    return;
+  }
+  if (t.dataset.quest) { const id = t.dataset.quest; if (t.checked) S.progress.quests[id] = 1; else delete S.progress.quests[id]; markDirty('progress'); render(); return; }
+  if (t.dataset.track) { const st = ensureProj(t.dataset.track); st.track = t.checked; markDirty('progress'); render(); return; }
+  if (t.dataset.setupTr) { UI.setup.traders[t.dataset.setupTr] = t.value; return; }
+  if (t.id === 'stash-sort') { UI.stashSort = t.value; saveUI(); render(); return; }
+  if (t.id === 'scan-files') { if (t.files?.length) startScan(t.files); t.value = ''; return; }
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.id === 'lk-q') { UI.q = t.value; renderLookupList(); return; }
+  if (t.id === 'pick-q') { renderPickList(t.value); return; }
+  if (t.id === 'add-q') { showAddPop(t.value); return; }
+});
+function showAddPop(q) {
+  const pop = $('#add-pop'); if (!pop) return;
+  const ids = searchItems(q).slice(0, 12);
+  if (!q.trim()) { pop.hidden = true; return; }
+  pop.innerHTML = ids.map(id => `<button type="button" class="irow" data-act="add-pick" data-id="${esc(id)}">${icon(id, 30)}<span><span class="nm">${esc(nm(id))}</span>${have(id) ? `<span class="sub" style="display:block">${fmt(have(id))} in stash</span>` : ''}</span><span class="tag">Add</span></button>`).join('') || '<div class="empty">No matches.</div>';
+  pop.hidden = false;
+}
+function hideAddPop() { const pop = $('#add-pop'); if (pop) pop.hidden = true; }
+document.addEventListener('keydown', e => {
+  const tag = (e.target.tagName || '').toLowerCase();
+  const typing = tag === 'input' || tag === 'select' || tag === 'textarea';
+  if (e.key === 'Escape' && !$('#modal').hidden) { closeModal(); return; }
+  if (e.key === '/' && !typing && $('#modal').hidden) { e.preventDefault(); if (UI.tab !== 'lookup') switchTab('lookup'); const q = $('#lk-q'); if (q) { q.focus(); q.select(); } return; }
+  if (e.target.id === 'lk-q' && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter')) {
+    const opts = [...document.querySelectorAll('#lk-list [data-act="open"]')]; if (!opts.length) return;
+    e.preventDefault();
+    let i = opts.findIndex(o => o.dataset.id === UI.sel);
+    if (e.key === 'ArrowDown') i = Math.min(opts.length - 1, i + 1);
+    else if (e.key === 'ArrowUp') i = Math.max(0, i - 1);
+    else if (i < 0) i = 0;
+    UI.sel = opts[i].dataset.id; saveUI(); renderLookupList(); renderDetail(UI.sel);
+    const cur = document.querySelector(`#lk-list [data-id="${CSS.escape(UI.sel)}"]`); if (cur) cur.scrollIntoView({ block: 'nearest' });
+    return;
+  }
+  if (e.target.id === 'lk-q' && e.key === 'Escape') { e.target.value = ''; UI.q = ''; renderLookupList(); return; }
+  if (e.target.id === 'add-q' && e.key === 'Enter') { e.preventDefault(); const first = $('#add-pop [data-act="add-pick"]'); if (first) first.click(); return; }
+  if (e.target.id === 'pick-q' && e.key === 'Enter') { e.preventDefault(); const first = $('#pick-list [data-act="pick"]'); if (first) first.click(); return; }
+  if (e.target.dataset.input && e.key === 'Enter') { e.target.blur(); }
+});
+// drag and drop screenshots onto the scan panel
+document.addEventListener('dragover', e => { const d = e.target.closest?.('#drop'); if (d) { e.preventDefault(); d.classList.add('over'); } });
+document.addEventListener('dragleave', e => { const d = e.target.closest?.('#drop'); if (d) d.classList.remove('over'); });
+document.addEventListener('drop', e => { const d = e.target.closest?.('#drop'); if (!d) return; e.preventDefault(); d.classList.remove('over'); if (e.dataTransfer?.files?.length) startScan(e.dataTransfer.files); });
+document.addEventListener('paste', e => {
+  if (UI.tab !== 'stash' || SCAN.status !== 'idle') return;
+  const files = [...(e.clipboardData?.files || [])].filter(f => f.type.startsWith('image/'));
+  if (files.length) { e.preventDefault(); startScan(files); }
+});
+function switchTab(tab) {
+  if (!TABS.some(t => t.id === tab)) return;
+  UI.tab = tab; saveUI();
+  $('#main').innerHTML = '';
+  render();
+  window.scrollTo({ top: 0 });
+}
+function openLookup(id) {
+  UI.sel = id; UI.q = ''; UI.lkFilter = UI.lkFilter === 'stash' && !have(id) ? 'all' : UI.lkFilter;
+  switchTab('lookup');
+}
+
+// ---------- persistence (owner-only db with an on-device fallback) ----------
+const Sync = { mode: 'boot', db: null, dirty: new Set(), inflight: new Set(), timer: 0, last: {}, quiet: {}, error: false, bootCache: null, migrated: {} };
+const DOCS = { progress: 'app/progress', stash: 'app/stash' };
+function cacheSave() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ source: Sync.mode === 'cloud' ? 'cloud' : 'local', progress: S.progress, stash: S.stash })); } catch (e) { /* storage blocked: fine */ }
+}
+function cacheLoad() { try { const c = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); return c && typeof c === 'object' ? c : null; } catch (e) { return null; } }
+function busy(key) { return Sync.dirty.has(key) || Sync.inflight.has(key); }
+function markDirty(key) {
+  S[key].updatedAt = new Date().toISOString();
+  invalidate();
+  Sync.dirty.add(key);
+  cacheSave();
+  clearTimeout(Sync.timer);
+  Sync.timer = setTimeout(flush, 600);
+  renderSync();
+}
+async function flush() {
+  if (Sync.mode === 'boot') return;
+  if (Sync.mode !== 'cloud') { Sync.dirty.clear(); renderSync(); return; }
+  for (const key of [...Sync.dirty].filter(k => !Sync.inflight.has(k))) {
+    Sync.dirty.delete(key); Sync.inflight.add(key); renderSync();
+    await writeDoc(key);
+    Sync.inflight.delete(key);
+  }
+  if (Sync.dirty.size) { clearTimeout(Sync.timer); Sync.timer = setTimeout(flush, 400); }
+  renderSync();
+}
+async function writeDoc(key, attempt = 0) {
+  const json = JSON.stringify(S[key]);
+  try {
+    await Sync.db.doc(DOCS[key]).set(JSON.parse(json));
+    Sync.last[key] = json; Sync.quiet[key] = Date.now() + 2000; Sync.error = false;
+  } catch (e) {
+    const code = e && e.code;
+    if (code === 'unavailable' && attempt < 1) { await sleep(400 + Math.random() * 700); return writeDoc(key, attempt + 1); }
+    if (['invalid_argument', 'not_granted', 'revoked', 'capability_disabled', 'capability_removed'].includes(code)) {
+      Sync.mode = 'local'; Sync.error = true; cacheSave();
+      toast('Saving on this device only', 'This view can\'t write to your Claude account.');
+      return;
+    }
+    if (code === 'quota_exceeded') { Sync.error = true; toast('Storage is full', 'Empty the stash list and scan again.'); return; }
+    Sync.error = true; Sync.dirty.add(key);
+    clearTimeout(Sync.timer); Sync.timer = setTimeout(flush, 4000);
+  }
+}
+function canAccept(key, json) {
+  if (busy(key)) return false;
+  if (Date.now() < (Sync.quiet[key] || 0) && json !== Sync.last[key]) { setTimeout(() => refetch(key), (Sync.quiet[key] - Date.now()) + 150); return false; }
+  return true;
+}
+async function refetch(key) {
+  if (busy(key) || Sync.mode !== 'cloud') return;
+  try { const snap = await Sync.db.doc(DOCS[key]).get(); if (busy(key)) return; if (snap.exists) apply(key, snap.data()); } catch (e) { /* the live subscription catches up */ }
+}
+function normalize(key, data) {
+  const base = key === 'progress' ? blankProgress() : blankStash();
+  const out = Object.assign(base, data && typeof data === 'object' ? data : {});
+  if (key === 'progress') { for (const k of ['quests', 'benches', 'projects']) if (!out[k] || typeof out[k] !== 'object') out[k] = {}; }
+  else if (!out.items || typeof out.items !== 'object') out.items = {};
+  return out;
+}
+function apply(key, data) {
+  S[key] = normalize(key, clone(data));
+  Sync.migrated[key] = true;
+  cacheSave(); invalidate(); render();
+}
+function onCloudEmpty(key) {
+  if (busy(key)) return;
+  const c = Sync.bootCache;
+  if (c && c.source === 'local' && c[key] && !Sync.migrated[key]) {
+    Sync.migrated[key] = true;
+    S[key] = normalize(key, clone(c[key]));
+    markDirty(key);
+  }
+  render();
+}
+function subscribe(key) {
+  Sync.db.doc(DOCS[key]).onSnapshot(snap => {
+    if (snap.metadata.hasPendingWrites) return;
+    if (!snap.exists) { if (!snap.metadata.fromCache) onCloudEmpty(key); return; }
+    const json = JSON.stringify(snap.data());
+    if (!canAccept(key, json)) return;
+    if (json !== JSON.stringify(S[key])) apply(key, snap.data());
+  }, e => { if (e && e.code === 'unavailable') setTimeout(() => subscribe(key), 3000); else { Sync.error = true; renderSync(); } });
+}
+function renderSync() {
+  const el = $('#sync');
+  const saving = Sync.dirty.size || Sync.inflight.size;
+  const [cls, text] = Sync.mode === 'cloud'
+    ? (Sync.error ? ['err', 'Sync problem: retrying'] : ['cloud', saving ? 'Saving…' : 'Synced to your Claude account'])
+    : Sync.mode === 'boot' ? ['', 'Connecting…'] : [Sync.error ? 'err' : '', 'Saved on this device only'];
+  el.className = 'sync ' + cls;
+  el.innerHTML = `<i></i><span>${esc(text)}</span>`;
+}
+function renderDataInfo() {
+  const el = $('#datainfo');
+  if (!G.ready) { el.textContent = G.error ? 'Game data failed to load' : 'Loading game data…'; return; }
+  const d = G.D.meta.commitDate ? new Date(G.D.meta.commitDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+  el.innerHTML = `Game data from ${esc(d)} via <a href="https://github.com/RaidTheory/arcraiders-data" target="_blank" rel="noopener">RaidTheory</a> and <a href="https://arctracker.io" target="_blank" rel="noopener">arctracker.io</a>. Not affiliated with Embark Studios.`;
+}
+
+// ---------- boot ----------
+async function boot() {
+  const cache = cacheLoad();
+  Sync.bootCache = cache;
+  if (cache) { if (cache.progress) S.progress = normalize('progress', cache.progress); if (cache.stash) S.stash = normalize('stash', cache.stash); }
+  renderSync();
+  render();
+  try { await loadGame(); } catch (e) { G.error = 'Couldn\'t load the item database (' + (e.message || 'network error') + ')'; }
+  renderDataInfo();
+  render();
+  let db = null;
+  try { db = window.claude && typeof window.claude.use === 'function' ? await window.claude.use('db') : null; } catch (e) { db = null; }
+  if (!db) { Sync.mode = 'local'; Sync.dirty.clear(); cacheSave(); renderSync(); return; }
+  Sync.mode = 'cloud'; Sync.db = db;
+  subscribe('progress'); subscribe('stash');
+  if (Sync.dirty.size) flush();
+  renderSync();
+}
+boot();
+</script>
