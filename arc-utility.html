@@ -40,6 +40,8 @@
   --r-epic: #9550c4;
   --r-legendary: #d5a021;
   --ok: #2f7d3d;
+  --c-x: #1f6fb2;
+  --c-d: #c4501d;
   --shadow: 0 1px 0 rgba(32, 27, 21, 0.06), 0 10px 24px -16px rgba(32, 27, 21, 0.45);
   --f-display: "Archivo", "Arial Black", system-ui, sans-serif;
   --f-body: "Barlow", "Segoe UI", system-ui, sans-serif;
@@ -55,6 +57,7 @@
     --orange: #e2693a; --on-orange: #1a0d05; --teal: #3ba39e; --mustard: #e8b13c; --red: #e0614f;
     --keep: #46b0aa; --stock: #a9b964; --recycle: #e3a935; --sell: #ea7444; --gear: #a7a2c2; --learn: #7aa5e6;
     --ok: #6cc47c; --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 26px -16px rgba(0, 0, 0, 0.8);
+    --c-x: #4c97d8; --c-d: #e2693a;
     color-scheme: dark;
   }
 }
@@ -65,6 +68,7 @@
   --orange: #e2693a; --on-orange: #1a0d05; --teal: #3ba39e; --mustard: #e8b13c; --red: #e0614f;
   --keep: #46b0aa; --stock: #a9b964; --recycle: #e3a935; --sell: #ea7444; --gear: #a7a2c2; --learn: #7aa5e6;
   --ok: #6cc47c; --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 26px -16px rgba(0, 0, 0, 0.8);
+  --c-x: #4c97d8; --c-d: #e2693a;
   color-scheme: dark;
 }
 
@@ -118,10 +122,11 @@ a { color: inherit; text-decoration-color: var(--line-2); text-underline-offset:
 .stripes i:nth-child(2) { background: #d6981d; }
 .stripes i:nth-child(3) { background: #1b706d; }
 .stripes i:nth-child(4) { background: #7b8f9b; }
-.nav { display: grid; gap: 4px; padding: 16px 10px; }
+.nav { display: grid; gap: 2px; padding: 10px 10px 14px; align-content: start; }
+.nav-group { font: 600 10px/1 var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--rail-ink-2); opacity: 0.7; padding: 12px 12px 4px; }
 .nav button {
   display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 12px;
-  padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; text-align: left;
+  padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; text-align: left;
   color: var(--rail-ink-2); font: 700 15px/1 var(--f-display); font-stretch: 112%; letter-spacing: 0.01em;
 }
 .nav button svg { width: 20px; height: 20px; }
@@ -400,12 +405,69 @@ button.sline:hover { background: var(--panel-2); }
 .bprow .sub { display: block; font-size: 12.5px; color: var(--ink-3); }
 .bprow.on { background: color-mix(in oklab, var(--teal) 7%, transparent); }
 
+/* ---------- ARC ---------- */
+.arcgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; align-items: start; }
+.arc { overflow: hidden; display: grid; }
+.arc-img { aspect-ratio: 2 / 1; max-width: 100%; background: #0e0c0a; overflow: hidden; }
+.arc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.arc-body { padding: 14px 16px; display: grid; gap: 10px; }
+.arc-body p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.arc-head { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+.arc-head h2 { font-size: 20px; }
+.weak { display: grid; gap: 3px; padding: 8px 10px; border-radius: 8px; background: color-mix(in oklab, var(--orange) 10%, var(--panel)); font-size: 14px; }
+.arc-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* ---------- loadouts ---------- */
+.loadouts { display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.kit-name { font: 800 20px/1.1 var(--f-display); font-stretch: 112%; border: 0; border-bottom: 1.5px dashed var(--line-2); background: transparent; padding: 4px 2px; min-width: 0; flex: 1 1 200px; }
+.kit-name:focus { outline: none; border-bottom-color: var(--orange); }
+.kit-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); border-bottom: 1px solid var(--line); }
+.kit-stats .d-stat b { font-size: 17px; }
+.kit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px; padding: 16px; }
+.slot { border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 8px; align-content: start; background: var(--panel-2); min-width: 0; }
+.slot.wide { grid-column: 1 / -1; }
+.slot-head { display: flex; justify-content: space-between; align-items: center; min-height: 34px; }
+.slot-sub { font-size: 12.5px; color: var(--ink-3); }
+.slot select, .inline-input, #check-kit { height: 36px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--panel); padding: 0 10px; min-width: 0; max-width: 100%; box-sizing: border-box; }
+.slot select { width: 100%; }
+.modrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.modrow select { width: 100%; }
+.modrow.pick { grid-template-columns: 76px minmax(0, 1fr); }
+.modrow.pick > :last-child { justify-self: stretch; }
+.modrow.pick .counter { justify-self: end; }
+
+/* ---------- raid log ---------- */
+.raid-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+.raid-fields label { display: grid; gap: 4px; }
+.raid-fields .wide { grid-column: 1 / -1; }
+.raid-fields .inline-input { width: 100%; }
+.btn.big { padding: 12px 22px; font-size: 15px; border-width: 2px; }
+.btn.out-x { border-color: var(--c-x); color: var(--c-x); }
+.btn.out-d { border-color: var(--c-d); color: var(--c-d); }
+.btn.out-x:not(:disabled):hover, .btn.out-x.suggest { background: var(--c-x); color: var(--panel); }
+.btn.out-d:not(:disabled):hover, .btn.out-d.suggest { background: var(--c-d); color: var(--panel); }
+.raid-charts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 14px; align-items: start; }
+.raid-charts .stack { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.raid-charts td:first-child { white-space: nowrap; }
+.legend { display: flex; gap: 14px; font-size: 12.5px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ocstrip { display: flex; flex-wrap: wrap; gap: 2px; }
+.oc { width: 16px; height: 16px; border-radius: 4px; display: inline-grid; place-items: center; flex: none; }
+.oc.x { background: var(--c-x); }
+.oc.d { background: var(--c-d); }
+.oc.d::after { content: "✕"; font: 700 9px/1 var(--f-body); color: var(--panel); }
+.ocstrip .oc { width: 18px; height: 18px; }
+.outcome { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
+.ratebar { position: relative; flex: 1; height: 12px; background: var(--paper-2); border-radius: 0 4px 4px 0; overflow: hidden; }
+.ratebar i { position: absolute; inset: 0 auto 0 0; background: var(--c-x); border-radius: 0 4px 4px 0; }
+.toast button { margin-left: 12px; border: 1px solid currentColor; background: transparent; color: inherit; border-radius: 6px; padding: 4px 10px; font: 700 12.5px/1 var(--f-body); }
+
 @media (max-width: 1100px) {
   .maps { grid-template-columns: minmax(0, 1fr); }
   .lmap { height: 62vh; min-height: 360px; }
   .map-side { max-height: none; min-height: 0; }
 }
-@media (max-width: 1000px) { .plan { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1000px) { .plan, .loadouts, .raid-charts { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- narrow ---------- */
 @media (max-width: 960px) {
@@ -423,7 +485,7 @@ button.sline:hover { background: var(--panel-2); }
   .stripes, .rail-foot { display: none; }
   .nav { display: flex; overflow-x: auto; padding: 8px max(10px, env(safe-area-inset-right, 0px)) 8px 4px; gap: 2px; scrollbar-width: none; }
   .nav button { grid-template-columns: auto auto; gap: 6px; padding: 9px 10px; font-size: 13px; white-space: nowrap; }
-  .nav button svg { display: none; }
+  .nav button svg, .nav-group { display: none; }
   .d-hero { grid-template-columns: auto minmax(0, 1fr); }
   .d-hero .stamp { grid-column: 1 / -1; justify-self: start; }
 }
@@ -453,14 +515,17 @@ button.sline:hover { background: var(--panel-2); }
 'use strict';
 // ---------- constants ----------
 const TABS = [
-  { id: 'lookup', label: 'Lookup', icon: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/>' },
-  { id: 'needs', label: 'Needs', icon: '<path d="M5 6h14M5 12h14M5 18h9"/><path d="m16 17 2 2 3-4"/>' },
-  { id: 'plan', label: 'Plan', icon: '<circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>' },
-  { id: 'maps', label: 'Maps', icon: '<path d="M3.5 6.5 9 4l6 2.5L20.5 4v13.5L15 20l-6-2.5-5.5 2.5z"/><path d="M9 4v13.5M15 6.5V20"/>' },
-  { id: 'stash', label: 'Stash', icon: '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M9.5 4v16M15 4v16"/>' },
-  { id: 'quests', label: 'Quests', icon: '<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 15h6"/>' },
-  { id: 'workshop', label: 'Workshop', icon: '<path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/>' },
-  { id: 'blueprints', label: 'Blueprints', icon: '<path d="M4 4v16h16z"/><path d="M8 12v4h4z"/>' },
+  { id: 'lookup', g: 'Reference', label: 'Lookup', icon: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/>' },
+  { id: 'arc', g: 'Reference', label: 'ARC', icon: '<circle cx="12" cy="11" r="4.5"/><circle cx="12" cy="11" r="1.4"/><path d="M4 6.5 7.5 9M20 6.5 16.5 9M7.5 15.5 5 20M16.5 15.5 19 20"/>' },
+  { id: 'plan', g: 'Raid', label: 'Plan', icon: '<circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>' },
+  { id: 'maps', g: 'Raid', label: 'Maps', icon: '<path d="M3.5 6.5 9 4l6 2.5L20.5 4v13.5L15 20l-6-2.5-5.5 2.5z"/><path d="M9 4v13.5M15 6.5V20"/>' },
+  { id: 'loadouts', g: 'Raid', label: 'Loadouts', icon: '<path d="M7 9a5 5 0 0 1 10 0v11H7z"/><path d="M9.5 4h5M9.5 14h5"/>' },
+  { id: 'raids', g: 'Raid', label: 'Raid log', icon: '<path d="M6 21V3.5"/><path d="M6 4h11l-2.5 4L17 12H6"/>' },
+  { id: 'needs', g: 'Progress', label: 'Needs', icon: '<path d="M5 6h14M5 12h14M5 18h9"/><path d="m16 17 2 2 3-4"/>' },
+  { id: 'stash', g: 'Progress', label: 'Stash', icon: '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M9.5 4v16M15 4v16"/>' },
+  { id: 'quests', g: 'Progress', label: 'Quests', icon: '<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 15h6"/>' },
+  { id: 'workshop', g: 'Progress', label: 'Workshop', icon: '<path d="M14.5 5.5a4 4 0 0 0-5 5L4 16l4 4 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/>' },
+  { id: 'blueprints', g: 'Progress', label: 'Blueprints', icon: '<path d="M4 4v16h16z"/><path d="M8 12v4h4z"/>' },
 ];
 const VERDICTS = {
   keep: 'KEEP', stock: 'STOCK', recycle: 'RECYCLE', sell: 'SELL', gear: 'GEAR', learn: 'LEARN',
@@ -504,14 +569,14 @@ const svg = (paths, size = 20) => `<svg viewBox="0 0 24 24" width="${size}" heig
 
 // ---------- state ----------
 const G = { ready: false, error: null };
-const S = { progress: blankProgress(), stash: blankStash(), pins: blankPins(), booting: true };
+const S = { progress: blankProgress(), stash: blankStash(), pins: blankPins(), kits: blankKits(), raids: blankRaids(), booting: true };
 const UI = Object.assign({
   tab: 'lookup', q: '', sel: null, lkFilter: 'all',
   needsScope: 'now', needsSrc: 'all',
   stashFilter: 'all', stashSort: 'slots',
   qTrader: 'all', qStatus: 'open',
   mapGroup: 'dam_battlegrounds', mapLayer: null, pinFilter: 'all', lastPinType: 'loot',
-  bpFilter: 'all', bpQ: '',
+  bpFilter: 'all', bpQ: '', arcMap: 'all', kitSel: null,
   bannerHidden: false,
 }, loadUI());
 const SCAN = { status: 'idle', files: [], urls: [], rows: [], error: '', ctl: null, mode: 'replace' };
@@ -519,9 +584,11 @@ const SCAN = { status: 'idle', files: [], urls: [], rows: [], error: '', ctl: nu
 function blankProgress() { return { v: 1, quests: {}, benches: {}, projects: {}, blueprints: {}, plan: {}, cond: {}, setupDone: false }; }
 function blankStash() { return { v: 1, items: {}, scannedAt: null }; }
 function blankPins() { return { v: 1, pins: [] }; }
+function blankKits() { return { v: 1, kits: [] }; }
+function blankRaids() { return { v: 1, raids: [], archived: null }; }
 function loadUI() { try { return JSON.parse(localStorage.getItem(UI_KEY) || '{}') || {}; } catch (e) { return {}; } }
 function saveUI() {
-  const keep = { tab: UI.tab, sel: UI.sel, lkFilter: UI.lkFilter, needsScope: UI.needsScope, needsSrc: UI.needsSrc, stashFilter: UI.stashFilter, stashSort: UI.stashSort, qTrader: UI.qTrader, qStatus: UI.qStatus, mapGroup: UI.mapGroup, mapLayer: UI.mapLayer, pinFilter: UI.pinFilter, lastPinType: UI.lastPinType, bpFilter: UI.bpFilter, bannerHidden: UI.bannerHidden };
+  const keep = { tab: UI.tab, sel: UI.sel, lkFilter: UI.lkFilter, needsScope: UI.needsScope, needsSrc: UI.needsSrc, stashFilter: UI.stashFilter, stashSort: UI.stashSort, qTrader: UI.qTrader, qStatus: UI.qStatus, mapGroup: UI.mapGroup, mapLayer: UI.mapLayer, pinFilter: UI.pinFilter, lastPinType: UI.lastPinType, bpFilter: UI.bpFilter, arcMap: UI.arcMap, kitSel: UI.kitSel, bannerHidden: UI.bannerHidden };
   try { localStorage.setItem(UI_KEY, JSON.stringify(keep)); } catch (e) { /* storage blocked: fine */ }
 }
 
@@ -577,6 +644,7 @@ async function loadGame() {
   G.layerGroup = {};
   G.atlas.forEach(g => g.layers.forEach(l => { G.layerGroup[l.id] = g; }));
   G.conditions = D.conditions || [];
+  G.ammoByName = Object.fromEntries(G.ids.filter(id => D.items[id].t === 'Ammunition').map(id => [D.items[id].n, id]));
   G.ready = true;
 }
 const item = id => G.items[id];
@@ -775,7 +843,7 @@ function render() {
   const main = $('#main');
   if (G.error) { main.innerHTML = `<div class="panel empty"><h2>Game data didn't load</h2><p>${esc(G.error)}. Reload the page to try again.</p></div>`; return; }
   if (!G.ready) { main.innerHTML = `<div class="panel empty"><div class="spinner" style="margin:0 auto 10px"></div>Loading game data…</div>`; return; }
-  const fn = { lookup: renderLookup, needs: renderNeeds, plan: renderPlan, maps: renderMaps, stash: renderStash, quests: renderQuests, workshop: renderWorkshop, blueprints: renderBlueprints }[UI.tab] || renderLookup;
+  const fn = { lookup: renderLookup, needs: renderNeeds, plan: renderPlan, maps: renderMaps, arc: renderArc, loadouts: renderLoadouts, raids: renderRaids, stash: renderStash, quests: renderQuests, workshop: renderWorkshop, blueprints: renderBlueprints }[UI.tab] || renderLookup;
   fn(main);
 }
 function renderNav() {
@@ -789,7 +857,7 @@ function renderNav() {
     const learnedN = G.bp.filter(b => isLearned(b.id)).length;
     badges = { blueprints: { t: `${learnedN}/${G.bp.length}` }, needs: shortNow ? { t: shortNow } : null, quests: avail ? { t: avail } : null, workshop: ready ? { t: ready + ' ready', hot: true } : null, stash: used ? { t: cap ? `${used}/${cap}` : used, hot: cap && used > cap * 0.9 } : null };
   }
-  $('#nav').innerHTML = TABS.map(t => `<button type="button" data-tab="${t.id}" ${UI.tab === t.id ? 'aria-current="page"' : ''}>${svg(t.icon)}<span>${t.label}</span>${badges[t.id] ? `<span class="badge ${badges[t.id].hot ? 'hot' : ''}">${esc(badges[t.id].t)}</span>` : '<span></span>'}</button>`).join('');
+  $('#nav').innerHTML = TABS.map((t, i) => `${!i || TABS[i - 1].g !== t.g ? `<div class="nav-group">${esc(t.g)}</div>` : ''}<button type="button" data-tab="${t.id}" ${UI.tab === t.id ? 'aria-current="page"' : ''}>${svg(t.icon)}<span>${t.label}</span>${badges[t.id] ? `<span class="badge ${badges[t.id].hot ? 'hot' : ''}">${esc(badges[t.id].t)}</span>` : '<span></span>'}</button>`).join('');
 }
 function needsSetup() {
   return G.ready && !S.progress.setupDone && !Object.keys(S.progress.quests).length && !Object.keys(S.progress.benches).length;
@@ -1340,7 +1408,7 @@ function renderPlan(main) {
     chosen.farm.forEach(f => f.its.forEach(id => tasks.push({ k: 'i:' + id, lbl: `Get ${fmt(wantQty(id))}× ${nm(id)}`, sub: `drops from ${titleCase(f.b.n)}` })));
     chosen.pins.forEach(p => tasks.push({ k: 'p:' + p.id, lbl: `Check your spot: ${p.label || nm(p.item)}`, sub: nm(p.item) }));
     const doneN = tasks.filter(t => P.done[t.k]).length;
-    raid = `<section class="panel"><div class="panel-head"><div><div class="eyebrow">This raid</div><h2 style="font-size:20px">${esc(chosen.g.n)}</h2></div><div class="toolbar"><span class="hn">${doneN}/${tasks.length}</span><button type="button" class="btn small ghost" data-act="open-map" data-layer="${esc(chosen.g.layers[0].id)}">Open map</button><button type="button" class="btn small" data-act="plan-clear">Finish raid</button></div></div>
+    raid = `<section class="panel"><div class="panel-head"><div><div class="eyebrow">This raid</div><h2 style="font-size:20px">${esc(chosen.g.n)}</h2></div><div class="toolbar"><span class="hn">${doneN}/${tasks.length}</span><button type="button" class="btn small ghost" data-act="open-map" data-layer="${esc(chosen.g.layers[0].id)}">Open map</button><button type="button" class="btn small ghost" data-act="plan-clear">Clear plan</button><button type="button" class="btn small primary" data-act="plan-log" data-group="${esc(chosen.g.id)}">Log this raid</button></div></div>
       <div class="panel-body" style="padding-top:4px">${tasks.length ? tasks.map(t => `<label class="task ${P.done[t.k] ? 'done' : ''}"><input type="checkbox" data-plan-done="${esc(t.k)}" ${P.done[t.k] ? 'checked' : ''}><span><span class="lbl">${esc(t.lbl)}</span><span class="sub">${esc(t.sub)}</span></span></label>`).join('') : '<p class="muted">None of your targets are on this map any more.</p>'}</div></section>`;
   }
   main.innerHTML = `${setupBanner()}
@@ -1353,12 +1421,303 @@ function renderPlan(main) {
           <div><div class="eyebrow">Extra targets</div>${T.extra.map(xRow).join('')}<button type="button" class="btn small ghost" data-act="plan-add" style="margin-top:8px">+ Add an item to hunt</button></div>
         </div></section>
       <div style="display:grid;gap:14px;min-width:0">
+        ${checklistHtml()}
         ${raid}
         ${useful.map(card).join('') || '<div class="panel empty">None of your targets point to a specific map. Use the loot areas below, or pin spots on the Maps tab and link items to them.</div>'}
         ${Object.keys(zones).length ? `<section class="panel"><div class="panel-head"><h2>Loot anywhere</h2><span class="muted small">look for these loot areas on the labeled maps</span></div><div class="panel-body" style="display:grid;gap:6px">${Object.entries(zones).sort((a, b) => b[1].length - a[1].length).map(([z, ids]) => `<div class="sline"><span class="tag">${esc(z)}</span><span>${ids.map(id => `<button type="button" class="linkish" data-act="open-lookup" data-id="${esc(id)}">${esc(nm(id))}</button>`).join(', ')}</span></div>`).join('')}</div></section>` : ''}
         ${idle.length ? `<p class="muted small" style="margin:0">Nothing on your list points to ${esc(list(idle.map(r => r.g.n)))}.</p>` : ''}
       </div>
     </div>`;
+}
+
+// ----- ARC field guide -----
+function deathCounts() { const c = {}; S.raids.raids.forEach(r => { if (r.o === 'd' && r.by) c[r.by] = (c[r.by] || 0) + 1; }); return c; }
+function renderArc(main) {
+  const f = G.atlas.some(g => g.id === UI.arcMap) ? UI.arcMap : 'all';
+  const bots = G.D.bots.filter(b => f === 'all' || b.maps.some(m => G.layerGroup[m]?.id === f))
+    .sort((a, b) => (THREAT_ORDER[a.threat] ?? 5) - (THREAT_ORDER[b.threat] ?? 5) || a.n.localeCompare(b.n));
+  const deaths = deathCounts();
+  const card = b => {
+    const need = b.drops.filter(d => shortOf(d) > 0);
+    return `<article class="panel arc">
+      ${b.img ? `<div class="arc-img"><img src="data/bots/${esc(b.id)}.webp" alt="${esc(titleCase(b.n))}" loading="lazy" width="${b.img[0]}" height="${b.img[1]}"></div>` : ''}
+      <div class="arc-body">
+        <div class="arc-head"><div><div class="eyebrow">${esc(b.type || 'ARC')}</div><h2>${esc(titleCase(b.n))}</h2></div><span class="tag ${THREAT_ORDER[b.threat] <= 1 ? 'now' : ''}">${esc(b.threat || '?')}</span></div>
+        ${b.d ? `<p>${esc(b.d)}</p>` : ''}
+        ${b.weak ? `<div class="weak"><span class="eyebrow">Weak point</span><span>${esc(b.weak)}</span></div>` : ''}
+        ${b.maps.length ? `<div class="chips">${mapTags(b.maps)}</div>` : ''}
+        ${b.drops.length ? `<div><div class="eyebrow" style="margin-bottom:6px">Drops${need.length ? ` · you need ${need.length}` : ''}</div><div class="mini">${b.drops.map(d => `<button class="minilink" type="button" data-act="open-lookup" data-id="${esc(d)}">${icon(d, 26)}<span>${esc(nm(d))}</span>${shortOf(d) ? `<span class="tag now">need ${fmt(shortOf(d))}</span>` : ''}</button>`).join('')}</div></div>` : ''}
+        <div class="arc-foot"><span class="muted small">${[b.dx ? `${fmt(b.dx)} XP to destroy` : '', b.lx ? `${fmt(b.lx)} XP to loot` : ''].filter(Boolean).join(' · ')}</span>${deaths[b.id] ? `<span class="tag">Killed you ${plural(deaths[b.id], 'time')}</span>` : ''}</div>
+      </div></article>`;
+  };
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Field guide</div><h1>ARC</h1><p>Every ARC machine: where it roams, where to hit it and what it drops. Parts you still need are marked.</p></div></header>
+    <div class="chips" role="group" aria-label="Map">${[['all', 'All maps'], ...G.atlas.map(g => [g.id, g.n])].map(([k, l]) => `<button type="button" class="chip" data-act="arc-map" data-group="${esc(k)}" aria-pressed="${f === k}">${esc(l)}</button>`).join('')}</div>
+    <div class="arcgrid">${bots.map(card).join('') || '<div class="panel empty">The community data lists no ARC on this map yet.</div>'}</div>`;
+}
+
+// ----- Loadouts -----
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+function blankKit(name) { return { id: 'k' + uid(), name: name || 'New loadout', aug: null, shield: null, w: [{ id: null, mods: {} }, { id: null, mods: {} }], ammo: {}, qu: [] }; }
+function kitParts(k) {
+  const m = new Map(), add = (id, n) => { if (id && item(id) && n > 0) m.set(id, (m.get(id) || 0) + n); };
+  add(k.aug, 1); add(k.shield, 1);
+  for (const w of k.w || []) { if (!w.id) continue; add(w.id, 1); Object.values(w.mods || {}).forEach(id => add(id, 1)); }
+  Object.entries(k.ammo || {}).forEach(([id, n]) => add(id, n));
+  (k.qu || []).forEach(([id, n]) => add(id, n));
+  return [...m.entries()];
+}
+const augLimit = id => { const e = item(id)?.e || {}; const v = e['Max Loadout Weight'] ?? e['Weight Limit']; return typeof v === 'number' ? v : null; };
+function shieldOk(augId, shieldId) {
+  const comp = item(augId)?.e?.['Shield Compatibility'];
+  if (!augId || !shieldId || typeof comp !== 'string') return true;
+  return comp.split(',').map(s => s.trim()).includes((item(shieldId)?.n || '').split(' ')[0]);
+}
+const ammoFor = wid => G.ammoByName[item(wid)?.e?.['Ammo Type']] || null;
+function stashValue() { return Object.entries(S.stash.items).reduce((s, [id, n]) => s + (item(id)?.v || 0) * n, 0); }
+function kitStats(k) {
+  const parts = kitParts(k);
+  const value = parts.reduce((s, [id, n]) => s + (item(id).v || 0) * n, 0);
+  const weight = parts.reduce((s, [id, n]) => s + (item(id).w || 0) * n, 0);
+  const missing = parts.filter(([id, n]) => have(id) < n).map(([id, n]) => [id, n - have(id)]);
+  const sv = stashValue();
+  return { parts, value, weight, limit: augLimit(k.aug), shieldOk: shieldOk(k.aug, k.shield), missing, share: sv ? value / sv : null };
+}
+function kitById(id) { return S.kits.kits.find(k => k.id === id) || null; }
+function kitStatusTag(st) {
+  if (!st.parts.length) return '<span class="tag">Empty</span>';
+  return st.missing.length ? `<span class="tag now">Missing ${st.missing.length}</span>` : '<span class="tag ok">Ready</span>';
+}
+function renderLoadouts(main) {
+  const kits = S.kits.kits;
+  const sel = kitById(UI.kitSel) || kits[0] || null;
+  UI.kitSel = sel?.id || null;
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">Gear up</div><h1>Loadouts</h1><p>Build kits and see what each one puts at risk, whether it fits your augment, and what's missing from your stash.</p></div>
+      <button type="button" class="btn primary" data-act="kit-new">+ New loadout</button></header>
+    ${kits.length ? `<div class="loadouts">
+      <aside class="panel" style="padding:6px">${kits.map(k => { const st = kitStats(k); return `<button type="button" class="irow" data-act="kit-sel" data-id="${esc(k.id)}" aria-selected="${k.id === sel.id}">${k.w[0]?.id ? icon(k.w[0].id, 40) : '<span class="tile" style="--s:40px"><span class="ph">K</span></span>'}<span><span class="nm">${esc(k.name)}</span><span class="sub" style="display:block">${fmt(st.value)} coins · ${st.weight.toFixed(1)} kg</span></span>${kitStatusTag(st)}</button>`; }).join('')}</aside>
+      <section id="kit-editor">${kitEditor(sel)}</section>
+    </div>` : `<div class="panel empty" style="padding:48px 24px"><h2 style="font-size:22px;margin-bottom:8px">No loadouts yet</h2><p style="max-width:50ch;margin:0 auto 16px">A loadout is the kit you take topside: augment, shield, two weapons with mods, ammo and quick-use items. The app works out its value, weight and what you're missing.</p><button type="button" class="btn primary" data-act="kit-new">Create your first loadout</button></div>`}`;
+}
+function selectHtml(attrs, options, value, emptyLabel) {
+  return `<select ${attrs}>${emptyLabel ? `<option value="">${esc(emptyLabel)}</option>` : ''}${options}</select>`.replace(`value="${value}"`, `value="${value}" selected`);
+}
+function kitEditor(k) {
+  const st = kitStats(k);
+  const byType = (types, label) => { const ids = G.ids.filter(id => types.includes(item(id).t)).sort((a, b) => nm(a).localeCompare(nm(b))); return ids.length ? `<optgroup label="${esc(label)}">${ids.map(id => `<option value="${esc(id)}">${esc(nm(id))}</option>`).join('')}</optgroup>` : ''; };
+  const augOpts = ['Combat', 'Looting', 'Tactical'].map(fam => { const ids = G.ids.filter(id => item(id).t === 'Augment' && nm(id).startsWith(fam)).sort((a, b) => nm(a).localeCompare(nm(b))); return `<optgroup label="${fam}">${ids.map(id => `<option value="${esc(id)}">${esc(nm(id))}${augLimit(id) ? ` (${augLimit(id)} kg)` : ''}</option>`).join('')}</optgroup>`; }).join('');
+  const shieldOpts = G.ids.filter(id => item(id).t === 'Shield').sort((a, b) => item(a).w - item(b).w).map(id => `<option value="${esc(id)}" ${shieldOk(k.aug, id) ? '' : 'disabled'}>${esc(nm(id))}${shieldOk(k.aug, id) ? '' : ' (not with this augment)'}</option>`).join('');
+  const gunTypes = [...GUN_TYPES];
+  const weaponOpts = gunTypes.map(t => byType([t], t)).join('');
+  const weaponBlock = (w, i) => {
+    const it = item(w.id), slots = it?.ms || {}, ammo = w.id ? ammoFor(w.id) : null;
+    return `<div class="slot"><div class="slot-head"><span class="eyebrow">Weapon ${i + 1}</span>${w.id ? icon(w.id, 34) : ''}</div>
+      ${selectHtml(`data-kit-weapon="${i}" aria-label="Weapon ${i + 1}"`, weaponOpts, w.id || '', 'No weapon')}
+      ${w.id ? `<div class="slot-sub">${esc([it.e?.['Firing Mode'], it.e?.['Ammo Type'], it.e?.['Magazine Size'] ? it.e['Magazine Size'] + ' rounds' : ''].filter(Boolean).join(' · '))}</div>` : ''}
+      ${Object.entries(slots).map(([slot, mods]) => `<label class="modrow pick"><span class="small muted">${esc(slot[0].toUpperCase() + slot.slice(1))}</span>${selectHtml(`data-kit-mod="${i}|${esc(slot)}" aria-label="${esc(slot)} mod"`, mods.filter(id => item(id)).map(id => `<option value="${esc(id)}">${esc(nm(id))}</option>`).join(''), w.mods?.[slot] || '', 'None')}</label>`).join('')}
+      ${ammo ? `<div class="modrow pick"><span class="small muted">Ammo</span><span style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${icon(ammo, 26)}${counter(ammo, k.ammo?.[ammo] || 0, 'kitammo')}</span></div>` : ''}
+    </div>`;
+  };
+  const pct = st.limit ? Math.min(100, (st.weight / st.limit) * 100) : 0;
+  const over = st.limit && st.weight > st.limit;
+  return `<article class="panel">
+    <div class="panel-head" style="flex-wrap:wrap"><input id="kit-name" class="kit-name" type="text" maxlength="40" value="${esc(k.name)}" aria-label="Loadout name">
+      <div class="toolbar"><button type="button" class="btn small ghost" data-act="kit-use" data-id="${esc(k.id)}">${planCheck().kit === k.id ? 'Next raid’s kit' : 'Use for next raid'}</button><button type="button" class="btn small ghost" data-act="kit-dup" data-id="${esc(k.id)}">Duplicate</button><button type="button" class="btn small ghost danger" data-act="kit-del" data-id="${esc(k.id)}">Delete</button></div></div>
+    <div class="kit-stats">
+      <div class="d-stat"><span class="eyebrow">At risk</span><b class="coin">${fmt(st.value)}</b><span class="small muted">${st.share != null ? `${(st.share * 100).toFixed(st.share < 0.1 ? 1 : 0)}% of your stash value` : 'add your stash to compare'}</span></div>
+      <div class="d-stat"><span class="eyebrow">Weight</span><b class="${over ? 'hn short' : ''}">${st.weight.toFixed(1)}${st.limit ? ` <span class="muted" style="font-size:14px">/ ${st.limit} kg</span>` : ' kg'}</b>${st.limit ? `<div class="bar ${over ? '' : 'full'}" style="margin-top:4px"><i style="width:${pct}%;${over ? 'background:var(--orange)' : ''}"></i></div>` : '<span class="small muted">pick an augment for its limit</span>'}</div>
+      <div class="d-stat"><span class="eyebrow">Shield</span><b style="font-size:15px">${!k.shield ? '<span class="muted">None</span>' : st.shieldOk ? '<span class="ready">Fits the augment</span>' : '<span class="hn short">Augment can\'t take it</span>'}</b>${k.shield && item(k.shield)?.sh ? `<span class="small muted">${item(k.shield).sh.charge} charge · ${item(k.shield).sh.mitigation}% reduction</span>` : ''}</div>
+      <div class="d-stat"><span class="eyebrow">In your stash</span><b style="font-size:15px">${!st.parts.length ? '<span class="muted">Empty kit</span>' : st.missing.length ? `<span class="hn short">${plural(st.missing.length, 'item')} missing</span>` : '<span class="ready">All there</span>'}</b></div>
+    </div>
+    ${st.missing.length ? `<div class="d-sec"><h3>Missing from your stash</h3><div class="mini">${st.missing.map(([id, n]) => `<button class="minilink" type="button" data-act="open-lookup" data-id="${esc(id)}">${icon(id, 26)}<span>${fmt(n)}× ${esc(nm(id))}${item(id).rp ? ` <span class="muted">· craft at ${esc(craftNote(id) || 'Workbench')}</span>` : ''}</span></button>`).join('')}</div></div>` : ''}
+    <div class="kit-grid">
+      <div class="slot"><div class="slot-head"><span class="eyebrow">Augment</span>${k.aug ? icon(k.aug, 34) : ''}</div>${selectHtml('data-kit-field="aug" aria-label="Augment"', augOpts, k.aug || '', 'No augment')}${k.aug && item(k.aug).e?.['Shield Compatibility'] ? `<div class="slot-sub">Shields: ${esc(item(k.aug).e['Shield Compatibility'])}</div>` : ''}</div>
+      <div class="slot"><div class="slot-head"><span class="eyebrow">Shield</span>${k.shield ? icon(k.shield, 34) : ''}</div>${selectHtml('data-kit-field="shield" aria-label="Shield"', shieldOpts, k.shield || '', 'No shield')}</div>
+      ${k.w.map(weaponBlock).join('')}
+      <div class="slot wide"><div class="slot-head"><span class="eyebrow">Quick use</span></div>
+        ${(k.qu || []).map(([id, n], i) => `<div class="modrow"><span style="display:flex;gap:8px;align-items:center;min-width:0">${icon(id, 26)}<span>${esc(nm(id))}</span></span><span style="display:flex;gap:6px;align-items:center">${counter(String(i), n, 'kitqu')}<button type="button" class="btn small ghost" data-act="kitqu-del" data-i="${i}" aria-label="Remove ${esc(nm(id))}">✕</button></span></div>`).join('') || '<p class="muted small" style="margin:0">Heals, grenades, utilities.</p>'}
+        <button type="button" class="btn small ghost" data-act="kitqu-add" style="justify-self:start">+ Add quick-use item</button></div>
+    </div>
+  </article>`;
+}
+function editKit(fn) {
+  const k = kitById(UI.kitSel); if (!k) return;
+  fn(k); markDirty('kits'); render();
+}
+
+// ----- pre-raid checklist (Plan tab) -----
+const CHECK_DEFAULTS = [
+  ['shield', 'Shield charged and repaired'],
+  ['weapons', 'Weapons repaired, mods on'],
+  ['heals', 'Heals and ammo packed'],
+  ['space', 'Room in the backpack for loot'],
+  ['keys', 'Keys for the rooms you plan to open'],
+  ['safe', 'Best valuable in the safe pocket'],
+];
+function planCheck() {
+  const c = S.progress.check && typeof S.progress.check === 'object' ? S.progress.check : (S.progress.check = {});
+  if (!c.done || typeof c.done !== 'object') c.done = {};
+  if (!Array.isArray(c.custom)) c.custom = [];
+  if (!c.hidden || typeof c.hidden !== 'object') c.hidden = {};
+  return c;
+}
+function checklistHtml() {
+  const c = planCheck(), kit = kitById(c.kit), st = kit ? kitStats(kit) : null;
+  const items = CHECK_DEFAULTS.filter(([k]) => !c.hidden[k]).map(([k, l]) => ({ k, l, custom: false })).concat(c.custom.map(x => ({ k: x.id, l: x.label, custom: true })));
+  const done = items.filter(x => c.done[x.k]).length;
+  return `<section class="panel"><div class="panel-head"><div><div class="eyebrow">Before you drop</div><h2 style="font-size:18px">Pre-raid check</h2></div><div class="toolbar"><span class="hn ${done === items.length && items.length ? 'ok' : ''}">${done}/${items.length}</span><button type="button" class="btn small ghost" data-act="check-reset">Reset</button></div></div>
+    <div class="panel-body" style="display:grid;gap:4px;padding-top:6px">
+      <div class="modrow" style="padding:6px 0;border-bottom:1px solid var(--line)"><span><span class="small muted" style="display:block">Kit</span>${kit ? `<span class="${st.missing.length ? 'hn short' : 'ready'}" style="font-size:13px">${st.missing.length ? `${plural(st.missing.length, 'item')} missing from your stash` : `Ready · ${fmt(st.value)} coins at risk`}</span>` : '<span class="small muted">Pick one to check it against your stash</span>'}</span>
+        ${S.kits.kits.length ? `<select id="check-kit" aria-label="Kit for this raid"><option value="">No kit</option>${S.kits.kits.map(k => `<option value="${esc(k.id)}" ${k.id === c.kit ? 'selected' : ''}>${esc(k.name)}</option>`).join('')}</select>` : '<button type="button" class="btn small ghost" data-tab="loadouts">Build a loadout</button>'}</div>
+      ${items.map(x => `<label class="task ${c.done[x.k] ? 'done' : ''}"><input type="checkbox" data-check="${esc(x.k)}" ${c.done[x.k] ? 'checked' : ''}><span style="display:flex;justify-content:space-between;gap:8px"><span class="lbl">${esc(x.l)}</span><button type="button" class="linkish small muted" data-act="check-del" data-id="${esc(x.k)}" aria-label="Remove “${esc(x.l)}”">remove</button></span></label>`).join('')}
+      <div class="toolbar" style="margin-top:8px"><input id="check-new" type="text" maxlength="60" placeholder="Add your own check…" aria-label="New check" class="inline-input"><button type="button" class="btn small" data-act="check-add">Add</button>${Object.keys(c.hidden).length ? '<button type="button" class="btn small ghost" data-act="check-restore">Restore defaults</button>' : ''}</div>
+    </div></section>`;
+}
+
+// ----- Raid log -----
+const RAID_CAP = 2000;
+function raidDraft() {
+  if (!UI.raidDraft) {
+    const last = S.raids.raids[S.raids.raids.length - 1];
+    UI.raidDraft = { m: planState().map || last?.m || null, v: '', k: planCheck().kit || '', by: '', n: '', items: [], addItems: true, takeKit: false, suggest: null };
+  }
+  return UI.raidDraft;
+}
+const RAIDSHOT = { status: 'idle', error: '', ctl: null };
+function killerName(by) { if (!by) return ''; if (by === 'raider') return 'Another raider'; if (by === 'env') return 'Fall, gas or storm'; const b = G.D.bots.find(x => x.id === by); return b ? titleCase(b.n) : by; }
+function raidStats() {
+  const R = S.raids.raids, A = S.raids.archived || null;
+  const n = R.length + (A?.n || 0), x = R.filter(r => r.o === 'x').length + (A?.x || 0);
+  const lootSum = R.filter(r => r.o === 'x' && r.v).reduce((s, r) => s + r.v, 0), lootN = R.filter(r => r.o === 'x' && r.v).length;
+  const kitLost = R.filter(r => r.o === 'd' && r.kv).reduce((s, r) => s + r.kv, 0);
+  const byMap = {};
+  R.forEach(r => { const m = byMap[r.m] || (byMap[r.m] = { n: 0, x: 0, loot: 0, lootN: 0 }); m.n++; if (r.o === 'x') { m.x++; if (r.v) { m.loot += r.v; m.lootN++; } } });
+  const killers = {}; R.forEach(r => { if (r.o === 'd') { const k = r.by || '?'; killers[k] = (killers[k] || 0) + 1; } });
+  return { n, x, rate: n ? x / n : 0, avgLoot: lootN ? lootSum / lootN : 0, lootSum, kitLost, byMap, killers };
+}
+function groupName(id) { return G.atlas.find(g => g.id === id)?.n || nm(id); }
+function renderRaids(main) {
+  const d = raidDraft(), st = raidStats(), R = S.raids.raids;
+  const kitOpts = S.kits.kits.map(k => `<option value="${esc(k.id)}" ${k.id === d.k ? 'selected' : ''}>${esc(k.name)}</option>`).join('');
+  const byOpts = `<option value="">Not set</option><option value="raider" ${d.by === 'raider' ? 'selected' : ''}>Another raider</option><option value="env" ${d.by === 'env' ? 'selected' : ''}>Fall, gas or storm</option><optgroup label="ARC">${G.D.bots.slice().sort((a, b) => a.n.localeCompare(b.n)).map(b => `<option value="${esc(b.id)}" ${d.by === b.id ? 'selected' : ''}>${esc(titleCase(b.n))}</option>`).join('')}</optgroup>`;
+  const recent = R.slice(-40);
+  const maps = Object.entries(st.byMap).sort((a, b) => b[1].n - a[1].n);
+  const killers = Object.entries(st.killers).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const shot = RAIDSHOT.status === 'working'
+    ? `<span style="display:flex;gap:8px;align-items:center"><span class="spinner"></span><span class="small">Reading your screenshot…</span><button type="button" class="btn small ghost" data-act="raidshot-stop">Stop</button></span>`
+    : `<label class="btn small ghost" style="cursor:pointer">Fill from a screenshot<input type="file" id="raid-shot" accept="image/png,image/jpeg,image/webp" multiple hidden></label>`;
+  main.innerHTML = `${setupBanner()}
+    <header class="page-head"><div><div class="eyebrow">After action</div><h1>Raid log</h1><p>Two clicks per raid: pick the map, then how it ended. Add details if you like, or read them from your end-of-raid screenshot.</p></div></header>
+    <section class="panel log">
+      <div class="panel-body" style="display:grid;gap:14px">
+        <div><div class="eyebrow" style="margin-bottom:6px">1 · Map</div><div class="chips" role="group" aria-label="Map">${G.atlas.map(g => `<button type="button" class="chip" data-act="raid-map" data-group="${esc(g.id)}" aria-pressed="${d.m === g.id}">${esc(g.n)}</button>`).join('')}</div></div>
+        <details class="more" ${d.v || d.n || d.by || d.items.length || d.k ? 'open' : ''}><summary>Details (optional)</summary>
+          <div class="raid-fields">
+            <label><span class="small muted">Loot value (coins)</span><input id="raid-v" type="number" min="0" inputmode="numeric" value="${esc(d.v)}" class="inline-input"></label>
+            <label><span class="small muted">Kit</span><select id="raid-k" class="inline-input"><option value="">No kit</option>${kitOpts}</select></label>
+            <label><span class="small muted">If you died, what got you</span><select id="raid-by" class="inline-input">${byOpts}</select></label>
+            <label class="wide"><span class="small muted">Note</span><input id="raid-n" type="text" maxlength="140" value="${esc(d.n)}" placeholder="Anything worth remembering" class="inline-input"></label>
+          </div>
+          ${d.items.length ? `<div style="margin-top:10px"><div class="mini">${d.items.map(([id, n]) => `<span>${icon(id, 26)}${fmt(n)}× ${esc(nm(id))}</span>`).join('')}</div><label class="check small" style="margin-top:8px"><input type="checkbox" id="raid-additems" ${d.addItems ? 'checked' : ''}> If I extracted, add these ${plural(d.items.length, 'item')} to my stash list</label></div>` : ''}
+          ${d.k ? `<label class="check small" style="margin-top:10px"><input type="checkbox" id="raid-takekit" ${d.takeKit ? 'checked' : ''}> If I died, take the kit's items off my stash list</label>` : ''}
+        </details>
+        <div class="toolbar" style="justify-content:space-between">
+          <div class="toolbar"><span class="eyebrow">2 · How it ended</span><button type="button" class="btn big out-x ${d.suggest === 'x' ? 'suggest' : ''}" data-act="raid-log" data-o="x" ${d.m ? '' : 'disabled'}>Extracted</button><button type="button" class="btn big out-d ${d.suggest === 'd' ? 'suggest' : ''}" data-act="raid-log" data-o="d" ${d.m ? '' : 'disabled'}>Died</button>${d.m ? '' : '<span class="small muted">Pick a map first</span>'}</div>
+          ${shot}
+        </div>
+        ${RAIDSHOT.error ? `<p style="color:var(--red);margin:0;font-weight:600">${esc(RAIDSHOT.error)}</p>` : ''}
+      </div>
+    </section>
+    <div class="strip">
+      <div class="panel stat"><span class="eyebrow">Raids logged</span><b>${fmt(st.n)}</b><span>${fmt(st.x)} extracted · ${fmt(st.n - st.x)} died</span></div>
+      <div class="panel stat"><span class="eyebrow">Extract rate</span><b>${st.n ? Math.round(st.rate * 100) + '%' : '—'}</b><span>${recent.length >= 10 ? `last 10: ${Math.round(recent.slice(-10).filter(r => r.o === 'x').length * 10)}%` : 'over all raids'}</span></div>
+      <div class="panel stat"><span class="eyebrow">Avg loot per extract</span><b class="${st.avgLoot ? 'coin' : ''}">${st.avgLoot ? fmt(st.avgLoot) : '—'}</b><span>from raids where you logged a value</span></div>
+      <div class="panel stat"><span class="eyebrow">Kits lost</span><b class="${st.kitLost ? 'coin' : ''}">${st.kitLost ? fmt(st.kitLost) : '—'}</b><span>value of logged kits when you died</span></div>
+    </div>
+    ${R.length ? `<div class="raid-charts"><div class="stack">
+      <section class="panel"><div class="panel-head"><h2>Last ${recent.length} raids</h2><span class="legend"><span><i class="oc x"></i>Extracted</span><span><i class="oc d"></i>Died</span></span></div>
+        <div class="panel-body"><div class="ocstrip" role="list">${recent.map(r => `<i class="oc ${r.o}" role="listitem" title="${esc(`${new Date(r.t).toLocaleString()} · ${groupName(r.m)} · ${r.o === 'x' ? 'Extracted' : 'Died'}${r.v ? ' · ' + fmt(r.v) + ' coins' : ''}${r.by ? ' · ' + killerName(r.by) : ''}`)}" aria-label="${esc(`${groupName(r.m)}, ${r.o === 'x' ? 'extracted' : 'died'}`)}"></i>`).join('')}</div><p class="muted small" style="margin:8px 0 0">Oldest on the left. Hover a square for details.</p></div></section>
+      ${killers.length ? `<section class="panel"><div class="panel-head"><h2>What got you</h2></div><div class="panel-body" style="display:grid;gap:6px">${killers.map(([k, n]) => `<div class="src"><span>${esc(k === '?' ? 'Not logged' : killerName(k))}</span><span class="hn">${n}</span></div>`).join('')}</div></section>` : ''}
+      </div>
+      <section class="panel"><div class="panel-head"><h2>Extract rate by map</h2></div><div class="tscroll"><table class="table"><thead><tr><th>Map</th><th>Extract rate</th><th>Raids</th><th>Avg loot</th></tr></thead><tbody>${maps.map(([m, v]) => `<tr title="${esc(`${groupName(m)}: ${v.x} of ${v.n} extracted`)}"><td>${esc(groupName(m))}</td><td style="min-width:160px"><div style="display:flex;gap:8px;align-items:center"><div class="ratebar"><i style="width:${(v.x / v.n) * 100}%"></i></div><span class="hn">${Math.round((v.x / v.n) * 100)}%</span></div></td><td class="num">${v.x}/${v.n}</td><td class="${v.lootN ? 'coin' : 'muted'}">${v.lootN ? fmt(v.loot / v.lootN) : '—'}</td></tr>`).join('')}</tbody></table></div></section>
+    </div>
+    <section class="panel"><div class="panel-head"><h2>History</h2><span class="muted small">${plural(R.length, 'raid')}${S.raids.archived?.n ? ` (+${fmt(S.raids.archived.n)} older, counted in totals)` : ''}</span></div><div class="tscroll"><table class="table"><thead><tr><th>When</th><th>Map</th><th>Outcome</th><th>Loot</th><th>Kit</th><th>Killed by</th><th>Note</th><th></th></tr></thead><tbody>
+      ${R.slice().reverse().slice(0, 100).map(r => `<tr><td class="small" style="white-space:nowrap">${esc(new Date(r.t).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }))}</td><td>${esc(groupName(r.m))}${r.c ? ` <span class="tag">${esc(G.conditions.find(c => c.id === r.c)?.n || r.c)}</span>` : ''}</td><td><span class="outcome ${r.o}"><i class="oc ${r.o}"></i>${r.o === 'x' ? 'Extracted' : 'Died'}</span></td><td class="${r.v ? 'coin' : 'muted'}">${r.v ? fmt(r.v) : '—'}</td><td class="small">${esc(r.kn || '')}${r.kv ? ` <span class="muted">(${fmt(r.kv)})</span>` : ''}</td><td class="small">${esc(killerName(r.by))}</td><td class="small" style="max-width:260px">${esc(r.n || '')}</td><td><button type="button" class="btn small ghost" data-act="raid-del" data-id="${esc(r.id)}" aria-label="Delete this raid">✕</button></td></tr>`).join('')}
+    </tbody></table></div></section>` : `<div class="panel empty">No raids logged yet. Your extract rate, best maps and what keeps killing you show up here after your first few raids.</div>`}`;
+}
+function logRaid(o) {
+  const d = raidDraft(); if (!d.m) { toast('Pick a map first'); return; }
+  const kit = kitById(d.k);
+  const before = clone(S.stash.items);
+  const r = { id: 'r' + uid(), t: Date.now(), m: d.m, o, v: Math.max(0, Math.floor(Number(d.v) || 0)) || null, k: kit?.id || null, kn: kit?.name || null, kv: kit ? kitStats(kit).value : null, by: o === 'd' ? (d.by || null) : null, n: (d.n || '').trim().slice(0, 140) || null, c: condNow(d.m)?.c || null };
+  S.raids.raids.push(r);
+  if (S.raids.raids.length > RAID_CAP) {
+    const old = S.raids.raids.splice(0, S.raids.raids.length - RAID_CAP), A = S.raids.archived || { n: 0, x: 0 };
+    A.n += old.length; A.x += old.filter(x => x.o === 'x').length; S.raids.archived = A;
+  }
+  let stashTouched = false;
+  if (o === 'x' && d.addItems && d.items.length) { d.items.forEach(([id, n]) => { S.stash.items[id] = Math.min(99999, (S.stash.items[id] || 0) + n); }); stashTouched = true; }
+  if (o === 'd' && kit && d.takeKit) { kitParts(kit).forEach(([id, n]) => setStash(id, have(id) - n)); stashTouched = true; }
+  planCheck().done = {};
+  markDirty('raids'); markDirty('progress'); if (stashTouched) markDirty('stash');
+  UI.raidDraft = { m: d.m, v: '', k: d.k, by: '', n: '', items: [], addItems: true, takeKit: d.takeKit, suggest: null };
+  render();
+  toast(o === 'x' ? 'Extraction logged' : 'Death logged', stashTouched ? 'Your stash list was updated.' : `${groupName(d.m)} · ${new Date(r.t).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}`, { label: 'Undo', fn: () => {
+    S.raids.raids = S.raids.raids.filter(x => x.id !== r.id); markDirty('raids');
+    if (stashTouched) { S.stash.items = before; markDirty('stash'); }
+    render(); toast('Raid removed');
+  } });
+}
+async function readRaidShot(files) {
+  const imgs = [...files].filter(f => /^image\/(png|jpeg|webp|gif)$/.test(f.type));
+  RAIDSHOT.error = '';
+  if (!imgs.length) { RAIDSHOT.error = 'Use PNG, JPEG or WebP screenshots.'; render(); return; }
+  const sample = await getSample();
+  const lim = sample ? await sample.limits().catch(() => null) : null;
+  if (!lim?.images) { RAIDSHOT.error = 'Screenshot reading only works when this page is opened from its claude.ai link while you\'re signed in.'; render(); return; }
+  const use = imgs.slice(0, lim.images.maxCount || 1);
+  RAIDSHOT.status = 'working'; RAIDSHOT.ctl = new AbortController(); render();
+  const maps = G.atlas.map(g => `${g.id}|${g.n}`).join('\n');
+  const bots = G.D.bots.map(b => `${b.id}|${titleCase(b.n)}`).join('\n');
+  const catalog = G.ids.map(id => `${id}|${G.items[id].n}`).join('\n');
+  const prompt = `These are screenshots from the end of a raid in the video game ARC Raiders: the raid summary and/or the loot the raider brought out. Read what you can see and leave the rest null.
+
+- "map": the map of the raid, as one id from the map list, or null
+- "outcome": "extracted" if the raider got out alive, "died" if they were downed or killed, or null if you can't tell
+- "lootValue": the total value of the loot, as a number, or null
+- "killedBy": if they died, one id from the ARC list, "raider" for another player, or null
+- "items": each item stack the raider brought out, with its count, using ids from the item catalog. Use [] if the screenshots don't show the loot.
+
+Reply with only JSON in this shape:
+{"map":null,"outcome":null,"lootValue":null,"killedBy":null,"items":[{"id":"metal_parts","count":3}]}
+
+Maps (id|name):
+${maps}
+
+ARC (id|name):
+${bots}
+
+Item catalog (id|name):
+${catalog}`;
+  try {
+    const res = await sample.json(prompt, { images: use, signal: RAIDSHOT.ctl.signal, cache: false });
+    const d = raidDraft();
+    if (G.atlas.some(g => g.id === res?.map)) d.m = res.map;
+    if (Number(res?.lootValue) > 0) d.v = String(Math.floor(Number(res.lootValue)));
+    if (res?.killedBy === 'raider' || G.D.bots.some(b => b.id === res?.killedBy)) d.by = res.killedBy;
+    d.suggest = res?.outcome === 'extracted' ? 'x' : res?.outcome === 'died' ? 'd' : null;
+    const agg = new Map();
+    (Array.isArray(res?.items) ? res.items : []).forEach(t => { const id = String(t?.id || ''); if (G.items[id]) agg.set(id, (agg.get(id) || 0) + Math.max(1, Math.min(9999, Math.floor(Number(t?.count) || 1)))); });
+    d.items = [...agg.entries()];
+    RAIDSHOT.status = 'idle';
+    toast('Filled from your screenshot', d.suggest ? `Looks like you ${d.suggest === 'x' ? 'extracted' : 'died'}. Check the details, then press the outcome.` : 'Check the details, then press Extracted or Died.');
+  } catch (e) {
+    RAIDSHOT.status = 'idle';
+    RAIDSHOT.error = { cancelled: '', not_granted: 'You didn\'t allow this page to use Claude, so it can\'t read screenshots.', rate_limited: 'You\'ve hit a Claude usage limit. Try again later.', image_rejected: 'Claude couldn\'t open that image. Try a PNG or JPEG.', invalid_json: 'Claude\'s answer came back garbled. Try again.', refused: 'Claude declined to read that image.' }[e?.code] ?? 'Reading the screenshot failed. Try again in a moment.';
+  }
+  RAIDSHOT.ctl = null;
+  render();
 }
 
 // ---------- modals ----------
@@ -1420,24 +1779,27 @@ function saveSetup() {
   toast('Progress saved', 'Your Needs list and verdicts now follow it.');
 }
 
-function pickItem(title, cb) {
-  UI.pickCb = cb;
+function pickItem(title, cb, filter) {
+  UI.pickCb = cb; UI.pickFilter = filter || null;
   openModal(`<div class="panel-head"><h2>${esc(title)}</h2><button class="btn small ghost" type="button" data-act="modal-close">Cancel</button></div>
     <div class="panel-body" style="display:grid;gap:10px"><input id="pick-q" type="search" autocomplete="off" placeholder="Type an item name…" autofocus style="height:42px;border-radius:8px;border:1.5px solid var(--line-2);background:var(--panel);padding:0 12px;font-weight:600"><div id="pick-list" style="max-height:50vh;overflow:auto"></div></div>`);
   renderPickList('');
 }
 function renderPickList(q) {
-  const ids = searchItems(q).slice(0, 40);
+  const f = UI.pickFilter;
+  const pool = q.trim() ? searchItems(q) : f ? G.ids.slice().sort((a, b) => nm(a).localeCompare(nm(b))) : [];
+  const ids = pool.filter(id => !f || f(id)).slice(0, 60);
   $('#pick-list').innerHTML = ids.map(id => `<button type="button" class="irow" data-act="pick" data-id="${esc(id)}">${icon(id, 34)}<span><span class="nm">${esc(nm(id))}</span><span class="sub" style="display:block">${esc(item(id).t)} · ${esc(item(id).r)}</span></span><span></span></button>`).join('') || `<div class="empty">${q ? 'No matches.' : 'Start typing to search.'}</div>`;
 }
 
 let toastTimer = 0;
-function toast(msg, sub) {
+function toast(msg, sub, action) {
   const t = $('#toast');
-  t.innerHTML = `${esc(msg)}${sub ? `<small>${esc(sub)}</small>` : ''}`;
+  UI.toastAction = action || null;
+  t.innerHTML = `<span style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span>${esc(msg)}</span>${action ? `<button type="button" data-act="toast-action">${esc(action.label)}</button>` : ''}</span>${sub ? `<small>${esc(sub)}</small>` : ''}`;
   t.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.hidden = true; }, 3800);
+  toastTimer = setTimeout(() => { t.hidden = true; UI.toastAction = null; }, action ? 7000 : 3800);
 }
 
 // ---------- stash edits ----------
@@ -1636,6 +1998,32 @@ document.addEventListener('click', e => {
     case 'plan-extra-del': delete planState().extra[id]; markDirty('progress'); render(); return;
     case 'plan-pick': { const P = planState(); P.map = d.group; P.done = {}; markDirty('progress'); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     case 'plan-clear': { const P = planState(); P.map = null; P.done = {}; markDirty('progress'); render(); toast('Raid finished', 'Pick the next map when you\'re ready.'); return; }
+    case 'toast-action': { const a = UI.toastAction; UI.toastAction = null; $('#toast').hidden = true; if (a) a.fn(); return; }
+    case 'arc-map': UI.arcMap = d.group; saveUI(); render(); return;
+    case 'kit-new': { const k = blankKit(`Loadout ${S.kits.kits.length + 1}`); S.kits.kits.push(k); UI.kitSel = k.id; saveUI(); markDirty('kits'); render(); setTimeout(() => { const n = $('#kit-name'); if (n) { n.focus(); n.select(); } }, 0); return; }
+    case 'kit-sel': UI.kitSel = id; saveUI(); render(); return;
+    case 'kit-dup': { const k = kitById(id); if (!k) return; const c = Object.assign(clone(k), { id: 'k' + uid(), name: k.name + ' (copy)' }); S.kits.kits.push(c); UI.kitSel = c.id; saveUI(); markDirty('kits'); render(); return; }
+    case 'kit-del':
+      if (t.dataset.armed) { S.kits.kits = S.kits.kits.filter(k => k.id !== id); if (planCheck().kit === id) { planCheck().kit = null; markDirty('progress'); } UI.kitSel = null; markDirty('kits'); render(); toast('Loadout deleted'); }
+      else { t.dataset.armed = '1'; t.textContent = 'Click again to delete'; setTimeout(() => { if (t.isConnected) { delete t.dataset.armed; t.textContent = 'Delete'; } }, 3000); }
+      return;
+    case 'kit-use': planCheck().kit = id; markDirty('progress'); render(); toast('Set as the kit for your next raid', 'It shows on the Plan tab’s pre-raid check.'); return;
+    case 'kitqu-add': pickItem('Add a quick-use item', iid => editKit(k => { const row = k.qu.find(x => x[0] === iid); if (row) row[1]++; else k.qu.push([iid, 1]); }), iid => item(iid).t === 'Quick Use'); return;
+    case 'kitqu-del': editKit(k => { k.qu.splice(Number(d.i), 1); }); return;
+    case 'kitqu-inc': case 'kitqu-dec': editKit(k => { const row = k.qu[Number(id)]; if (row) row[1] = Math.max(1, row[1] + (d.act === 'kitqu-inc' ? 1 : -1)); }); return;
+    case 'kitammo-inc': case 'kitammo-dec': editKit(k => { const step = Math.max(1, Math.round((item(id)?.s || 10) / 4)); k.ammo[id] = Math.max(0, (k.ammo[id] || 0) + (d.act === 'kitammo-inc' ? step : -step)); }); return;
+    case 'check-reset': planCheck().done = {}; markDirty('progress'); render(); return;
+    case 'check-add': { const inp = $('#check-new'); const label = (inp?.value || '').trim().slice(0, 60); if (!label) { inp?.focus(); return; } planCheck().custom.push({ id: 'c' + uid(), label }); markDirty('progress'); render(); setTimeout(() => $('#check-new')?.focus(), 0); return; }
+    case 'check-del': { const c = planCheck(); if (CHECK_DEFAULTS.some(([k]) => k === id)) c.hidden[id] = 1; else c.custom = c.custom.filter(x => x.id !== id); delete c.done[id]; markDirty('progress'); render(); return; }
+    case 'check-restore': planCheck().hidden = {}; markDirty('progress'); render(); return;
+    case 'plan-log': UI.raidDraft = null; raidDraft().m = d.group; switchTab('raids'); return;
+    case 'raid-map': raidDraft().m = d.group; render(); return;
+    case 'raid-log': logRaid(d.o); return;
+    case 'raidshot-stop': RAIDSHOT.ctl?.abort(); return;
+    case 'raid-del':
+      if (t.dataset.armed) { S.raids.raids = S.raids.raids.filter(r => r.id !== id); markDirty('raids'); render(); toast('Raid deleted'); }
+      else { t.dataset.armed = '1'; t.textContent = 'Delete?'; setTimeout(() => { if (t.isConnected) { delete t.dataset.armed; t.textContent = '✕'; } }, 3000); }
+      return;
     case 'add-pick': setStash(id, have(id) + 1); hideAddPop(); $('#add-q').value = ''; render(); setTimeout(() => { const inp = document.getElementById('cnt-stash-' + id); if (inp) { inp.focus(); inp.select(); } }, 0); return;
   }
 });
@@ -1653,9 +2041,30 @@ document.addEventListener('change', e => {
     else if (t.dataset.input === 'setupbench') { UI.setup.benches[id] = Math.min(G.bench[id].max, v); t.value = UI.setup.benches[id]; }
     else if (t.dataset.input === 'given') { const [pid, iid] = id.split('|'); const st = ensureProj(pid); st.given = st.given || {}; st.given[iid] = v; markDirty('progress'); render(); }
     else if (t.dataset.input === 'scan') { const r = SCAN.rows[Number(id)]; if (r) r.count = v; }
+    else if (t.dataset.input === 'kitqu') editKit(k => { const row = k.qu[Number(id)]; if (row) row[1] = Math.max(1, v); });
+    else if (t.dataset.input === 'kitammo') editKit(k => { k.ammo[id] = v; });
     return;
   }
   if (t.dataset.quest) { const id = t.dataset.quest; if (t.checked) S.progress.quests[id] = 1; else delete S.progress.quests[id]; markDirty('progress'); render(); return; }
+  if (t.dataset.kitField) { const f = t.dataset.kitField; editKit(k => { k[f] = t.value || null; if (f === 'aug' && k.shield && !shieldOk(k.aug, k.shield)) k.shield = null; }); return; }
+  if (t.dataset.kitWeapon) {
+    const i = Number(t.dataset.kitWeapon);
+    editKit(k => {
+      k.w[i] = { id: t.value || null, mods: {} };
+      const used = new Set(k.w.map(w => w.id && ammoFor(w.id)).filter(Boolean));
+      Object.keys(k.ammo).forEach(a => { if (!used.has(a)) delete k.ammo[a]; });
+      used.forEach(a => { if (!k.ammo[a]) { const mag = Number(item(k.w[i].id)?.e?.['Magazine Size']) || 10; k.ammo[a] = Math.min(item(a)?.s || 60, mag * 4); } });
+    });
+    return;
+  }
+  if (t.dataset.kitMod) { const [i, slot] = t.dataset.kitMod.split('|'); editKit(k => { const w = k.w[Number(i)]; if (!w) return; if (t.value) w.mods[slot] = t.value; else delete w.mods[slot]; }); return; }
+  if (t.id === 'check-kit') { planCheck().kit = t.value || null; markDirty('progress'); render(); return; }
+  if (t.dataset.check) { const c = planCheck(); if (t.checked) c.done[t.dataset.check] = 1; else delete c.done[t.dataset.check]; markDirty('progress'); render(); return; }
+  if (t.id === 'raid-k') { raidDraft().k = t.value; render(); return; }
+  if (t.id === 'raid-by') { raidDraft().by = t.value; return; }
+  if (t.id === 'raid-additems') { raidDraft().addItems = t.checked; return; }
+  if (t.id === 'raid-takekit') { raidDraft().takeKit = t.checked; return; }
+  if (t.id === 'raid-shot') { if (t.files?.length) readRaidShot(t.files); t.value = ''; return; }
   if (t.dataset.bp) { const id = t.dataset.bp; if (t.checked) S.progress.blueprints[id] = 1; else delete S.progress.blueprints[id]; markDirty('progress'); render(); return; }
   if (t.dataset.planQ) { const P = planState(); if (t.checked) delete P.skipQ[t.dataset.planQ]; else P.skipQ[t.dataset.planQ] = 1; markDirty('progress'); render(); return; }
   if (t.dataset.planI) { const P = planState(); if (t.checked) delete P.skipI[t.dataset.planI]; else P.skipI[t.dataset.planI] = 1; markDirty('progress'); render(); return; }
@@ -1672,6 +2081,9 @@ document.addEventListener('input', e => {
   if (t.id === 'pick-q') { renderPickList(t.value); return; }
   if (t.id === 'add-q') { showAddPop(t.value); return; }
   if (t.id === 'bp-q') { UI.bpQ = t.value; renderBpList(); return; }
+  if (t.id === 'kit-name') { const k = kitById(UI.kitSel); if (k) { k.name = t.value.slice(0, 40) || 'Loadout'; markDirty('kits'); const row = document.querySelector(`[data-act="kit-sel"][data-id="${CSS.escape(k.id)}"] .nm`); if (row) row.textContent = k.name; } return; }
+  if (t.id === 'raid-v') { raidDraft().v = t.value; return; }
+  if (t.id === 'raid-n') { raidDraft().n = t.value; return; }
   if (t.id === 'pin-label') { if (MAPV.edit) MAPV.edit.label = t.value; return; }
 });
 function showAddPop(q) {
@@ -1687,6 +2099,7 @@ document.addEventListener('keydown', e => {
   const typing = tag === 'input' || tag === 'select' || tag === 'textarea';
   if (e.key === 'Escape' && !$('#modal').hidden) { closeModal(); return; }
   if (e.key === 'Escape' && UI.tab === 'maps' && (MAPV.adding || MAPV.edit)) { setAddMode(false); MAPV.edit = null; renderPins(); renderMapSide(); return; }
+  if (e.target.id === 'check-new' && e.key === 'Enter') { e.preventDefault(); $('[data-act="check-add"]')?.click(); return; }
   if (e.target.id === 'pin-label' && e.key === 'Enter') { e.preventDefault(); $('[data-act="pin-save"]')?.click(); return; }
   if (e.key === '/' && !typing && $('#modal').hidden) { e.preventDefault(); if (UI.tab !== 'lookup') switchTab('lookup'); const q = $('#lk-q'); if (q) { q.focus(); q.select(); } return; }
   if (e.target.id === 'lk-q' && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter')) {
@@ -1729,7 +2142,7 @@ function openLookup(id) {
 
 // ---------- persistence (owner-only db with an on-device fallback) ----------
 const Sync = { mode: 'boot', db: null, dirty: new Set(), inflight: new Set(), timer: 0, last: {}, quiet: {}, error: false, bootCache: null, migrated: {} };
-const DOCS = { progress: 'app/progress', stash: 'app/stash', pins: 'app/pins' };
+const DOCS = { progress: 'app/progress', stash: 'app/stash', pins: 'app/pins', kits: 'app/kits', raids: 'app/raids' };
 function cacheSave() {
   try { localStorage.setItem(LS_KEY, JSON.stringify({ source: Sync.mode === 'cloud' ? 'cloud' : 'local', progress: S.progress, stash: S.stash, pins: S.pins })); } catch (e) { /* storage blocked: fine */ }
 }
@@ -1783,10 +2196,12 @@ async function refetch(key) {
   try { const snap = await Sync.db.doc(DOCS[key]).get(); if (busy(key)) return; if (snap.exists) apply(key, snap.data()); } catch (e) { /* the live subscription catches up */ }
 }
 function normalize(key, data) {
-  const base = key === 'progress' ? blankProgress() : key === 'pins' ? blankPins() : blankStash();
+  const base = { progress: blankProgress, pins: blankPins, kits: blankKits, raids: blankRaids }[key]?.() || blankStash();
   const out = Object.assign(base, data && typeof data === 'object' ? data : {});
   if (key === 'progress') { for (const k of ['quests', 'benches', 'projects', 'blueprints', 'plan', 'cond']) if (!out[k] || typeof out[k] !== 'object') out[k] = {}; }
   else if (key === 'pins') out.pins = Array.isArray(out.pins) ? out.pins.filter(p => p && p.id && p.l && Number.isFinite(p.x) && Number.isFinite(p.y)) : [];
+  else if (key === 'kits') out.kits = Array.isArray(out.kits) ? out.kits.filter(k => k && k.id).map(k => Object.assign(blankKit(), k, { w: [0, 1].map(i => Object.assign({ id: null, mods: {} }, (k.w || [])[i] || {})), qu: Array.isArray(k.qu) ? k.qu.filter(x => Array.isArray(x) && x.length === 2) : [], ammo: k.ammo && typeof k.ammo === 'object' ? k.ammo : {} })) : [];
+  else if (key === 'raids') out.raids = Array.isArray(out.raids) ? out.raids.filter(r => r && r.id && r.m && (r.o === 'x' || r.o === 'd')) : [];
   else if (!out.items || typeof out.items !== 'object') out.items = {};
   return out;
 }

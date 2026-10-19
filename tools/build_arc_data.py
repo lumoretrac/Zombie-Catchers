@@ -6,6 +6,7 @@ https://github.com/RaidTheory/arcraiders-data (MIT) and writes:
 
   arc-utility/game.json   compact English-only data the app loads
   arc-utility/icons.webp  every item icon in one sprite sheet
+  arc-utility/bots/       one picture per ARC enemy
   arc-utility/maps/       map tiles, 1000 px square, three zoom levels
                           (generated, not committed: rerun this script)
 
@@ -102,6 +103,18 @@ def build(src):
             it['bp'] = 1
         if j.get('isWeapon'):
             it['wp'] = 1
+        effects = {k: v['value'] for k, v in (j.get('effects') or {}).items()
+                   if isinstance(v, dict) and v.get('value') is not None}
+        if effects:
+            it['e'] = effects
+        if j.get('modSlots'):
+            it['ms'] = j['modSlots']
+        if j.get('compatibleWith'):
+            it['cw'] = j['compatibleWith']
+        if j.get('upgradesTo'):
+            it['ut'] = j['upgradesTo']
+        if j.get('shieldCharge') is not None:
+            it['sh'] = {'charge': j['shieldCharge'], 'mitigation': j.get('damageMitigation'), 'speed': j.get('movementSpeedModifier') or 0}
         if j.get('vendors'):
             it['vd'] = [
                 {'tr': v.get('trader'), 'c': v.get('cost') or {}, 'lim': v.get('limit')}
@@ -167,10 +180,23 @@ def build(src):
         'n': en(b.get('name')),
         'type': en(b.get('type')),
         'threat': b.get('threat'),
+        'd': en(b.get('description')),
         'maps': b.get('maps') or [],
         'drops': b.get('drops') or [],
         'weak': en(b.get('weakness')),
+        'dx': b.get('destroyXp'),
+        'lx': b.get('lootXp'),
     } for b in load(os.path.join(src, 'bots.json'))]
+    os.makedirs(os.path.join(OUT_DIR, 'bots'), exist_ok=True)
+    for b in bots:
+        path = os.path.join(src, 'images', 'bots', b['id'] + '.png')
+        if not os.path.exists(path):
+            continue
+        im = Image.open(path).convert('RGBA')
+        if im.width > 640:
+            im = im.resize((640, round(640 * im.height / im.width)), Image.LANCZOS)
+        im.save(os.path.join(OUT_DIR, 'bots', b['id'] + '.webp'), 'WEBP', quality=80, method=6)
+        b['img'] = [im.width, im.height]
 
     trades = [{
         'tr': t['trader'],
